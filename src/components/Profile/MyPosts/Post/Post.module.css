@@ -1,0 +1,11 @@
+.item {
+	color: green;
+}
+
+.item.active {
+	color: aqua;
+}
+
+.item img {
+	width: 50px;
+}
