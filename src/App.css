@@ -8,23 +8,3 @@
 	"h h"
 	"n c";
 }
-.header {
-	grid-area: h;
-	background-color: indigo;
-}
-.header img {
-	width: 60px;
-	/* height: 60px; */
-}
-.nav {
-	grid-area: n;
-	background-color: rgb(189, 165, 206);
-}
-.content {
-	grid-area: c;
-	background-color: rgb(166, 159, 172);
-}
-.content img {
-	width: 1000px;
-	/* display: block; */
-}
