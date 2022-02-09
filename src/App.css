@@ -8,3 +8,8 @@
 	"h h"
 	"n c";
 }
+
+.app-wrapper-content {
+	grid-area: c;
+	background-color: rgb(166, 159, 172);
+}
