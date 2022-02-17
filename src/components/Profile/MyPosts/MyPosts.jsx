@@ -6,12 +6,13 @@ import Post from './Post/Post';
 const MyPosts = (props) => {
     // debugger;
 
-    let posts = [
-        {id: 1, message: 'Hello world!', count: 10},
-        {id: 2, message: 'Hello friend!', count: 15}
-    ]
+  // let postsElements1 = props.map(p => <Post message={p.message} count={p.count} />)
 
-    let postsElements = posts.map(p => <Post message={p.message} count={p.count} />)
+  // let postsElements = props.map(p => {
+  //   message={p.message} count={p.count})
+  // }
+
+  // console.log(props.message)
 
     return (
         <div className={s.postsBlock}>
@@ -25,7 +26,8 @@ const MyPosts = (props) => {
                 </div>
             </div>
             <div className={s.posts}>
-                {postsElements}
+              <Post message={props.message} count={props.count} />
+              {/*  {postsElements1}*/}
             </div>
         </div>
     );
