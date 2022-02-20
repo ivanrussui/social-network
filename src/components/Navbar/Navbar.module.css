@@ -2,6 +2,7 @@
 	grid-area: n;
 	background-color: rgb(189, 165, 206);
 	padding: 20px;
+	margin: 10px 10px 0 0;
 }
 
 .item {
@@ -12,6 +13,14 @@
 .active {
 	color: gold;
 	text-decoration: none;
+}
+
+.settings {
+	padding-top: 33px;
+}
+
+.friends {
+	padding-top: 50px;
 }
 
 /*.item a.active {*/

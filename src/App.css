@@ -12,4 +12,5 @@
 .app-wrapper-content {
 	grid-area: c;
 	background-color: rgb(166, 159, 172);
+	margin-top: 10px;
 }

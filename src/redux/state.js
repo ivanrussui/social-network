@@ -17,9 +17,12 @@ let state = {
     messages: [
       {id: 1, message: 'Hi!'},
       {id: 2, message: 'My name is Ivan'},
-      {id: 3, message: 'And you'}
+      {id: 3, message: 'And you'},
+      {id: 3, message: 'I am Fine'},
+      {id: 3, message: 'It s cool'}
     ]
-  }
+  },
+  sidebar: []
 };
 
 export default state;
