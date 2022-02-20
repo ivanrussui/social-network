@@ -1,0 +1,11 @@
+.friends {
+  font-size: 22px;
+  color: white;
+}
+
+.friendsItems {
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 52px);
+  gap: 5px;
+}
