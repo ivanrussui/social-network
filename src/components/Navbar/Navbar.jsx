@@ -26,7 +26,7 @@ const Navbar = (props) => {
       </div>
       <div className={s.friends}>
         {/*<NavLink to="/friends" className={navData => navData.isActive ? s.active : s.item}>Friends</NavLink>*/}
-        <Friends friends={props.state} />
+        <Friends friends={props.state.friends} />
       </div>
     </nav>
   );

@@ -22,12 +22,18 @@ let state = {
       {id: 5, message: 'It s cool'}
     ]
   },
-  sidebar: [],
-  friends: [
-    { id: 1, name: 'Kristina'},
-    { id: 2, name: 'Vladimir' },
-    { id: 3, name: 'Alexa' }
-  ]
+  sidebar: {
+    friends: [
+      {id: 1, name: 'Kristina'},
+      {id: 2, name: 'Vladimir'},
+      {id: 3, name: 'Alexa'}
+    ]
+  }
+  // friends: [
+  //   { id: 1, name: 'Kristina'},
+  //   { id: 2, name: 'Vladimir' },
+  //   { id: 3, name: 'Alexa' }
+  // ]
 };
 
 export default state;
