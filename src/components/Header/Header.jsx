@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header className={s.header}>
       <img
-        src="https://logojinni.com/ru/image/logos/react-446.svg"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
         alt="logo"
       />
     </header>

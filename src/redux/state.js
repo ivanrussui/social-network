@@ -1,9 +1,12 @@
+import {rerenderEntire} from '../render';
+
 let state = {
   profilePage: {
     posts: [
       {id: 1, message: 'Hello world!', count: 10},
-      {id: 2, message: 'Hello friend!', count: 15}
-    ]
+      {id: 2, message: 'React it\'s cool', count: 15}
+    ],
+    newPostText: 'React SamuraiJS'
   },
   dialogsPage: {
     dialogs: [
@@ -29,11 +32,26 @@ let state = {
       {id: 3, name: 'Alexa'}
     ]
   }
-  // friends: [
-  //   { id: 1, name: 'Kristina'},
-  //   { id: 2, name: 'Vladimir' },
-  //   { id: 3, name: 'Alexa' }
-  // ]
 };
+
+export let addPost = (postMessage) => {
+  // debugger;
+  let newPost = {
+    id: 3,
+    message: postMessage,
+    count: 0
+  };
+
+  state.profilePage.posts.push(newPost);
+  rerenderEntire(state);
+};
+
+
+export let updateNewPostText = (newText) => {
+  // debugger;
+  state.profilePage.newPostText = newText;
+  rerenderEntire(state);
+};
+
 
 export default state;
