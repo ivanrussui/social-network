@@ -11,15 +11,12 @@ const MyPosts = (props) => {
 
   let addPost = () => {
     // debugger;
-    let text = newPostElement.current.value;
-    props.addPost(text);
-    props.updateNewPostText('');
+    props.addPost();
   };
 
   let onPostChange = () => {
     // debugger;
     let text = newPostElement.current.value;
-    console.log(text)
     props.updateNewPostText(text);
   }
 

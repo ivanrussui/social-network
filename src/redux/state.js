@@ -34,15 +34,25 @@ let state = {
   }
 };
 
-export let addPost = (postMessage) => {
+// window.state = state;
+//
+// let obg = {
+//   e: 5,
+//   t: 'lk' = {
+//     d: 'd'
+//   }
+// }
+
+export let addPost = () => {
   // debugger;
   let newPost = {
     id: 3,
-    message: postMessage,
+    message: state.profilePage.newPostText,
     count: 0
   };
 
   state.profilePage.posts.push(newPost);
+  state.profilePage.newPostText = '';
   rerenderEntire(state);
 };
 
