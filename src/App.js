@@ -11,7 +11,7 @@ import Settings from './components/Settings/Settings';
 // import {updateNewPostText} from './redux/state';
 
 const App = (props) => {
-// debugger
+  // debugger;
   return (
 
     <div className="app-wrapper">
@@ -25,7 +25,9 @@ const App = (props) => {
                                    updateNewPostText={props.updateNewPostText}
                  />}/>
           <Route path="/dialogs/*"
-                 element={<Dialogs state={props.appState.dialogsPage}/>}/>
+                 element={<Dialogs dialogsPage={props.appState.dialogsPage}
+                                   addMessage={props.addMessage}
+                 />}/>
           <Route path="/news" element={<News/>}/>
           <Route path="/music" element={<Music/>}/>
           <Route path="/settings" element={<Settings/>}/>

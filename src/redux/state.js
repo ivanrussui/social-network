@@ -23,7 +23,8 @@ let state = {
       {id: 3, message: 'And you'},
       {id: 4, message: 'I am Fine'},
       {id: 5, message: 'It s cool'}
-    ]
+    ],
+    // newPostMessage: 'Flux архитектура'
   },
   sidebar: {
     friends: [
@@ -42,6 +43,17 @@ let state = {
 //     d: 'd'
 //   }
 // }
+
+export let addMessage = (postMessage) => {
+  // debugger;
+  let newMessage = {
+    id: 6,
+    message: postMessage
+  };
+
+  state.dialogsPage.messages.push(newMessage);
+  rerenderEntire(state);
+};
 
 export let addPost = () => {
   // debugger;
