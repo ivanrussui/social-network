@@ -1,13 +1,25 @@
-// import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
+import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state';
-import {rerenderEntire} from './render';
+import state, {subscribe} from './redux/state';
+import {addMessage, addPost, updateNewMessageText, updateNewPostText} from './redux/state';
+import {BrowserRouter} from 'react-router-dom';
+
+let rerenderEntire = (state) => {
+  ReactDOM.render(
+    <BrowserRouter>
+      <App appState={state}
+           addPost={addPost} updateNewPostText={updateNewPostText}
+           addMessage={addMessage} updateNewMessageText={updateNewMessageText} />
+    </BrowserRouter>, document.getElementById('root'));
+}
 
 
 rerenderEntire(state);
+
+subscribe(rerenderEntire);
 
 
 

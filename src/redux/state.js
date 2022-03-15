@@ -1,4 +1,6 @@
-import {rerenderEntire} from '../render';
+let rerenderEntire = () => {
+  console.log('State change');
+}
 
 let state = {
   profilePage: {
@@ -21,17 +23,10 @@ let state = {
   }
 };
 
-// window.state = state;
-//
-// let obg = {
-//   e: 5,
-//   t: 'lk' = {
-//     d: 'd'
-//   }
-// }
+window.state = state;
 
 // функция добавления постов Profile
-export let addPost = () => {
+export const addPost = () => {
   // debugger;
   let newPost = {
     id: 3,
@@ -45,7 +40,7 @@ export let addPost = () => {
 };
 
 // функция обновления ввода текста в посты Profile
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
   // debugger;
   state.profilePage.newPostText = newText;
   rerenderEntire(state);
@@ -53,7 +48,7 @@ export let updateNewPostText = (newText) => {
 
 
 // функция добавления постов-сообщений Messages
-export let addMessage = () => {
+export const addMessage = () => {
   // debugger;
   let newMessage = {
     id: 6,
@@ -66,10 +61,15 @@ export let addMessage = () => {
 };
 
 // функция обновления ввода текста в посты-сообщения Messages
-export let updateNewMessageText = (newText) => {
+export const updateNewMessageText = (newText) => {
   // debugger;
   state.dialogsPage.newPostMessage = newText;
   rerenderEntire(state);
 };
+
+// функция наблюдатель с коллбэком будет связана с subscribe(rerenderEntire) в index.js паттерн observer
+export const subscribe = (observer) => {
+  rerenderEntire = observer; // происходит замыкание, вых из функ и идет выше, ввверху находит
+}
 
 export default state;
