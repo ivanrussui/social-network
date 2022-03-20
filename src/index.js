@@ -3,23 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state, {subscribe} from './redux/state';
-import {addMessage, addPost, updateNewMessageText, updateNewPostText} from './redux/state';
+// import state, {subscribe} from './redux/state';
+// import {addMessage, addPost, updateNewMessageText, updateNewPostText} from './redux/state';
 import {BrowserRouter} from 'react-router-dom';
+import store from './redux/state';
+
+// debugger;
 
 let rerenderEntire = (state) => {
+  // debugger;
   ReactDOM.render(
     <BrowserRouter>
-      <App appState={state}
-           addPost={addPost} updateNewPostText={updateNewPostText}
-           addMessage={addMessage} updateNewMessageText={updateNewMessageText} />
+      <App
+        // store={store}
+           state={state}
+           addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}
+           addMessage={store.addMessage.bind(store)} updateNewMessageText={store.updateNewMessageText.bind(store)}
+      />
     </BrowserRouter>, document.getElementById('root'));
 }
 
 
-rerenderEntire(state);
+rerenderEntire(store.state);
 
-subscribe(rerenderEntire);
+store.subscribe(rerenderEntire);
 
 
 
