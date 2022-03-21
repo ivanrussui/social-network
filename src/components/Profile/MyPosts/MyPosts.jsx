@@ -12,15 +12,9 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    // debugger
+    // debugger;
     props.addPost();
   };
-  // store.addPost()
-  // addPost = () => {
-  //   // debugger;
-  //   props.addPost();
-  // };
-  // addPost();
 
   let onPostChange = () => {
     // debugger;
@@ -38,7 +32,6 @@ const MyPosts = (props) => {
         </div>
         <div>
           <button onClick={addPost}>SEND</button>
-          {/*<button onClick={addPost}>SEND</button>*/}
         </div>
       </div>
       <div className={s.posts}>

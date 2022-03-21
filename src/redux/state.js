@@ -1,5 +1,5 @@
 let store = {
-  state: {
+  _state: {
     profilePage: {
       posts: [
         {id: 1, message: 'Hello world!', count: 10}, {id: 2, message: 'React it\'s cool', count: 15}
@@ -21,7 +21,13 @@ let store = {
     }
   },
 
-  rerenderEntire() {
+  // метод получение state
+  getState() {
+    // debugger;
+    return this._state;
+  },
+
+  _callSubscriber() {
     console.log('State change');
   },
 
@@ -31,20 +37,20 @@ let store = {
     // console.log(store.addPost)
     let newPost = {
       id: 3,
-      message: this.state.profilePage.newPostText,
+      message: this._state.profilePage.newPostText,
       count: 0
     };
 
-    this.state.profilePage.posts.push(newPost);
-    this.state.profilePage.newPostText = '';
-    this.rerenderEntire(this.state);
+    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.newPostText = '';
+    this._callSubscriber(this._state);
   },
 
   // функция обновления ввода текста в посты Profile
   updateNewPostText(newText) {
     // debugger;
-    this.state.profilePage.newPostText = newText;
-    this.rerenderEntire(this.state);
+    this._state.profilePage.newPostText = newText;
+    this._callSubscriber(this._state);
   },
 
   // функция добавления постов-сообщений Messages
@@ -52,24 +58,24 @@ let store = {
     // debugger;
     let newMessage = {
       id: 6,
-      message: this.state.dialogsPage.newPostMessage
+      message: this._state.dialogsPage.newPostMessage
     };
 
-    this.state.dialogsPage.messages.push(newMessage);
-    this.state.dialogsPage.newPostMessage = '';
-    this.rerenderEntire(this.state);
+    this._state.dialogsPage.messages.push(newMessage);
+    this._state.dialogsPage.newPostMessage = '';
+    this._callSubscriber(this._state);
   },
 
   // функция обновления ввода текста в посты-сообщения Messages
   updateNewMessageText(newText) {
     // debugger;
-    this.state.dialogsPage.newPostMessage = newText;
-    this.rerenderEntire(this.state);
+    this._state.dialogsPage.newPostMessage = newText;
+    this._callSubscriber(this._state);
   },
 
   // функция наблюдатель с коллбэком будет связана с subscribe(rerenderEntire) в index.js паттерн observer
   subscribe(observer) {
-    this.rerenderEntire = observer; // происходит замыкание, вых из функ и идет выше, ввверху находит
+    this._callSubscriber = observer; // происходит замыкание, вых из функ и идет выше, ввверху находит
   }
 }
 
