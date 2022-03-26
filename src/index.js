@@ -3,21 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import state, {subscribe} from './redux/state';
-// import {addMessage, addPost, updateNewMessageText, updateNewPostText} from './redux/state';
 import {BrowserRouter} from 'react-router-dom';
 import store from './redux/state';
 
-// debugger;
-
 let rerenderEntire = (state) => {
-  // debugger;
   ReactDOM.render(
     <BrowserRouter>
       <App
            state={state}
            dispatch={store.dispatch.bind(store)}
-           addMessage={store.addMessage.bind(store)} updateNewMessageText={store.updateNewMessageText.bind(store)}
       />
     </BrowserRouter>, document.getElementById('root'));
 }

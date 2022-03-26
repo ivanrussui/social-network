@@ -48,30 +48,25 @@ let store = {
       this._state.profilePage.posts.push(newPost);
       this._state.profilePage.newPostText = '';
       this._callSubscriber(this._state);
+
     } else if (action.type === 'UPDATE-NEW-POST-TEXT') { // обновление ввода текста в посты Profile
       this._state.profilePage.newPostText = action.newText;
       this._callSubscriber(this._state);
+
+    } else if (action.type === 'ADD-MESSAGE') { // добавление постов-сообщений Messages
+      let newMessage = {
+        id: 6,
+        message: this._state.dialogsPage.newPostMessage
+      };
+      this._state.dialogsPage.messages.push(newMessage);
+      this._state.dialogsPage.newPostMessage = '';
+      this._callSubscriber(this._state);
+
+    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') { // обновление ввода текста в посты-сообщения Messages
+        this._state.dialogsPage.newPostMessage = action.newText;
+        this._callSubscriber(this._state);
     }
-  },
-
-  // функция добавления постов-сообщений Messages
-  addMessage() {
-    // debugger;
-    let newMessage = {
-      id: 6,
-      message: this._state.dialogsPage.newPostMessage
-    };
-
-    this._state.dialogsPage.messages.push(newMessage);
-    this._state.dialogsPage.newPostMessage = '';
-    this._callSubscriber(this._state);
-  },
-
-  // функция обновления ввода текста в посты-сообщения Messages
-  updateNewMessageText(newText) {
-    this._state.dialogsPage.newPostMessage = newText;
-    this._callSubscriber(this._state);
-  },
+  }
 }
 
 
@@ -96,3 +91,21 @@ window.store = store;
 //   this._state.profilePage.newPostText = newText;
 //   this._callSubscriber(this._state);
 // },
+
+// функция добавления постов-сообщений Messages
+// addMessage() {
+//   let newMessage = {
+//     id: 6,
+//     message: this._state.dialogsPage.newPostMessage
+//   };
+//
+//   this._state.dialogsPage.messages.push(newMessage);
+//   this._state.dialogsPage.newPostMessage = '';
+//   this._callSubscriber(this._state);
+// },
+
+// функция обновления ввода текста в посты-сообщения Messages
+// updateNewMessageText(newText) {
+//   this._state.dialogsPage.newPostMessage = newText;
+//   this._callSubscriber(this._state);
+// }
