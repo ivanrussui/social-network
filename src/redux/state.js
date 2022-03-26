@@ -21,36 +21,37 @@ let store = {
     }
   },
 
+  // наш "подписчик" ранее rerenderEntire()
+  _callSubscriber() {
+    console.log('State change');
+  },
+
   // метод получение state
   getState() {
     // debugger;
     return this._state;
   },
 
-  _callSubscriber() {
-    console.log('State change');
+  // функция наблюдатель с коллбэком будет связана с subscribe(rerenderEntire) в index.js паттерн observer
+  subscribe(observer) {
+    this._callSubscriber = observer; // происходит замыкание, вых из функ и идет выше, ввверху находит
   },
 
-  // функция добавления постов Profile
-  addPost() {
+  dispatch(action) { // { type: 'ADD-POST' }
     // debugger;
-    // console.log(store.addPost)
-    let newPost = {
-      id: 3,
-      message: this._state.profilePage.newPostText,
-      count: 0
-    };
-
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  },
-
-  // функция обновления ввода текста в посты Profile
-  updateNewPostText(newText) {
-    // debugger;
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber(this._state);
+    if (action.type === 'ADD-POST') { // добавление постов Profile
+      let newPost = {
+        id: 3,
+        message: this._state.profilePage.newPostText,
+        count: 0
+      };
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPostText = '';
+      this._callSubscriber(this._state);
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') { // обновление ввода текста в посты Profile
+      this._state.profilePage.newPostText = action.newText;
+      this._callSubscriber(this._state);
+    }
   },
 
   // функция добавления постов-сообщений Messages
@@ -68,23 +69,30 @@ let store = {
 
   // функция обновления ввода текста в посты-сообщения Messages
   updateNewMessageText(newText) {
-    // debugger;
     this._state.dialogsPage.newPostMessage = newText;
     this._callSubscriber(this._state);
   },
-
-  // функция наблюдатель с коллбэком будет связана с subscribe(rerenderEntire) в index.js паттерн observer
-  subscribe(observer) {
-    this._callSubscriber = observer; // происходит замыкание, вых из функ и идет выше, ввверху находит
-  }
 }
 
 
 export default store;
-
-
-
 window.store = store;
-// window.state = state;
 
-// export default state;
+// функция добавления постов Profile
+// addPost() {
+//   let newPost = {
+//     id: 3,
+//     message: this._state.profilePage.newPostText,
+//     count: 0
+//   };
+//
+//   this._state.profilePage.posts.push(newPost);
+//   this._state.profilePage.newPostText = '';
+//   this._callSubscriber(this._state);
+// },
+
+// функция обновления ввода текста в посты Profile
+// updateNewPostText(newText) {
+//   this._state.profilePage.newPostText = newText;
+//   this._callSubscriber(this._state);
+// },

@@ -10,6 +10,8 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 // import {updateNewPostText} from './redux/state';
 
+// debugger
+
 const App = (props) => {
   // debugger;
   return (
@@ -22,8 +24,8 @@ const App = (props) => {
           <Route path="/profile"
                  element={<Profile
                    profilePage={props.state.profilePage}
-                   addPost={props.addPost}
-                   updateNewPostText={props.updateNewPostText}
+                   dispatch={props.dispatch}
+                   // updateNewPostText={props.updateNewPostText}
                  />}/>
           <Route path="/dialogs/*"
                  element={<Dialogs
