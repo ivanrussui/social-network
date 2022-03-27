@@ -1,3 +1,7 @@
+// обернули в переменные action type из action creator
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 let store = {
   _state: {
     profilePage: {
@@ -12,7 +16,10 @@ let store = {
         {id: 5, name: 'Vladimir'}, {id: 6, name: 'Alexandra'}
       ],
       messages: [
-        {id: 1, message: 'Hi!'}, {id: 2, message: 'My name is Ivan'}, {id: 3, message: 'And you'}, {id: 4, message: 'I am Fine'}, {id: 5, message: 'It s cool'}
+        {id: 1, message: 'Hi!'}, {id: 2, message: 'My name is Ivan'}, {id: 3, message: 'And you'}, {
+          id: 4,
+          message: 'I am Fine'
+        }, {id: 5, message: 'It s cool'}
       ],
       newPostMessage: 'Flux архитектура'
     },
@@ -39,7 +46,7 @@ let store = {
 
   dispatch(action) { // { type: 'ADD-POST' }
     // debugger;
-    if (action.type === 'ADD-POST') { // добавление постов Profile
+    if (action.type === ADD_POST) { // добавление постов Profile; ADD_POST это переменная action type из action creator
       let newPost = {
         id: 3,
         message: this._state.profilePage.newPostText,
@@ -49,7 +56,7 @@ let store = {
       this._state.profilePage.newPostText = '';
       this._callSubscriber(this._state);
 
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') { // обновление ввода текста в посты Profile
+    } else if (action.type === UPDATE_NEW_POST_TEXT) { // обновление ввода текста в посты Profile
       this._state.profilePage.newPostText = action.newText;
       this._callSubscriber(this._state);
 
@@ -63,11 +70,15 @@ let store = {
       this._callSubscriber(this._state);
 
     } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') { // обновление ввода текста в посты-сообщения Messages
-        this._state.dialogsPage.newPostMessage = action.newText;
-        this._callSubscriber(this._state);
+      this._state.dialogsPage.newPostMessage = action.newText;
+      this._callSubscriber(this._state);
     }
   }
-}
+};
+
+// наши actionCreator
+export const addPostActionCreator = () => ({type: ADD_POST });
+export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
 
 
 export default store;
