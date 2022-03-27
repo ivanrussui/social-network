@@ -22,7 +22,7 @@ const MyPosts = (props) => {
     // let action = updateNewPostText(text);
     // let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
     props.dispatch(action);
-  }
+  };
 
   return (
     <div className={s.postsBlock}>

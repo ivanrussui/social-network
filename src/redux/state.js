@@ -1,6 +1,8 @@
 // обернули в переменные action type из action creator
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let store = {
   _state: {
@@ -60,7 +62,7 @@ let store = {
       this._state.profilePage.newPostText = action.newText;
       this._callSubscriber(this._state);
 
-    } else if (action.type === 'ADD-MESSAGE') { // добавление постов-сообщений Messages
+    } else if (action.type === ADD_MESSAGE) { // добавление постов-сообщений Messages
       let newMessage = {
         id: 6,
         message: this._state.dialogsPage.newPostMessage
@@ -69,7 +71,7 @@ let store = {
       this._state.dialogsPage.newPostMessage = '';
       this._callSubscriber(this._state);
 
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') { // обновление ввода текста в посты-сообщения Messages
+    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) { // обновление ввода текста в посты-сообщения Messages
       this._state.dialogsPage.newPostMessage = action.newText;
       this._callSubscriber(this._state);
     }
@@ -79,6 +81,8 @@ let store = {
 // наши actionCreator
 export const addPostActionCreator = () => ({type: ADD_POST });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
+export const addMessageActionCreator = () => ({ type:  ADD_MESSAGE });
+export const updateNewMessageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text });
 
 
 export default store;
