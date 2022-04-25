@@ -1,8 +1,11 @@
 // обернули в переменные action type из action creator
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
+const SEND_MESSAGE = 'SEND-MESSAGE';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+// const ADD_MESSAGE = 'ADD-MESSAGE';
+// const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let store = {
   _state: {
@@ -18,12 +21,11 @@ let store = {
         {id: 5, name: 'Vladimir'}, {id: 6, name: 'Alexandra'}
       ],
       messages: [
-        {id: 1, message: 'Hi!'}, {id: 2, message: 'My name is Ivan'}, {id: 3, message: 'And you'}, {
-          id: 4,
-          message: 'I am Fine'
-        }, {id: 5, message: 'It s cool'}
+        {id: 1, message: 'Hi!'}, {id: 2, message: 'My name is Ivan'}, {id: 3, message: 'And you'},
+        {id: 4, message: 'I am Fine'}, {id: 5, message: 'It s cool'}
       ],
-      newPostMessage: 'Flux архитектура'
+      newMessageBody: ''
+      // newPostMessage: 'Flux архитектура'
     },
     sidebar: {
       friends: [{id: 1, name: 'Kristina'}, {id: 2, name: 'Vladimir'}, {id: 3, name: 'Alexa'}]
@@ -62,27 +64,40 @@ let store = {
       this._state.profilePage.newPostText = action.newText;
       this._callSubscriber(this._state);
 
-    } else if (action.type === ADD_MESSAGE) { // добавление постов-сообщений Messages
-      let newMessage = {
-        id: 6,
-        message: this._state.dialogsPage.newPostMessage
-      };
-      this._state.dialogsPage.messages.push(newMessage);
-      this._state.dialogsPage.newPostMessage = '';
+    } else if (action.type === SEND_MESSAGE) { // добавление постов-сообщений Messages / альтернатива
+      let body = this._state.dialogsPage.newMessageBody;
+      this._state.dialogsPage.newMessageBody = '';
+      this._state.dialogsPage.messages.push({id: 6, message: body});
       this._callSubscriber(this._state);
 
-    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) { // обновление ввода текста в посты-сообщения Messages
-      this._state.dialogsPage.newPostMessage = action.newText;
+    } else if (action.type === UPDATE_NEW_MESSAGE_BODY) { // обновление ввода текста в посты-сообщения Messages / альтернатива
+      this._state.dialogsPage.newMessageBody = action.body;
       this._callSubscriber(this._state);
     }
+    // } else if (action.type === ADD_MESSAGE) { // добавление постов-сообщений Messages
+    //   let newMessage = {
+    //     id: 6,
+    //     message: this._state.dialogsPage.newPostMessage
+    //   };
+    //   this._state.dialogsPage.messages.push(newMessage);
+    //   this._state.dialogsPage.newPostMessage = '';
+    //   this._callSubscriber(this._state);
+    //
+    // } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) { // обновление ввода текста в посты-сообщения Messages
+    //   this._state.dialogsPage.newPostMessage = action.newText;
+    //   this._callSubscriber(this._state);
+    // }
   }
 };
 
 // наши actionCreator
-export const addPostActionCreator = () => ({type: ADD_POST });
+export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
-export const addMessageActionCreator = () => ({ type:  ADD_MESSAGE });
-export const updateNewMessageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text });
+
+export const sendMessageCreator = () => ({ type: SEND_MESSAGE });
+export const updateNewMessageBodyCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_BODY, body: text });
+// export const addMessageActionCreator = () => ({ type:  ADD_MESSAGE });
+// export const updateNewMessageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text });
 
 
 export default store;
