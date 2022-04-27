@@ -2,25 +2,39 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Mesage';
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from '../../redux/state';
+import {
+  addMessageActionCreator, sendMessageCreator,
+  updateNewMessageBodyCreator,
+  updateNewMessageTextActionCreator
+} from '../../redux/state';
 
 const Dialogs = (props) => {
   // debugger;
-  let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id} key={d.id}/>);
-  let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id}/>);
+  let state = props.store.getState().dialogsPage;
 
-  let newMessageElement = React.createRef();
+  let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id} key={d.id}/>);
+  let messagesElements = state.messages.map(m => <Message message={m.message} key={m.id}/>);
+  let newMessageBody = state.newMessageBody;
 
-  let AddMessage = () => {
-    props.dispatch(addMessageActionCreator());
-    // debugger;
+  // let newMessageElement = React.createRef();
+
+  // let AddMessage = () => {
+  //   props.dispatch(addMessageActionCreator());
+  // };
+
+  // let onMessagePost = () => {
+  //   let text = newMessageElement.current.value;
+  //   let action = updateNewMessageTextActionCreator(text);
+  //   props.dispatch(action);
+  // };
+
+  let onSendMessageClick = () => {
+    props.store.dispatch(sendMessageCreator());
   };
 
-  let onMessagePost = () => {
-    let text = newMessageElement.current.value;
-    let action = updateNewMessageTextActionCreator(text);
-    props.dispatch(action);
-    // debugger;
+  let onNewMessageChange = (e) => {
+    let body = e.target.value;
+    props.store.dispatch(updateNewMessageBodyCreator(body));
   };
 
   return (
@@ -29,13 +43,16 @@ const Dialogs = (props) => {
         {dialogsElements}
       </div>
       <div className={s.messages}>
-        {messagesElements}
+        <div>{messagesElements}</div>
         <div>
-          <textarea onChange={onMessagePost} ref={newMessageElement}
-  value={props.dialogsPage.newPostMessage}/>
-        </div>
-        <div>
-          <button onClick={AddMessage}>Add</button>
+          <div>
+            <textarea onChange={onNewMessageChange}
+                      value={newMessageBody}
+                      placeholder="Enter your message"/>
+          </div>
+          <div>
+            <button onClick={onSendMessageClick}>Send</button>
+          </div>
         </div>
       </div>
     </div>
