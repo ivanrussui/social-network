@@ -2,11 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Mesage';
-import {
-  addMessageActionCreator, sendMessageCreator,
-  updateNewMessageBodyCreator,
-  updateNewMessageTextActionCreator
-} from '../../redux/state';
+import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialogsReducer';
 
 const Dialogs = (props) => {
   // debugger;
@@ -16,23 +12,11 @@ const Dialogs = (props) => {
   let messagesElements = state.messages.map(m => <Message message={m.message} key={m.id}/>);
   let newMessageBody = state.newMessageBody;
 
-  // let newMessageElement = React.createRef();
-
-  // let AddMessage = () => {
-  //   props.dispatch(addMessageActionCreator());
-  // };
-
-  // let onMessagePost = () => {
-  //   let text = newMessageElement.current.value;
-  //   let action = updateNewMessageTextActionCreator(text);
-  //   props.dispatch(action);
-  // };
-
-  let onSendMessageClick = () => {
+  let onSendMessageClick = () => {      // отправка сообщения
     props.store.dispatch(sendMessageCreator());
   };
 
-  let onNewMessageChange = (e) => {
+  let onNewMessageChange = (e) => {     // изменение текста
     let body = e.target.value;
     props.store.dispatch(updateNewMessageBodyCreator(body));
   };

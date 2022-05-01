@@ -1,11 +1,7 @@
-// обернули в переменные action type из action creator
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-// const ADD_MESSAGE = 'ADD-MESSAGE';
-// const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+// импортируем редьюсоры
+import profileReducer from './profileReducer';
+import dialogsReducer from './dialogsReducer';
+import sidebarReducer from './sidebarReducer';
 
 let store = {
   _state: {
@@ -48,94 +44,17 @@ let store = {
     this._callSubscriber = observer; // происходит замыкание, вых из функ и идет выше, ввверху находит
   },
 
-  dispatch(action) { // { type: 'ADD-POST' }
+  dispatch(action) {
     // debugger;
-    if (action.type === ADD_POST) { // добавление постов Profile; ADD_POST это переменная action type из action creator
-      let newPost = {
-        id: 3,
-        message: this._state.profilePage.newPostText,
-        count: 0
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.newPostText = '';
-      this._callSubscriber(this._state);
 
-    } else if (action.type === UPDATE_NEW_POST_TEXT) { // обновление ввода текста в посты Profile
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber(this._state);
+    // связываем наш dispatch со своими редьюсерами
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action);
 
-    } else if (action.type === SEND_MESSAGE) { // добавление постов-сообщений Messages / альтернатива
-      let body = this._state.dialogsPage.newMessageBody;
-      this._state.dialogsPage.newMessageBody = '';
-      this._state.dialogsPage.messages.push({id: 6, message: body});
-      this._callSubscriber(this._state);
-
-    } else if (action.type === UPDATE_NEW_MESSAGE_BODY) { // обновление ввода текста в посты-сообщения Messages / альтернатива
-      this._state.dialogsPage.newMessageBody = action.body;
-      this._callSubscriber(this._state);
-    }
-    // } else if (action.type === ADD_MESSAGE) { // добавление постов-сообщений Messages
-    //   let newMessage = {
-    //     id: 6,
-    //     message: this._state.dialogsPage.newPostMessage
-    //   };
-    //   this._state.dialogsPage.messages.push(newMessage);
-    //   this._state.dialogsPage.newPostMessage = '';
-    //   this._callSubscriber(this._state);
-    //
-    // } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) { // обновление ввода текста в посты-сообщения Messages
-    //   this._state.dialogsPage.newPostMessage = action.newText;
-    //   this._callSubscriber(this._state);
-    // }
+    this._callSubscriber(this._state); // уведомляем подписчика
   }
 };
 
-// наши actionCreator
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
-
-export const sendMessageCreator = () => ({ type: SEND_MESSAGE });
-export const updateNewMessageBodyCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_BODY, body: text });
-// export const addMessageActionCreator = () => ({ type:  ADD_MESSAGE });
-// export const updateNewMessageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text });
-
-
 export default store;
 window.store = store;
-
-// функция добавления постов Profile
-// addPost() {
-//   let newPost = {
-//     id: 3,
-//     message: this._state.profilePage.newPostText,
-//     count: 0
-//   };
-//
-//   this._state.profilePage.posts.push(newPost);
-//   this._state.profilePage.newPostText = '';
-//   this._callSubscriber(this._state);
-// },
-
-// функция обновления ввода текста в посты Profile
-// updateNewPostText(newText) {
-//   this._state.profilePage.newPostText = newText;
-//   this._callSubscriber(this._state);
-// },
-
-// функция добавления постов-сообщений Messages
-// addMessage() {
-//   let newMessage = {
-//     id: 6,
-//     message: this._state.dialogsPage.newPostMessage
-//   };
-//
-//   this._state.dialogsPage.messages.push(newMessage);
-//   this._state.dialogsPage.newPostMessage = '';
-//   this._callSubscriber(this._state);
-// },
-
-// функция обновления ввода текста в посты-сообщения Messages
-// updateNewMessageText(newText) {
-//   this._state.dialogsPage.newPostMessage = newText;
-//   this._callSubscriber(this._state);
-// }
