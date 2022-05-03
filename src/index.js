@@ -7,6 +7,7 @@ import {BrowserRouter} from 'react-router-dom';
 import store from './redux/reduxStore';
 
 let rerenderEntire = (state) => {
+  // debugger;
   ReactDOM.render(
     <BrowserRouter>
       <App
@@ -20,7 +21,14 @@ let rerenderEntire = (state) => {
 
 rerenderEntire(store.getState());
 
-store.subscribe(rerenderEntire);
+// отдаем store в качестве подписчика функцию rerenderEntire
+// store.subscribe(rerenderEntire);
+
+// отдаем store в качестве подписчика анонимную функцию, внутри вызываем функцию rerenderEntire
+store.subscribe(() => {
+  let state = store.getState();
+  rerenderEntire(state);
+});
 
 
 
