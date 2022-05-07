@@ -18,7 +18,7 @@ let rerenderEntire = (state) => {
     </BrowserRouter>, document.getElementById('root'));
 }
 
-
+// функция перерисовки дерева срабатывая у store запрашивет getState
 rerenderEntire(store.getState());
 
 // отдаем store в качестве подписчика функцию rerenderEntire
