@@ -5,20 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import store from './redux/reduxStore';
+import StoreContext from './StoreContext';
+
+//todo потом убери из эпп все просто у тебя сайдбар еще
 
 let rerenderEntire = (state) => {
   // debugger;
   ReactDOM.render(
     <BrowserRouter>
-      <App
-           state={state}
-           dispatch={store.dispatch.bind(store)}
-           store={store}
-      />
+      <StoreContext.Provider value={store}>
+        <App state={state}
+             dispatch={store.dispatch.bind(store)}
+             store={store}/>
+      </StoreContext.Provider>
     </BrowserRouter>, document.getElementById('root'));
-}
+};
 
-// функция перерисовки дерева срабатывая у store запрашивет getState
+// функция перерисовки дерева срабатывая у store запрашивает getState
 rerenderEntire(store.getState());
 
 // отдаем store в качестве подписчика функцию rerenderEntire
@@ -29,7 +32,6 @@ store.subscribe(() => {
   let state = store.getState();
   rerenderEntire(state);
 });
-
 
 
 // If you want to start measuring performance in your app, pass a function
