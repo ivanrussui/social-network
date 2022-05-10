@@ -5,19 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import store from './redux/reduxStore';
-import StoreContext from './StoreContext';
+import StoreContext, {Provider} from './StoreContext';
 
-//todo потом убери из эпп все просто у тебя сайдбар еще
+//todo <App state={state} /> тут state тк в навбар идут данные
 
 let rerenderEntire = (state) => {
   // debugger;
   ReactDOM.render(
     <BrowserRouter>
-      <StoreContext.Provider value={store}>
-        <App state={state}
-             dispatch={store.dispatch.bind(store)}
-             store={store}/>
-      </StoreContext.Provider>
+      <Provider store={store}>
+        <App state={state} />
+      </Provider>
     </BrowserRouter>, document.getElementById('root'));
 };
 

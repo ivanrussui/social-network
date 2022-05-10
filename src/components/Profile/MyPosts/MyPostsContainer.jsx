@@ -8,18 +8,18 @@ const MyPostsContainer = (props) => {
 // debugger;
 
   return (
-    <StoreContext.Consumer> {
-      (store) => {
-        let state = props.store.getState();
-        // todo возможно это решит проблему let state = store.getState();
+    <StoreContext.Consumer>
+      { (store) => {
+
+        let state = store.getState();
 
         let addPost = () => {  // добавить пост
-          props.store.dispatch(addPostActionCreator());
+          store.dispatch(addPostActionCreator());
         };
 
         let onPostChange = (text) => {  // изменение текста поста
           let action = updateNewPostTextActionCreator(text);
-          props.store.dispatch(action);
+          store.dispatch(action);
         };
 
         return <MyPosts updateNewPostText={onPostChange}

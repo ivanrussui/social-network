@@ -23,9 +23,9 @@ let store = {
       newMessageBody: ''
       // newPostMessage: 'Flux архитектура'
     },
-    // sidebar: {
-    //   friends: [{id: 1, name: 'Kristina'}, {id: 2, name: 'Vladimir'}, {id: 3, name: 'Alexa'}]
-    // }
+    sidebar: {
+      friends: [{id: 1, name: 'Kristina'}, {id: 2, name: 'Vladimir'}, {id: 3, name: 'Alexa'}]
+    }
   },
 
   // наш "подписчик" ранее rerenderEntire()
