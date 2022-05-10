@@ -4,12 +4,12 @@ import MyPosts from './MyPosts';
 import StoreContext from '../../../StoreContext';
 
 
-const MyPostsContainer = (props) => {
+const MyPostsContainer = () => {
 // debugger;
 
   return (
     <StoreContext.Consumer>
-      { (store) => {
+      { store => {
 
         let state = store.getState();
 

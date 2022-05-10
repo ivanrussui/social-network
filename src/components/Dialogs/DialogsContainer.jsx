@@ -3,12 +3,12 @@ import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialo
 import Dialogs from './Dialogs';
 import StoreContext from '../../StoreContext';
 
-const DialogsContainer = (props) => {
+const DialogsContainer = () => {
   // debugger;
 
   return (
     <StoreContext.Consumer>
-      { (store) => {
+      { store => {
 
         let state = store.getState().dialogsPage;
 
