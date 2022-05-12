@@ -5,7 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import store from './redux/reduxStore';
-import StoreContext, {Provider} from './StoreContext';
+import {Provider} from "react-redux";
+// import StoreContext, {Provider} from './StoreContext';
 
 //todo <App state={state} /> тут state тк в навбар идут данные
 
@@ -19,6 +20,20 @@ let rerenderEntire = (state) => {
     </BrowserRouter>, document.getElementById('root'));
 };
 
+//todo как было сначала
+// let rerenderEntire = (state) => {
+//     // debugger;
+//     ReactDOM.render(
+//         <BrowserRouter>
+//             <StoreContext.Provider value={store}>
+//                 <App state={state} />
+//             </StoreContext.Provider>
+//         </BrowserRouter>, document.getElementById('root'));
+// };
+
+
+
+
 // функция перерисовки дерева срабатывая у store запрашивает getState
 rerenderEntire(store.getState());
 
@@ -30,6 +45,15 @@ store.subscribe(() => {
   let state = store.getState();
   rerenderEntire(state);
 });
+
+
+//todo когда App "подчистишь" от state={state}
+rerenderEntire();
+
+store.subscribe(() => {
+   rerenderEntire();
+});
+//todo state уже не надо будет передавать
 
 
 // If you want to start measuring performance in your app, pass a function
