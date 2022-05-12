@@ -48,11 +48,11 @@ store.subscribe(() => {
 
 
 //todo когда App "подчистишь" от state={state}
-rerenderEntire();
-
-store.subscribe(() => {
-   rerenderEntire();
-});
+// rerenderEntire();
+//
+// store.subscribe(() => {
+//    rerenderEntire();
+// });
 //todo state уже не надо будет передавать
 
 
