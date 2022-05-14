@@ -9,7 +9,7 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 
-const App = (props) => {
+const App = () => {
   // debugger;
   return (
     <div className="app-wrapper">

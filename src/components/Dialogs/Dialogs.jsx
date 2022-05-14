@@ -11,11 +11,11 @@ const Dialogs = (props) => {
   let messagesElements = state.messages.map(m => <Message message={m.message} key={m.id}/>);
   let newMessageBody = state.newMessageBody;
 
-  let onSendMessageClick = () => {      // отправка сообщения
+  let onSendMessageClick = () => {  // отправка сообщения
     props.sendMessage();
   };
 
-  let onNewMessageChange = (e) => {     // изменение текста
+  let onNewMessageChange = (e) => {  // изменение текста
     let body = e.target.value;
     props.updateNewMessageBody(body);
   };
