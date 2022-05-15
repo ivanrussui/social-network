@@ -7,24 +7,13 @@ import {BrowserRouter} from 'react-router-dom';
 import store from './redux/reduxStore';
 import {Provider} from "react-redux";
 
-let rerenderEntire = () => {
-  // debugger;
-  ReactDOM.render(
+ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <App/>
       </Provider>
-    </BrowserRouter>, document.getElementById('root'));
-};
-
-// функция перерисовки дерева
-rerenderEntire();
-
-// отдаем store в качестве подписчика анонимную функцию, внутри вызываем функцию rerenderEntire
-store.subscribe(() => {
-    rerenderEntire();
-});
-
+    </BrowserRouter>, document.getElementById('root')
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

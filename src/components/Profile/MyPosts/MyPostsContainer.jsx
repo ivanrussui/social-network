@@ -3,7 +3,7 @@ import MyPosts from './MyPosts';
 import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
-  return{
+  return {
     newPostText: state.profilePage.newPostText,
     posts: state.profilePage.posts
   }

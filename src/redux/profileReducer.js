@@ -12,25 +12,30 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   // debugger;
   switch (action.type) {
-    case ADD_POST: // добавление постов Profile; ADD_POST это переменная action type из action creator
+    case ADD_POST: { // добавление постов Profile; ADD_POST это переменная action type из action creator
       let newPost = {
         id: 3,
         message: state.newPostText,
         count: 0
       };
-      state.posts.push(newPost);
-      state.newPostText = '';
-      return state;
-    case UPDATE_NEW_POST_TEXT: // обновление ввода текста в посты Profile
-      state.newPostText = action.newText;
-      return state;
+      let stateCopy = {...state}; // поверхностное копирование
+      stateCopy.posts = [...state.posts]; // глубокое копирование
+      stateCopy.posts.push(newPost);
+      stateCopy.newPostText = '';
+      return stateCopy;
+    }
+    case UPDATE_NEW_POST_TEXT: { // обновление ввода текста в посты Profile
+      let stateCopy = {...state};
+      stateCopy.newPostText = action.newText;
+      return stateCopy;
+    }
     default:
       return state;
   }
 }
 
 // наши actionCreator
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
+export const addPostActionCreator = () => ({type: ADD_POST});
+export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
 
 export default profileReducer;
