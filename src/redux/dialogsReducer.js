@@ -16,26 +16,25 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SEND_MESSAGE: { // добавление постов-сообщений Messages / альтернатива
+    case SEND_MESSAGE:  // добавление постов-сообщений Messages
       let body = state.newMessageBody;
-      let stateCopy = {...state}; // поверхностное копирование
-      stateCopy.messages = [...stateCopy.messages];  // глубокое копирование
-      stateCopy.newMessageBody = '';
-      stateCopy.messages.push({id: 6, message: body});
-      return stateCopy;
-    }
-    case UPDATE_NEW_MESSAGE_BODY: { // обновление ввода текста в посты-сообщения Messages / альтернатива
-      let stateCopy = {...state}
-      stateCopy.newMessageBody = action.body;
-      return stateCopy;
-    }
+      return {
+        ...state,           // поверхностное копирование
+        newMessageBody: '',
+        messages: [...state.messages, {id: 6, message: body}],  // глубокое копирование, {вместо push сразу пишем}
+      };
+    case UPDATE_NEW_MESSAGE_BODY:  // обновление ввода текста в посты-сообщения Messages
+      return {
+        ...state,
+        newMessageBody: action.body
+      };
     default:
       return state;
   }
 }
 
 // наши actionCreator
-export const sendMessageCreator = () => ({ type: SEND_MESSAGE });
-export const updateNewMessageBodyCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_BODY, body: text });
+export const sendMessageCreator = () => ({type: SEND_MESSAGE});
+export const updateNewMessageBodyCreator = (text) => ({type: UPDATE_NEW_MESSAGE_BODY, body: text});
 
 export default dialogsReducer;
