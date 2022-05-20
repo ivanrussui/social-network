@@ -21,7 +21,7 @@ const dialogsReducer = (state = initialState, action) => {
       return {
         ...state,           // поверхностное копирование
         newMessageBody: '',
-        messages: [...state.messages, {id: 6, message: body}],  // глубокое копирование, {вместо push сразу пишем}
+        messages: [...state.messages, {id: 6, message: body}]  // глубокое копирование, {вместо push сразу пишем}
       };
     case UPDATE_NEW_MESSAGE_BODY:  // обновление ввода текста в посты-сообщения Messages
       return {

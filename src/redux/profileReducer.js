@@ -21,7 +21,7 @@ const profileReducer = (state = initialState, action) => {
       return  {
         ...state,         // поверхностное копирование
         newPostText: '',
-        posts: [...state.posts, newPost],    // глубокое копирование, вместо push сразу пишем
+        posts: [...state.posts, newPost]    // глубокое копирование, вместо push сразу пишем
       };
     }
     case UPDATE_NEW_POST_TEXT: { // обновление ввода текста в посты Profile
