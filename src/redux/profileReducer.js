@@ -1,4 +1,4 @@
-// обернули в переменные action type из action creator
+// обернули в переменные action.type из actionCreator
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 

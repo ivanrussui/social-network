@@ -1,4 +1,4 @@
-// обернули в переменные action type из action creator
+// обернули в переменные action.type из actionCreator
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 

@@ -1,12 +1,14 @@
+// обернули в переменные action.type из actionCreator
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET-USERS';
 
 let initialState = {
   users: [
-    {id: 1, followed: false, name: 'Ivan', status: 'Hello World', location: {country: 'Russia', city: 'Moscow'}},
-    {id: 2, followed: false, name: 'Dmitry', status: 'Yo Yo Yo', location: {country: 'Belarus', city: 'Minsk'}},
-    {id: 3, followed: true, name: 'Fedor', status: 'I am programmer', location: {country: 'Moldova', city: 'Kishinev'}},
-    {id: 4, followed: true, name: 'Vasily', status: 'Hi Developers', location: {country: 'USA', city: 'New York'}}
+    // {id: 1, followed: false, name: 'Ivan', status: 'Hello World', location: {country: 'Russia', city: 'Moscow'}},
+    // {id: 2, followed: false, name: 'Dmitry', status: 'Yo Yo Yo', location: {country: 'Belarus', city: 'Minsk'}},
+    // {id: 3, followed: true, name: 'Fedor', status: 'I am programmer', location: {country: 'Moldova', city: 'Kishinev'}},
+    // {id: 4, followed: true, name: 'Vasily', status: 'Hi Developers', location: {country: 'USA', city: 'New York'}}
   ]
   // ninjaTurtles: [
   //   {id: 1, name: 'Leonardo', role: 'Leader', weapon: 'Ninjato swords', color: 'Blue'},
@@ -18,18 +20,17 @@ let initialState = {
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FOLLOW:
+    case FOLLOW:   // подисаться
       return {
-        ...state,
-        users: state.users.map(u => {
-          if (u.id === action.userId) {
-            return {...u, followed: true}
+        ...state,   // поверхностное копирование
+        users: state.users.map(u => {   // делаем копию users, map возвращает новый массив
+          if (u.id === action.userId) {    // если id совпадает, то
+            return {...u, followed: true}  // возвращаем копию
           }
           return u;
         })
-      }
-
-    case UNFOLLOW:
+      };
+    case UNFOLLOW:  // отписаться
       return {
         ...state,
         users: state.users.map(u => {
@@ -38,13 +39,20 @@ const usersReducer = (state = initialState, action) => {
           }
           return u;
         })
-      }
+      };
+    case SET_USERS: // получить юзеров
+      return {
+        ...state,
+        users: [...state.users, ...action.users] // к существующим юзерам добавляем новых
+      };
     default:
       return state;
   }
 }
 
+// наши actionCreator               userId нужен чтобы понимать с каким юзером взаидойствовать
 export const followActionCreator = (userId) => ({type: FOLLOW, userId});
 export const unfollowActionCreator = (userId) => ({type: UNFOLLOW, userId});
+export const setUsersActionCreator = (users) => ({type: SET_USERS, users});
 
 export default usersReducer;
