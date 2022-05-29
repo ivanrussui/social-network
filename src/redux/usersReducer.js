@@ -4,12 +4,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 
 let initialState = {
-  users: [
-    {id: 1, imgSrc: 'https://cdn-icons-png.flaticon.com/512/149/149452.png', followed: false, name: 'Ivan', status: 'Hello World', location: {country: 'Russia', city: 'Moscow'}},
-    {id: 2, imgSrc: 'https://cdn-icons-png.flaticon.com/512/149/149452.png', followed: false, name: 'Dmitry', status: 'Yo Yo Yo', location: {country: 'Belarus', city: 'Minsk'}},
-    {id: 3, imgSrc: 'https://cdn-icons-png.flaticon.com/512/149/149452.png', followed: true, name: 'Fedor', status: 'I am programmer', location: {country: 'Moldova', city: 'Kishinev'}},
-    {id: 4, imgSrc: 'https://cdn-icons-png.flaticon.com/512/149/149452.png', followed: true, name: 'Vasily', status: 'Hi Developers', location: {country: 'USA', city: 'New York'}}
-  ]
+  users: []
   // ninjaTurtles: [
   //   {id: 1, name: 'Leonardo', role: 'Leader', weapon: 'Ninjato swords', color: 'Blue'},
   //   {id: 2, name: 'Raphael', role: 'Strong', weapon: 'Sai daggers', color: 'Red'},
