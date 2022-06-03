@@ -2,12 +2,14 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {followActionCreator, setUsersActionCreator, unfollowActionCreator} from "../../redux/usersReducer";
 
+// функция принимающая весь state приложения
 let mapStateToProps = (state) => {
-  return {
+  return {             // возвращает объект с данными которые нам нужны
     users: state.usersPage.users
   }
 }
 
+// функция передает презентационной компоненте через props callback
 let mapDispatchToProps = (dispatch) => {
   return {
     follow: (userId) => {
