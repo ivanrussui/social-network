@@ -12,7 +12,7 @@ ReactDOM.render(
       <Provider store={store}>
         <App/>
       </Provider>
-    </BrowserRouter>, document.getElementById('root')
+    </BrowserRouter>, document.querySelector('#root')
 );
 
 // If you want to start measuring performance in your app, pass a function
