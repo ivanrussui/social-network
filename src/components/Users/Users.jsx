@@ -4,24 +4,14 @@ import * as axios from "axios";
 import userAva from '../../assets/img/user.png';
 
 class Users extends React.Component {
-
-  constructor(props) {
-    super(props);
-    alert('new');
-    // if (this.props.users.length === 0) {
-      axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-        this.props.setUsers(response.data.items)
-      });
-    // }
-
+  componentDidMount() {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+      this.props.setUsers(response.data.items)
+    });
   }
-
-  // getUsers = () => {
-  // }
 
   render() {
     return <div className={styles.users}>
-      {/*<button onClick={this.getUsers}>Get Users</button>*/}
       {
         this.props.users.map(u => <div key={u.id}>
           <div>
