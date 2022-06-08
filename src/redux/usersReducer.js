@@ -4,13 +4,10 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 
 let initialState = {
-  users: []
-  // ninjaTurtles: [
-  //   {id: 1, name: 'Leonardo', role: 'Leader', weapon: 'Ninjato swords', color: 'Blue'},
-  //   {id: 2, name: 'Raphael', role: 'Strong', weapon: 'Sai daggers', color: 'Red'},
-  //   {id: 3, name: 'Donatello', role: 'Genius', weapon: 'Bo pole', color: 'Violet'},
-  //   {id: 4, name: 'Michelangelo', role: 'Funny', weapon: 'Nunchaku', color: 'Orange'},
-  // ]
+  users: [],
+  pageSize: 5,
+  totalCount: 25,
+  currentPage: 3
 };
 
 const usersReducer = (state = initialState, action) => {

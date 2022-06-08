@@ -11,3 +11,7 @@
   height: 75px;
   display: block;
 }
+
+.selectedPage {
+  font-weight: bold;
+}

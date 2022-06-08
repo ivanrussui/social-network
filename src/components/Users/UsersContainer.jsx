@@ -5,7 +5,10 @@ import {followActionCreator, setUsersActionCreator, unfollowActionCreator} from 
 // функция принимающая весь state приложения
 let mapStateToProps = (state) => {
   return {             // возвращает объект с данными которые нам нужны
-    users: state.usersPage.users
+    users: state.usersPage.users,
+    pageSize: state.usersPage.pageSize,
+    totalCount: state.usersPage.totalCount,
+    currentPage: state.usersPage.currentPage
   }
 }
 
