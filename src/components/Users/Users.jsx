@@ -5,14 +5,15 @@ import userAva from '../../assets/img/user.png';
 
 class Users extends React.Component {
   componentDidMount() {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+      .then(response => {
       this.props.setUsers(response.data.items)
     });
   }
 
   render() {
 
-    let pagesCount = this.props.totalCount / this.props.pageSize;
+    let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {

@@ -6,8 +6,8 @@ const SET_USERS = 'SET-USERS';
 let initialState = {
   users: [],
   pageSize: 5,
-  totalCount: 25,
-  currentPage: 3
+  totalCount: 26,
+  currentPage: 5
 };
 
 const usersReducer = (state = initialState, action) => {
