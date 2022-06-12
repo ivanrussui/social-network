@@ -3,11 +3,12 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const SET_TOTAL_COUNT = 'SET-TOTAL-COUNT';
 
 let initialState = {
   users: [],
   pageSize: 5,
-  totalCount: 26,
+  totalCount: 0,
   currentPage: 6
 };
 
@@ -42,6 +43,10 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state, currentPage: action.currentPage
       }
+    case SET_TOTAL_COUNT: // получить общее количество юзеров с сервера
+      return {
+        ...state, totalCount: action.count
+      }
     default:
       return state;
   }
@@ -52,5 +57,6 @@ export const followActionCreator = (userId) => ({type: FOLLOW, userId});
 export const unfollowActionCreator = (userId) => ({type: UNFOLLOW, userId});
 export const setUsersActionCreator = (users) => ({type: SET_USERS, users});
 export const setCurrentPageActionCreator = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export const setTotalCountActionCreator = (totalCount) => ({type: SET_TOTAL_COUNT, count: totalCount});
 
 export default usersReducer;

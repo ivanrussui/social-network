@@ -3,6 +3,7 @@ import Users from "./Users";
 import {
   followActionCreator,
   setCurrentPageActionCreator,
+  setTotalCountActionCreator,
   setUsersActionCreator,
   unfollowActionCreator
 } from "../../redux/usersReducer";
@@ -31,6 +32,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setCurrentPage: (pageNumber) => {
       dispatch(setCurrentPageActionCreator(pageNumber));
+    },
+    setTotalCount: (totalCount) => {
+      dispatch(setTotalCountActionCreator(totalCount));
     }
   }
 }
