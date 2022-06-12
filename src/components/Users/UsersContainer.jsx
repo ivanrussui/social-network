@@ -1,6 +1,11 @@
 import {connect} from "react-redux";
 import Users from "./Users";
-import {followActionCreator, setUsersActionCreator, unfollowActionCreator} from "../../redux/usersReducer";
+import {
+  followActionCreator,
+  setCurrentPageActionCreator,
+  setUsersActionCreator,
+  unfollowActionCreator
+} from "../../redux/usersReducer";
 
 // функция принимающая весь state приложения
 let mapStateToProps = (state) => {
@@ -23,6 +28,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setUsers: (users) => {
       dispatch(setUsersActionCreator(users));
+    },
+    setCurrentPage: (pageNumber) => {
+      dispatch(setCurrentPageActionCreator(pageNumber));
     }
   }
 }

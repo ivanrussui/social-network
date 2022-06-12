@@ -2,6 +2,11 @@
   padding: 10px;
 }
 
+.users span {
+  cursor: pointer;
+  padding: 2px;
+}
+
 .userInfo {
   margin-bottom: 15px;
 }
