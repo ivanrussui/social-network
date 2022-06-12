@@ -26,7 +26,10 @@ class Users extends React.Component {
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i);
+      // if (pages.length < 10) { // условие чтобы 1000+ страниц не было
+        pages.push(i);
+      // }
+      // pages.push(i);
     }
 
     return <div className={styles.users}>
