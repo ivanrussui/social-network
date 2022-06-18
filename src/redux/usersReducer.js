@@ -41,11 +41,13 @@ const usersReducer = (state = initialState, action) => {
       };
     case SET_CURRENT_PAGE: // получить текущую страницу
       return {
-        ...state, currentPage: action.currentPage
+        ...state,
+        currentPage: action.currentPage
       }
     case SET_TOTAL_COUNT: // получить общее количество юзеров с сервера
       return {
-        ...state, totalCount: action.count
+        ...state,
+        totalCount: action.count
       }
     default:
       return state;
