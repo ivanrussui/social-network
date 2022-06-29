@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import * as axios from "axios";
 import Users from "./Users";
-import Spinner from '../../assets/img/spinner.svg';
+import Spinner from "../common/Spinner/Spinner";
 import {
   followActionCreator,
   setCurrentPageActionCreator,
@@ -38,15 +38,17 @@ class UsersContainer extends React.Component {
 
   render() {
     // console.log(this.props)
-    return <> { this.props.isFetching ? <img src={Spinner} /> : null }
-      <Users totalCount={this.props.totalCount}
-             pageSize={this.props.pageSize}
-             currentPage={this.props.currentPage}
-             users={this.props.users}
-             follow={this.props.follow}
-             unfollow={this.props.unfollow}
-             onPageChanged={this.onPageChanged}
-      />
+    return <>
+      { this.props.isFetching ?
+        <Spinner/> :
+        <Users totalCount={this.props.totalCount}
+               pageSize={this.props.pageSize}
+               currentPage={this.props.currentPage}
+               users={this.props.users}
+               follow={this.props.follow}
+               unfollow={this.props.unfollow}
+               onPageChanged={this.onPageChanged}
+        /> }
     </>
   }
 }
