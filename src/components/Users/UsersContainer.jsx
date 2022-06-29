@@ -2,21 +2,24 @@ import React from 'react';
 import {connect} from "react-redux";
 import * as axios from "axios";
 import Users from "./Users";
+import Spinner from '../../assets/img/spinner.svg';
 import {
   followActionCreator,
   setCurrentPageActionCreator,
   setTotalCountActionCreator,
   setUsersActionCreator,
-  unfollowActionCreator
+  unfollowActionCreator,
+  toggleIsFetchingActionCreator
 } from "../../redux/usersReducer";
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
 class UsersContainer extends React.Component {
-
   componentDidMount() {
+    this.props.toggleIsFetching(true); // spinner = true
     // получаем юзеров с сервера
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
       .then(response => {
+        this.props.toggleIsFetching(false); // spinner = false
         this.props.setUsers(response.data.items);
         this.props.setTotalCount(response.data.totalCount);
       });
@@ -24,23 +27,27 @@ class UsersContainer extends React.Component {
 
   // изменение (переключение) страницы
   onPageChanged = (pageNumber) => {
+    this.props.toggleIsFetching(true); // spinner = true
     this.props.setCurrentPage(pageNumber);
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
       .then(response => {
+        this.props.toggleIsFetching(false); // spinner = false
         this.props.setUsers(response.data.items);
       });
   }
 
   render() {
     // console.log(this.props)
-    return <Users totalCount={this.props.totalCount}
-                  pageSize={this.props.pageSize}
-                  currentPage={this.props.currentPage}
-                  users={this.props.users}
-                  follow={this.props.follow}
-                  unfollow={this.props.unfollow}
-                  onPageChanged={this.onPageChanged}
-    />
+    return <> { this.props.isFetching ? <img src={Spinner} /> : null }
+      <Users totalCount={this.props.totalCount}
+             pageSize={this.props.pageSize}
+             currentPage={this.props.currentPage}
+             users={this.props.users}
+             follow={this.props.follow}
+             unfollow={this.props.unfollow}
+             onPageChanged={this.onPageChanged}
+      />
+    </>
   }
 }
 
@@ -50,11 +57,12 @@ let mapStateToProps = (state) => {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalCount: state.usersPage.totalCount,
-    currentPage: state.usersPage.currentPage
+    currentPage: state.usersPage.currentPage,
+    isFetching: state.usersPage.isFetching
   }
 }
 
-// функция передает презентационной компоненте через props callback
+// функция передает компоненте через props callback
 let mapDispatchToProps = (dispatch) => {
   return {
     follow: (userId) => {
@@ -71,6 +79,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setTotalCount: (totalCount) => {
       dispatch(setTotalCountActionCreator(totalCount));
+    },
+    toggleIsFetching: (isFetching) => {
+      dispatch(toggleIsFetchingActionCreator(isFetching));
     }
   }
 }
