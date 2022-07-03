@@ -3,14 +3,7 @@ import {connect} from "react-redux";
 import * as axios from "axios";
 import Users from "./Users";
 import Spinner from "../common/Spinner/Spinner";
-import {
-  followActionCreator,
-  setCurrentPageActionCreator,
-  setTotalCountActionCreator,
-  setUsersActionCreator,
-  unfollowActionCreator,
-  toggleIsFetchingActionCreator
-} from "../../redux/usersReducer";
+import {follow, setCurrentPage, setTotalCount, setUsers, unfollow, toggleIsFetching} from "../../redux/usersReducer";
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
 class UsersContainer extends React.Component {
@@ -39,7 +32,7 @@ class UsersContainer extends React.Component {
   render() {
     // console.log(this.props)
     return <>
-      { this.props.isFetching ?
+      {this.props.isFetching ?
         <Spinner/> :
         <Users totalCount={this.props.totalCount}
                pageSize={this.props.pageSize}
@@ -48,7 +41,7 @@ class UsersContainer extends React.Component {
                follow={this.props.follow}
                unfollow={this.props.unfollow}
                onPageChanged={this.onPageChanged}
-        /> }
+        />}
     </>
   }
 }
@@ -65,27 +58,32 @@ let mapStateToProps = (state) => {
 }
 
 // функция передает компоненте через props callback
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => {
-      dispatch(followActionCreator(userId));
-    },
-    unfollow: (userId) => {
-      dispatch(unfollowActionCreator(userId));
-    },
-    setUsers: (users) => {
-      dispatch(setUsersActionCreator(users));
-    },
-    setCurrentPage: (pageNumber) => {
-      dispatch(setCurrentPageActionCreator(pageNumber));
-    },
-    setTotalCount: (totalCount) => {
-      dispatch(setTotalCountActionCreator(totalCount));
-    },
-    toggleIsFetching: (isFetching) => {
-      dispatch(toggleIsFetchingActionCreator(isFetching));
-    }
-  }
-}
+// let mapDispatchToProps = (dispatch) => {
+//   return {
+//     follow: (userId) => {
+//       dispatch(followActionCreator(userId));
+//     },
+//     unfollow: (userId) => {
+//       dispatch(unfollowActionCreator(userId));
+//     },
+//     setUsers: (users) => {
+//       dispatch(setUsersActionCreator(users));
+//     },
+//     setCurrentPage: (pageNumber) => {
+//       dispatch(setCurrentPageActionCreator(pageNumber));
+//     },
+//     setTotalCount: (totalCount) => {
+//       dispatch(setTotalCountActionCreator(totalCount));
+//     },
+//     toggleIsFetching: (isFetching) => {
+//       dispatch(toggleIsFetchingActionCreator(isFetching));
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+
+export default connect(mapStateToProps,
+  // вместо функ mapDispatchToProps с диспатчами, коллбэками...
+  // делаем объектами, они ссылаются на объекты в редаксе и все работает благодаря connect пример follow: follow
+  {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching}
+)(UsersContainer);
