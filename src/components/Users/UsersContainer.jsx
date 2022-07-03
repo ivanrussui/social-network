@@ -83,7 +83,8 @@ let mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,
-  // вместо функ mapDispatchToProps с диспатчами, коллбэками...
-  // делаем объектами, они ссылаются на объекты в редаксе и все работает благодаря connect пример follow: follow
+  // вместо функции mapDispatchToProps с диспатчами, коллбэками...
+  // делаем объектами, они ссылаются на объекты actionCreator в редаксе и все работает благодаря connect пример follow: follow
+  // ! Важная справка: если передавать в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента
   {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching}
 )(UsersContainer);
