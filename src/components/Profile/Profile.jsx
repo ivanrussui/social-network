@@ -6,7 +6,7 @@ const Profile = () => {
   // debugger;
   return (
     <div>
-      <ProfileInfo/>
+      <ProfileInfo />
       <MyPostsContainer />
     </div>
   );
