@@ -1,7 +1,13 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
+import Spinner from "../../common/Spinner/Spinner";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+  // debugger;
+  if (!props.profile) { // если в props profile нет или null или undefined
+    return <Spinner/> // отображаем спиннер
+  }
+
   return (
     <div>
       <div>
@@ -11,7 +17,8 @@ const ProfileInfo = () => {
         />
       </div>
       <div className={s.descriptionBlock}>
-        avatar + description
+        <img src={props.profile.photos.large} alt="avatar" />
+        <span> {props.profile.lookingForAJobDescription} </span>
       </div>
 
     </div>
