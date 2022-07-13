@@ -15,3 +15,11 @@
 .descriptionText {
   margin-left: 10px;
 }
+
+.status img {
+  /*padding-left: 10px;*/
+  max-width: 40px;
+}
+/*.contactsSocial {*/
+/*  padding-left: 20px;*/
+/*}*/
