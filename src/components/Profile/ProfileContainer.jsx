@@ -19,7 +19,7 @@ class ProfileContainer extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить ( ) скобки а потом { }
+let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
   profile: state.profilePage.profile
 })
 
