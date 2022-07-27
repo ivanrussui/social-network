@@ -7,11 +7,10 @@ const Users = (props) => {
   let pagesCount = Math.ceil(props.totalCount / props.pageSize);
 
   let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    if (pages.length < 10) { // условие чтобы 1000+ страниц не было
-      pages.push(i);
+  for (let i = 4010; i <= pagesCount; i++) {
+    if (pages.length < 4500) { // условие чтобы 1000+ страниц не было
+      pages.sort((a, b) => a - b).push(i);
     }
-    // pages.push(i);
   }
 
   return <div className={styles.users}>

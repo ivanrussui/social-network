@@ -10,7 +10,7 @@ let initialState = {
   users: [],
   pageSize: 5,
   totalCount: 0,
-  currentPage: 1,
+  currentPage: 4010,
   isFetching: false
 };
 

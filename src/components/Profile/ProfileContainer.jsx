@@ -3,14 +3,16 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfileActionCreator} from "../../redux/profileReducer";
-// import {withRouter} from "react-router-dom";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    debugger;
-    let profileId = this.props.router.params.profileId;
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+    // debugger;
+    let profileId = this.props.router.params.userId;
+    if (!profileId) {
+      profileId = 2
+    }
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${profileId}`)
       .then(response => {
         // debugger;
         this.props.setUserProfileActionCreator(response.data);
