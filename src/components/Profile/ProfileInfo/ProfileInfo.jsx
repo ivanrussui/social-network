@@ -1,12 +1,15 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Spinner from "../../common/Spinner/Spinner";
+import plug from '../../../assets/img/plug.png'
 
 const ProfileInfo = (props) => {
   // debugger;
   if (!props.profile) { // если в props profile нет или null или undefined
     return <Spinner/> // отображаем спиннер
   }
+
+  const photos = props.profile.photos.large;
 
   return (
     <div>
@@ -17,17 +20,17 @@ const ProfileInfo = (props) => {
         />
       </div>
       <div className={s.descriptionBlock}>
-        <img src={props.profile.photos.large} alt="avatar"/>
+        { photos ?
+          <img src={photos} alt="avatar"/> :
+          <img src={plug} alt="Заглушка"/>
+        }
         <div className={s.descriptionText}>
           <div><b>О себе:</b> {props.profile.aboutMe}</div>
           <div><b>Контакты:</b> <br/>
               <a href="facebook.com">{props.profile.contacts.facebook}</a> <br/>
-              {/*<a href="#">{props.profile.contacts.website}</a> <br/>*/}
               <a href="vk.com/dimych">{props.profile.contacts.vk}</a> <br/>
               <a href="instagra.com/sds">{props.profile.contacts.instagram}</a> <br/>
-              {/*<a href="#">{props.profile.contacts.youtube}</a> <br/>*/}
               <a href="github.com">{props.profile.contacts.github}</a> <br/>
-              {/*<a href="#">{props.profile.contacts.mainLink}</a> <br/>*/}
           </div>
 
           <div className={s.status}><b>Статус работы: </b>
