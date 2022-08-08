@@ -6,7 +6,8 @@ let initialState = {
   id: null,
   email: null,
   login: null,
-  isFetching: false // не забудь реализовать
+  isAuth: false,
+  isFetching: false // не забудь реализовать,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -14,7 +15,8 @@ const authReducer = (state = initialState, action) => {
     case SET_USER_DATA:   // получить у юзера дэйта
       return {
         ...state,   // поверхностное копирование
-        ...action.data // в data будут сидеть id, email, login
+        ...action.data, // в data будут сидеть id, email, login
+        isAuth: true
       };
     // case TOGGLE_IS_FETCHING: // тоглим isFetching
     //   return {
@@ -27,7 +29,7 @@ const authReducer = (state = initialState, action) => {
 }
 
 // наши actionCreator
-export const setUserData = (id, email, login) => ({ type: SET_USER_DATA, data: {id, email, login} });
+export const setAuthUserData = (id, email, login) => ({ type: SET_USER_DATA, data: {id, email, login} });
 // export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 export default authReducer;
