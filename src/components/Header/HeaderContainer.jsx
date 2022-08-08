@@ -26,7 +26,8 @@ class HeaderContainer extends React.Component {
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   login: state.auth.login,
-  dialog1: state.dialogsPage.dialogs[0]
+  dialog1: state.dialogsPage.dialogs[0],
+  id: state.auth.id
 });
 // console.log(store.getState())
 // debugger

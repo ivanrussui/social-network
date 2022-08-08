@@ -11,8 +11,9 @@ const Header = (props) => {
         alt="logo"
       />
       <div className={s.loginBlock}>
-        {/*{ props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink> }*/}
-        { props.isAuth ? props.dialog1.name : <NavLink to={'/login'}>Login</NavLink> }
+        {/*<NavLink to={'/login'}>Login</NavLink>*/}
+        { props.isAuth ? `login: ${props.login} - id: ${props.id}` : <NavLink to={'/login'}>Login</NavLink> }
+        {/*{ props.isAuth ? props.dialog1.name : <NavLink to={'/login'}>Login</NavLink> }*/}
       </div>
     </header>
   );
