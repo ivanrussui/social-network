@@ -27,7 +27,8 @@ const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   login: state.auth.login,
   dialog1: state.dialogsPage.dialogs[0],
-  id: state.auth.id
+  id: state.auth.id,
+  avatar: state.auth.avatar
 });
 // console.log(store.getState())
 // debugger

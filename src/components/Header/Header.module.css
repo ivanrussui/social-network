@@ -11,15 +11,22 @@
 }
 
 .loginBlock {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 5px;
-  /*float: right;*/
+  /*position: absolute;*/
+  /*top: 50%;*/
+  /*transform: translateY(-50%);*/
+  /*right: 5px;*/
+  float: right;
   color: aqua;
+  display: flex;
+  align-items: center;
 }
 
 .loginBlock a {
   color: white;
+}
+
+.loginBlock img {
+  /*width: 50px;*/
+  height: 60px;
 }
 
