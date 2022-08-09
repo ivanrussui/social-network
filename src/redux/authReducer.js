@@ -1,14 +1,14 @@
 // обернули в переменные action.type из actionCreator
 const SET_USER_DATA = 'SET_USER_DATA';
-// const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const SET_HEADER_USER_PROFILE = 'SET-HEADER-USER-PROFILE';
 
 let initialState = {
   id: null,
   email: null,
   login: null,
   isAuth: false,
-  isFetching: false, // не забудь реализовать
-  avatar: null
+  avatar: null,
+  profile: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -19,11 +19,12 @@ const authReducer = (state = initialState, action) => {
         ...action.data, // в data будут сидеть id, email, login
         isAuth: true
       };
-    // case TOGGLE_IS_FETCHING: // тоглим isFetching
-    //   return {
-    //     ...state,
-    //     isFetching: action.isFetching
-    //   }
+    case SET_HEADER_USER_PROFILE: { // получаем профиль юзера
+      return {
+        ...state,
+        profile: action.profile
+      }
+    }
     default:
       return state;
   }
@@ -31,6 +32,6 @@ const authReducer = (state = initialState, action) => {
 
 // наши actionCreator
 export const setAuthUserData = (id, email, login) => ({ type: SET_USER_DATA, data: {id, email, login} });
-// export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const setUserHeader = (profile) => ({type: SET_HEADER_USER_PROFILE, profile});
 
 export default authReducer;

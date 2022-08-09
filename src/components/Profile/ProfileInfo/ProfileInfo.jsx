@@ -4,7 +4,7 @@ import Spinner from "../../common/Spinner/Spinner";
 import plug from '../../../assets/img/plug.png'
 
 const ProfileInfo = (props) => {
-  // debugger;
+  debugger;
   if (!props.profile) { // если в props profile нет или null или undefined
     return <Spinner/> // отображаем спиннер
   }
