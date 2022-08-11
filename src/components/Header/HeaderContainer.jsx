@@ -3,7 +3,7 @@ import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
 import {setAuthUserData, setHeaderUserProfile} from "../../redux/authReducer";
-// import {setUserProfileActionCreator} from "../../redux/profileReducer";
+import {setUserProfileActionCreator} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 class HeaderContainer extends React.Component {
@@ -26,7 +26,7 @@ class HeaderContainer extends React.Component {
       axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${profileId}`)
           .then(response => {
             // debugger;
-            this.props.setHeaderUserProfile(response.data);
+            this.props.setUserProfileActionCreator(response.data);
           });
       });
   }
@@ -34,8 +34,8 @@ class HeaderContainer extends React.Component {
   render() {
     // debugger
     // console.log(this.props)
-    // return <Header {...this.props} />
-    return <Header {...this.props} profile={this.props.profile}/>
+    return <Header {...this.props} />
+    // return <Header {...this.props} profile={this.props.profile}/>
   }
 }
 
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
   dialog1: state.dialogsPage.dialogs[0],
   id: state.auth.id,
   avatar: state.auth.avatar,
-  profile: state.auth.profile
+  profile: state.profilePage.profile
 });
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
@@ -63,4 +63,4 @@ function withRouter(Component) {
 
 
 // export default connect(mapStateToProps, {setAuthUserData}) (HeaderContainer);
-export default connect(mapStateToProps, {setAuthUserData, setHeaderUserProfile})(withRouter(HeaderContainer));
+export default connect(mapStateToProps, {setAuthUserData, setUserProfileActionCreator})(withRouter(HeaderContainer));
