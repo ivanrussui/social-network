@@ -7,8 +7,8 @@ const Users = (props) => {
   let pagesCount = Math.ceil(props.totalCount / props.pageSize);
 
   let pages = [];
-  for (let i = 4040; i <= pagesCount; i++) {
-    if (pages.length < 4500) { // условие чтобы 1000+ страниц не было
+  for (let i = 4070; i <= pagesCount; i++) {
+    if (pages.length < 4100) { // условие чтобы 1000+ страниц не было
       pages.sort((a, b) => a - b).push(i);
     }
   }

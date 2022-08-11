@@ -2,8 +2,8 @@ import React from 'react';
 import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
-import {setAuthUserData, setUserHeader} from "../../redux/authReducer";
-import {setUserProfileActionCreator} from "../../redux/profileReducer";
+import {setAuthUserData, setHeaderUserProfile} from "../../redux/authReducer";
+// import {setUserProfileActionCreator} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 class HeaderContainer extends React.Component {
@@ -12,6 +12,7 @@ class HeaderContainer extends React.Component {
     if (!profileId) {
       profileId = 2
     }
+    // debugger
 
     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
       withCredentials: true
@@ -25,7 +26,7 @@ class HeaderContainer extends React.Component {
       axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${profileId}`)
           .then(response => {
             // debugger;
-            this.props.setUserHeader(response.data);
+            this.props.setHeaderUserProfile(response.data);
           });
       });
   }
@@ -33,8 +34,8 @@ class HeaderContainer extends React.Component {
   render() {
     // debugger
     // console.log(this.props)
-    return <Header {...this.props} />
-    // return <Header {...this.props} profile={this.props.profile}/>
+    // return <Header {...this.props} />
+    return <Header {...this.props} profile={this.props.profile}/>
   }
 }
 
@@ -62,4 +63,4 @@ function withRouter(Component) {
 
 
 // export default connect(mapStateToProps, {setAuthUserData}) (HeaderContainer);
-export default connect(mapStateToProps, {setAuthUserData, setUserHeader}) (withRouter(HeaderContainer));
+export default connect(mapStateToProps, {setAuthUserData, setHeaderUserProfile})(withRouter(HeaderContainer));
