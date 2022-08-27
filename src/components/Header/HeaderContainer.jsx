@@ -15,12 +15,12 @@ class HeaderContainer extends React.Component {
     // debugger
 
     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-      withCredentials: true
+      withCredentials: true // для кроссдоменных запросов передаем что мы авторизованы
     })
-      .then(responce => {
+      .then(response => {
         // debugger
-        if (responce.data.resultCode === 0) {
-          let {id, email, login} = responce.data.data;
+        if (response.data.resultCode === 0) {
+          let {id, email, login} = response.data.data;
           this.props.setAuthUserData(id, email, login);
         }
       axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${profileId}`)
