@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import Spinner from "../common/Spinner/Spinner";
 import {follow, setCurrentPage, setTotalCount, setUsers, unfollow, toggleIsFetching} from "../../redux/usersReducer";
-import {getUsers} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
 class UsersContainer extends React.Component {
@@ -11,7 +11,7 @@ class UsersContainer extends React.Component {
     this.props.toggleIsFetching(true); // spinner = true
 
     // получаем юзеров с сервера
-    getUsers(this.props.currentPage, this.props.pageSize)
+    usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
       .then(data => {
         // debugger
         this.props.toggleIsFetching(false); // spinner = false
@@ -25,7 +25,7 @@ class UsersContainer extends React.Component {
     this.props.toggleIsFetching(true); // spinner = true
     this.props.setCurrentPage(pageNumber);
 
-    getUsers(pageNumber, this.props.pageSize)
+    usersAPI.getUsers(pageNumber, this.props.pageSize)
       .then(data => {
         this.props.toggleIsFetching(false); // spinner = false
         this.props.setUsers(data.items);
