@@ -60,30 +60,6 @@ let mapStateToProps = (state) => {
   }
 }
 
-// функция передает компоненте через props callback
-// let mapDispatchToProps = (dispatch) => {
-//   return {
-//     follow: (userId) => {
-//       dispatch(followActionCreator(userId));
-//     },
-//     unfollow: (userId) => {
-//       dispatch(unfollowActionCreator(userId));
-//     },
-//     setUsers: (users) => {
-//       dispatch(setUsersActionCreator(users));
-//     },
-//     setCurrentPage: (pageNumber) => {
-//       dispatch(setCurrentPageActionCreator(pageNumber));
-//     },
-//     setTotalCount: (totalCount) => {
-//       dispatch(setTotalCountActionCreator(totalCount));
-//     },
-//     toggleIsFetching: (isFetching) => {
-//       dispatch(toggleIsFetchingActionCreator(isFetching));
-//     }
-//   }
-// }
-
 
 export default connect(mapStateToProps,
   // вместо функции mapDispatchToProps с диспатчами, коллбэками...

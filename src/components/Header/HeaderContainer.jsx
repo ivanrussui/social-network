@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {setAuthUserData, setHeaderUserProfile} from "../../redux/authReducer";
 import {setUserProfileActionCreator} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {getAuthMe, getProfile} from "../../api/api";
+import {authAPI, profileAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class HeaderContainer extends React.Component {
     }
     // debugger
 
-    getAuthMe()
+    authAPI.getAuthMe()
       .then(data => {
         // debugger
         if (data.resultCode === 0) {
@@ -24,7 +24,7 @@ class HeaderContainer extends React.Component {
         }
       });
 
-        getProfile(profileId)
+        profileAPI.getProfile(profileId)
           .then(data => this.props.setUserProfileActionCreator(data));
   }
 

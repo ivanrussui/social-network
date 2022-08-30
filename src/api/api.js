@@ -1,7 +1,5 @@
 import * as axios from "axios";
 
-const baseUrl = 'https://social-network.samuraijs.com/api/1.0/';
-
 const instance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
   withCredentials: true, // для кроссдоменных запросов передаем что мы авторизованы
@@ -25,13 +23,16 @@ export const usersAPI = {
   }
 }
 
-export const getProfile = (profileId = 2) => {
-  return axios.get(baseUrl + `profile/${profileId}`).then(response => response.data);
+export const profileAPI = {
+  getProfile(profileId = 2) {
+    return instance.get(`profile/${profileId}`)
+      .then(response => response.data);
+  }
 }
 
-export const getAuthMe = () => {
-  return axios.get(baseUrl + `auth/me`, {
-    withCredentials: true
-  })
-    .then(response => response.data);
-};
+export const authAPI = {
+  getAuthMe() {
+    return instance.get(`auth/me`)
+      .then(response => response.data);
+  }
+}

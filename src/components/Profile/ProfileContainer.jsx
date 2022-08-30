@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {setUserProfileActionCreator} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {getProfile} from "../../api/api";
+import {profileAPI} from "../../api/api";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -14,7 +14,7 @@ class ProfileContainer extends React.Component {
     }
 
     // debugger
-    getProfile(profileId)
+    profileAPI.getProfile(profileId)
       .then(data => this.props.setUserProfileActionCreator(data));
   }
 
