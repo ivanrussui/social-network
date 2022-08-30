@@ -1,8 +1,7 @@
 import styles from './Users.module.css';
 import userAva from '../../assets/img/user.png';
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
-import {followUser, unfollowUser} from "../../api/api";
+import {deleteUser, postUser} from "../../api/api";
 
 const Users = (props) => {
   // debugger
@@ -36,7 +35,7 @@ const Users = (props) => {
           </NavLink>
             { u.followed
               ? <button onClick={ () => {
-                unfollowUser(u.id)
+                deleteUser(u.id)
                   .then(data => {
                     if (data.resultCode === 0) {
                       props.unfollow(u.id);
@@ -44,7 +43,7 @@ const Users = (props) => {
                   });
               } }>Unfollow</button>
               : <button onClick={ () => {
-                followUser(u.id)
+                postUser(u.id)
                   .then(data => {
                       if (data.resultCode === 0) {
                         props.follow(u.id);

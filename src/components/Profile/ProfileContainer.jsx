@@ -4,6 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfileActionCreator} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {getProfile} from "../../api/api";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -14,11 +15,14 @@ class ProfileContainer extends React.Component {
     }
 
     // debugger
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${profileId}`)
-      .then(response => {
-        // debugger;
-        this.props.setUserProfileActionCreator(response.data);
-      });
+    getProfile(profileId).then(data => {
+      this.props.setUserProfileActionCreator(data);
+    });
+    // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${profileId}`)
+    //   .then(response => {
+    //     // debugger;
+    //     this.props.setUserProfileActionCreator(response.data);
+    //   });
   }
 
   render() {
