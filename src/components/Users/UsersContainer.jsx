@@ -11,12 +11,13 @@ class UsersContainer extends React.Component {
     this.props.toggleIsFetching(true); // spinner = true
 
     // получаем юзеров с сервера
-    getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-      // debugger
-      this.props.toggleIsFetching(false); // spinner = false
-        this.props.setUsers(data.items);
-        this.props.setTotalCount(data.totalCount);
-      });
+    getUsers(this.props.currentPage, this.props.pageSize)
+      .then(data => {
+        // debugger
+        this.props.toggleIsFetching(false); // spinner = false
+          this.props.setUsers(data.items);
+          this.props.setTotalCount(data.totalCount);
+        });
   }
 
   // изменение (переключение) страницы
@@ -24,7 +25,8 @@ class UsersContainer extends React.Component {
     this.props.toggleIsFetching(true); // spinner = true
     this.props.setCurrentPage(pageNumber);
 
-    getUsers(pageNumber, this.props.pageSize).then(data => {
+    getUsers(pageNumber, this.props.pageSize)
+      .then(data => {
         this.props.toggleIsFetching(false); // spinner = false
         this.props.setUsers(data.items);
       });

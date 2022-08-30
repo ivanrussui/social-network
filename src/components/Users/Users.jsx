@@ -34,6 +34,7 @@ const Users = (props) => {
             <img className={styles.userImg} src={u.photos.small != null ? u.photos.small : userAva} alt="user"/>
           </NavLink>
             { u.followed
+
               ? <button onClick={ () => {
                 deleteUser(u.id)
                   .then(data => {
@@ -42,6 +43,7 @@ const Users = (props) => {
                     }
                   });
               } }>Unfollow</button>
+
               : <button onClick={ () => {
                 postUser(u.id)
                   .then(data => {
@@ -50,6 +52,7 @@ const Users = (props) => {
                       }
                     });
               } }>Follow</button>
+
             }
         </div>
 
