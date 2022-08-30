@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {setAuthUserData, setHeaderUserProfile} from "../../redux/authReducer";
 import {setUserProfileActionCreator} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {authAPI, profileAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
@@ -14,21 +15,17 @@ class HeaderContainer extends React.Component {
     }
     // debugger
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-      withCredentials: true // для кроссдоменных запросов передаем что мы авторизованы
-    })
-      .then(response => {
+    authAPI.getAuthMe()
+      .then(data => {
         // debugger
-        if (response.data.resultCode === 0) {
-          let {id, email, login} = response.data.data;
+        if (data.resultCode === 0) {
+          let {id, email, login} = data.data;
           this.props.setAuthUserData(id, email, login);
         }
-      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${profileId}`)
-          .then(response => {
-            // debugger;
-            this.props.setUserProfileActionCreator(response.data);
-          });
       });
+
+        profileAPI.getProfile(profileId)
+          .then(data => this.props.setUserProfileActionCreator(data));
   }
 
   render() {
