@@ -9,3 +9,13 @@ export const getUsers = (currentPage = 1, pageSize = 5) => {
         .then(response => response.data);
 
 };
+
+export const unfollowUser = (id) => {
+    return axios.delete(baseUrl + `1.0/follow/${id}`, {
+        withCredentials: true,
+        headers: {
+            'API-KEY': 'f46c8a87-f5e7-4a08-b342-9cddf97694b1'
+        }
+    })
+        .then(response => response.data);
+};
