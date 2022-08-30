@@ -19,3 +19,13 @@ export const unfollowUser = (id) => {
     })
         .then(response => response.data);
 };
+
+export const followUser = (id) => {
+    return axios.post(baseUrl + `1.0/follow/${id}`, {}, {
+        withCredentials: true,
+        headers: {
+            'API-KEY': 'f46c8a87-f5e7-4a08-b342-9cddf97694b1'
+        }
+    })
+        .then(response => response.data);
+}
