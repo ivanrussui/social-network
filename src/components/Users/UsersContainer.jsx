@@ -15,9 +15,9 @@ class UsersContainer extends React.Component {
       .then(data => {
         // debugger
         this.props.toggleIsFetching(false); // spinner = false
-          this.props.setUsers(data.items);
-          this.props.setTotalCount(data.totalCount);
-        });
+        this.props.setUsers(data.items);
+        this.props.setTotalCount(data.totalCount);
+      });
   }
 
   // изменение (переключение) страницы
