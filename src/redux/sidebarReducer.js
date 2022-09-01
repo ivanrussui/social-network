@@ -1,8 +1,12 @@
 let initialState = {
-  friends: [{id: 1, name: 'Kristina'}, {id: 2, name: 'Vladimir'}, {id: 3, name: 'Alexa'}]
+  friends: [
+    {id: 1, name: 'Kristina'},
+    {id: 2, name: 'Vladimir'},
+    {id: 3, name: 'Alexa'}
+  ]
 };
 
-const sidebarReducer = (state = initialState, action) => {
+const sidebarReducer = (state = initialState) => {
   return state;
 }
 
