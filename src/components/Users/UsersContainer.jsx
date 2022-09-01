@@ -2,7 +2,15 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import Spinner from "../common/Spinner/Spinner";
-import {follow, setCurrentPage, setTotalCount, setUsers, unfollow, toggleIsFetching} from "../../redux/usersReducer";
+import {
+  follow,
+  setCurrentPage,
+  setTotalCount,
+  setUsers,
+  unfollow,
+  toggleIsFetching,
+  toggleFollowingProgress
+} from "../../redux/usersReducer";
 import {usersAPI} from "../../api/api";
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
@@ -44,6 +52,8 @@ class UsersContainer extends React.Component {
                follow={this.props.follow}
                unfollow={this.props.unfollow}
                onPageChanged={this.onPageChanged}
+               followingInProgress={this.props.followingInProgress}
+               toggleFollowingProgress={this.props.toggleFollowingProgress}
         />}
     </>
   }
@@ -56,7 +66,8 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalCount: state.usersPage.totalCount,
     currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress
   }
 }
 
@@ -65,5 +76,5 @@ export default connect(mapStateToProps,
   // вместо функции mapDispatchToProps с диспатчами, коллбэками...
   // делаем объектами, они ссылаются на объекты actionCreator в редаксе и все работает благодаря connect пример follow: follow
   // ! Важная справка: если передавать в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента
-  {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching}
+  {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching, toggleFollowingProgress}
 )(UsersContainer);
