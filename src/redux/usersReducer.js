@@ -59,7 +59,7 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isFetching: action.isFetching
       };
-    case TOGGLE_FOLLOWING_PROGRESS:
+    case TOGGLE_FOLLOWING_PROGRESS: // disable активного юзера во время запроса
       return {
         ...state,
         followingInProgress: action.isFetching
