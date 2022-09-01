@@ -63,8 +63,8 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         followingInProgress: action.isFetching
-          ? [...state.followingInProgress, action.userId]
-          : state.followingInProgress.filter(id => id !== action.userId)
+          ? [...state.followingInProgress, action.userId] // true добавляем нужную id в массив
+          : state.followingInProgress.filter(id => id !== action.userId) // false фильтруем и убираем нужный id
       };
     default:
       return state;
