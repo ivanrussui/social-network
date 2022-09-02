@@ -9,23 +9,26 @@ import {
   setUsers,
   unfollow,
   toggleIsFetching,
-  toggleFollowingProgress
+  toggleFollowingProgress, getUsersThunkCreator
 } from "../../redux/usersReducer";
 import {usersAPI} from "../../api/api";
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true); // spinner = true
 
-    // получаем юзеров с сервера
-    usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-      .then(data => {
-        // debugger
-        this.props.toggleIsFetching(false); // spinner = false
-        this.props.setUsers(data.items);
-        this.props.setTotalCount(data.totalCount);
-      });
+    this.props.getUsersThunkCreator();
+    // debugger
+    // this.props.toggleIsFetching(true); // spinner = true
+    //
+    // // получаем юзеров с сервера
+    // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+    //   .then(data => {
+    //     // debugger
+    //     this.props.toggleIsFetching(false); // spinner = false
+    //     this.props.setUsers(data.items);
+    //     this.props.setTotalCount(data.totalCount);
+    //   });
   }
 
   // изменение (переключение) страницы
@@ -76,5 +79,5 @@ export default connect(mapStateToProps,
   // вместо функции mapDispatchToProps с диспатчами, коллбэками...
   // делаем объектами, они ссылаются на объекты actionCreator в редаксе и все работает благодаря connect пример follow: follow
   // ! Важная справка: если передавать в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента
-  {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching, toggleFollowingProgress}
+  {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching, toggleFollowingProgress, getUsersThunkCreator}
 )(UsersContainer);

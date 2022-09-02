@@ -1,4 +1,6 @@
 // обернули в переменные action.type из actionCreator
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -82,6 +84,21 @@ export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_FO
 
 
 // Thunk
+export const getUsersThunkCreator = (currentPage, pageSize) => {
 
+  return dispatch => {
+
+  dispatch(toggleIsFetching(true)); // spinner = true
+
+  // получаем юзеров с сервера
+  usersAPI.getUsers(currentPage, pageSize)
+    .then(data => {
+      // debugger
+      dispatch(toggleIsFetching(false)); // spinner = false
+      dispatch(setUsers(data.items));
+      dispatch(setTotalCount(data.totalCount));
+    });
+  }
+}
 
 export default usersReducer;
