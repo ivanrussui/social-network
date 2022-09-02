@@ -80,4 +80,8 @@ export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, count: tot
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId});
 
+
+// Thunk
+
+
 export default usersReducer;
