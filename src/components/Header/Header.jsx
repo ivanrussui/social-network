@@ -24,8 +24,8 @@ const Header = (props) => {
 
         <div className={s.loginBlock}>
           { photos ?
-            <img src={photos} alt="avatar"/> :
-            <img src={plug} alt='Spider-Man'/>
+            <img src={photos} alt="Avatar"/> :
+            <img src={plug} alt='Plug'/>
           }
           {/*{ id ?*/}
           {/*  <span>dfsdf</span> :*/}
