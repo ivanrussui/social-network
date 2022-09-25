@@ -73,9 +73,9 @@ const usersReducer = (state = initialState, action) => {
   }
 }
 
-// наши actionCreator  userId нужен чтобы понимать с каким юзером взаидойствовать
-export const follow = (userId) => ({type: FOLLOW, userId});
-export const unfollow = (userId) => ({type: UNFOLLOW, userId});
+// Наши actionCreator. userId нужен, чтобы понимать с каким юзером взаимодействовать
+export const followSuccess = (userId) => ({type: FOLLOW, userId});
+export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, count: totalCount});
@@ -84,20 +84,46 @@ export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_FO
 
 
 // Thunk
-export const getUsersThunkCreator = (currentPage, pageSize) => {
-
+export const getUsers = (currentPage, pageSize) => {
   return dispatch => {
+    dispatch(toggleIsFetching(true)); // spinner = true
 
-  dispatch(toggleIsFetching(true)); // spinner = true
-
-  // получаем юзеров с сервера
-  usersAPI.getUsers(currentPage, pageSize)
-    .then(data => {
-      // debugger
-      dispatch(toggleIsFetching(false)); // spinner = false
-      dispatch(setUsers(data.items));
-      dispatch(setTotalCount(data.totalCount));
+    // получаем юзеров с сервера
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        // debugger
+        dispatch(toggleIsFetching(false)); // spinner = false
+        dispatch(setUsers(data.items));
+        dispatch(setTotalCount(data.totalCount));
+        dispatch(setCurrentPage(currentPage)); // меняется активная кнопка при переключении пагинации
     });
+  }
+}
+
+// Thunk
+export const follow = (userId) => {
+  return dispatch => {
+    dispatch(toggleFollowingProgress(true, userId));
+    // подписываемся на юзера
+    usersAPI.postUser(userId).then(data => {
+        if (data.resultCode === 0) {
+          dispatch(followSuccess(userId));
+        }
+        dispatch(toggleFollowingProgress(false, userId));
+      });
+  }
+}
+
+// Thunk
+export const unfollow = (userId) => {
+  return dispatch => {
+    dispatch(toggleFollowingProgress(true, userId));
+    // отписываемся от юзера
+    usersAPI.deleteUser(userId).then(data => {
+        if (data.resultCode === 0) {
+          dispatch(unfollowSuccess(userId));
+        }
+        dispatch(toggleFollowingProgress(false, userId));
+      });
   }
 }
 

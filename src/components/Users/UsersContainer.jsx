@@ -5,42 +5,23 @@ import Spinner from "../common/Spinner/Spinner";
 import {
   follow,
   setCurrentPage,
-  setTotalCount,
-  setUsers,
   unfollow,
-  toggleIsFetching,
-  toggleFollowingProgress, getUsersThunkCreator
+  toggleFollowingProgress,
+  getUsers
 } from "../../redux/usersReducer";
-import {usersAPI} from "../../api/api";
+
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
 class UsersContainer extends React.Component {
   componentDidMount() {
-
-    this.props.getUsersThunkCreator();
-    // debugger
-    // this.props.toggleIsFetching(true); // spinner = true
-    //
-    // // получаем юзеров с сервера
-    // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-    //   .then(data => {
-    //     // debugger
-    //     this.props.toggleIsFetching(false); // spinner = false
-    //     this.props.setUsers(data.items);
-    //     this.props.setTotalCount(data.totalCount);
-    //   });
+    // обращаемся к Thunk
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   // изменение (переключение) страницы
   onPageChanged = (pageNumber) => {
-    this.props.toggleIsFetching(true); // spinner = true
-    this.props.setCurrentPage(pageNumber);
-
-    usersAPI.getUsers(pageNumber, this.props.pageSize)
-      .then(data => {
-        this.props.toggleIsFetching(false); // spinner = false
-        this.props.setUsers(data.items);
-      });
+    // обращаемся к Thunk
+    this.props.getUsers(pageNumber, this.props.pageSize);
   }
 
   render() {
@@ -56,7 +37,6 @@ class UsersContainer extends React.Component {
                unfollow={this.props.unfollow}
                onPageChanged={this.onPageChanged}
                followingInProgress={this.props.followingInProgress}
-               toggleFollowingProgress={this.props.toggleFollowingProgress}
         />}
     </>
   }
@@ -76,8 +56,8 @@ let mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,
-  // вместо функции mapDispatchToProps с диспатчами, коллбэками...
+  // Вместо функции mapDispatchToProps с диспатчами, коллбэками...
   // делаем объектами, они ссылаются на объекты actionCreator в редаксе и все работает благодаря connect пример follow: follow
   // ! Важная справка: если передавать в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента
-  {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching, toggleFollowingProgress, getUsersThunkCreator}
+  {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers}
 )(UsersContainer);
