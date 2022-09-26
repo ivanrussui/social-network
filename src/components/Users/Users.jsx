@@ -1,7 +1,6 @@
 import styles from './Users.module.css';
 import userAva from '../../assets/img/user.png';
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 const Users = (props) => {
   // debugger

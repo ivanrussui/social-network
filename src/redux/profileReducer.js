@@ -1,4 +1,6 @@
 // обернули в переменные action.type из actionCreator
+import {profileAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -44,6 +46,17 @@ const profileReducer = (state = initialState, action) => {
 // наши actionCreator
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
-export const setUserProfileActionCreator = (profile) => ({type: SET_USER_PROFILE, profile});
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+
+
+// Thunk
+export const getProfile = (profileId) => {
+  return dispatch => {
+
+    profileAPI.getProfile(profileId).then(data => {
+      dispatch(setUserProfile(data));
+    });
+  }
+}
 
 export default profileReducer;

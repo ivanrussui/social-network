@@ -1,9 +1,8 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfileActionCreator} from "../../redux/profileReducer";
+import {setUserProfile, getProfile} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {profileAPI} from "../../api/api";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -13,9 +12,8 @@ class ProfileContainer extends React.Component {
       profileId = 2
     }
 
-    // debugger
-    profileAPI.getProfile(profileId)
-      .then(data => this.props.setUserProfileActionCreator(data));
+    // обращаемся к Thunk
+    this.props.getProfile(profileId);
   }
 
   render() {
@@ -41,7 +39,7 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {setUserProfileActionCreator})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {setUserProfile, getProfile})(withRouter(ProfileContainer));
 
 
 // todo это устарело в 6 роутере

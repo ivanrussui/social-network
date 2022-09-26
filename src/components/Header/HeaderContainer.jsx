@@ -1,11 +1,10 @@
 import React from 'react';
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
-import {setAuthUserData, setHeaderUserProfile} from "../../redux/authReducer";
-import {setUserProfileActionCreator} from "../../redux/profileReducer";
+import {setAuthUserData} from "../../redux/authReducer";
+import {setUserProfile, getProfile} from "../../redux/profileReducer";
+import {getAuthMe} from "../../redux/authReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {authAPI, profileAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
@@ -13,19 +12,12 @@ class HeaderContainer extends React.Component {
     if (!profileId) {
       profileId = 2
     }
-    // debugger
 
-    authAPI.getAuthMe()
-      .then(data => {
-        // debugger
-        if (data.resultCode === 0) {
-          let {id, email, login} = data.data;
-          this.props.setAuthUserData(id, email, login);
-        }
-      });
+    // обращаемся к Thunk
+    this.props.getAuthMe();
 
-        profileAPI.getProfile(profileId)
-          .then(data => this.props.setUserProfileActionCreator(data));
+    // обращаемся к Thunk
+    this.props.getProfile(profileId);
   }
 
   render() {
@@ -52,12 +44,13 @@ function withRouter(Component) {
     let navigate = useNavigate();
     let params = useParams();
     return (
-      <Component {...props} router={{ location, navigate, params }} />
+      <Component {...props} router={{location, navigate, params}}/>
     );
   }
+
   return ComponentWithRouterProp;
 }
 
 
 // export default connect(mapStateToProps, {setAuthUserData}) (HeaderContainer);
-export default connect(mapStateToProps, {setAuthUserData, setUserProfileActionCreator})(withRouter(HeaderContainer));
+export default connect(mapStateToProps, {setAuthUserData, setUserProfile, getProfile, getAuthMe})(withRouter(HeaderContainer));
