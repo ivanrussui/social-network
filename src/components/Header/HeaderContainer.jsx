@@ -1,9 +1,8 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {setAuthUserData} from "../../redux/authReducer";
-import {setUserProfile, getProfile} from "../../redux/profileReducer";
-import {getAuthMe} from "../../redux/authReducer";
+import {getProfileThunk} from "../../redux/profileReducer";
+import {getAuthMeThunk} from "../../redux/authReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 class HeaderContainer extends React.Component {
@@ -14,10 +13,10 @@ class HeaderContainer extends React.Component {
     }
 
     // обращаемся к Thunk
-    this.props.getAuthMe();
+    this.props.getAuthMeThunk();
 
     // обращаемся к Thunk
-    this.props.getProfile(profileId);
+    this.props.getProfileThunk(profileId);
   }
 
   render() {
@@ -52,5 +51,4 @@ function withRouter(Component) {
 }
 
 
-// export default connect(mapStateToProps, {setAuthUserData}) (HeaderContainer);
-export default connect(mapStateToProps, {setAuthUserData, setUserProfile, getProfile, getAuthMe})(withRouter(HeaderContainer));
+export default connect(mapStateToProps, {getProfileThunk, getAuthMeThunk})(withRouter(HeaderContainer));

@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfile, getProfile} from "../../redux/profileReducer";
+import {getProfileThunk} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component {
     }
 
     // обращаемся к Thunk
-    this.props.getProfile(profileId);
+    this.props.getProfileThunk(profileId);
   }
 
   render() {
@@ -39,9 +39,5 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {setUserProfile, getProfile})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {getProfileThunk})(withRouter(ProfileContainer));
 
-
-// todo это устарело в 6 роутере
-// let WithUrlDataContainerComponent = withRouter(ProfileContainer);
-// export default connect(mapStateToProps, {setUserProfileActionCreator})(WithUrlDataContainerComponent);
