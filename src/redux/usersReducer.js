@@ -83,8 +83,8 @@ export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFe
 export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId});
 
 
-// Thunk
-export const getUsers = (currentPage, pageSize) => {
+// ThunkCreator
+export const getUsersThunk = (currentPage, pageSize) => {
   return dispatch => {
     dispatch(toggleIsFetching(true)); // spinner = true
 
@@ -99,8 +99,8 @@ export const getUsers = (currentPage, pageSize) => {
   }
 }
 
-// Thunk
-export const follow = (userId) => {
+// ThunkCreator
+export const followThunk = (userId) => {
   return dispatch => {
     dispatch(toggleFollowingProgress(true, userId));
     // подписываемся на юзера
@@ -113,8 +113,8 @@ export const follow = (userId) => {
   }
 }
 
-// Thunk
-export const unfollow = (userId) => {
+// ThunkCreator
+export const unfollowThunk = (userId) => {
   return dispatch => {
     dispatch(toggleFollowingProgress(true, userId));
     // отписываемся от юзера

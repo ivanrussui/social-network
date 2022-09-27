@@ -49,14 +49,11 @@ export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 
-// Thunk
-export const getProfile = (profileId) => {
-  return dispatch => {
-
-    profileAPI.getProfile(profileId).then(data => {
-      dispatch(setUserProfile(data));
-    });
-  }
+// ThunkCreator
+export const getProfileThunk = (profileId) => dispatch => {
+  profileAPI.getProfile(profileId).then(data => {
+    dispatch(setUserProfile(data));
+  });
 }
 
 export default profileReducer;
