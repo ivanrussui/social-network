@@ -3,23 +3,24 @@
 } */
 
 .image {
-  width: 1000px;
+    width: 1000px;
 }
 
 .descriptionBlock {
-  padding: 10px;
-  display: flex;
-  align-items: end;
+    padding: 10px;
+    display: flex;
+    align-items: end;
 }
 
 .descriptionText {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .status img {
-  /*padding-left: 10px;*/
-  max-width: 40px;
+    /*padding-left: 10px;*/
+    max-width: 40px;
 }
+
 /*.contactsSocial {*/
 /*  padding-left: 20px;*/
 /*}*/

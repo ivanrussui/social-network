@@ -1,13 +1,13 @@
 .friendsItem {
-  text-align: center;
+    text-align: center;
 }
 
 .friendsItem img {
-  width: 40px;
-  border-radius: 25px;
+    width: 40px;
+    border-radius: 25px;
 }
 
 .text {
-  color: white;
-  font-size: 14px;
+    color: white;
+    font-size: 14px;
 }

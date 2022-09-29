@@ -1,26 +1,26 @@
 .nav {
-	grid-area: n;
-	background-color: rgb(189, 165, 206);
-	padding: 15px;
-	margin: 10px 10px 0 0;
+    grid-area: n;
+    background-color: rgb(189, 165, 206);
+    padding: 15px;
+    margin: 10px 10px 0 0;
 }
 
 .item {
-	color: #fff;
-	text-decoration: none;
+    color: #fff;
+    text-decoration: none;
 }
 
 .active {
-	color: gold;
-	text-decoration: none;
+    color: gold;
+    text-decoration: none;
 }
 
 .settings {
-	padding-top: 33px;
+    padding-top: 33px;
 }
 
 .friends {
-	padding-top: 50px;
+    padding-top: 50px;
 }
 
 /*.item a.active {*/

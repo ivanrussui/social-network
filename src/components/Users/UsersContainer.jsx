@@ -3,59 +3,59 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import Spinner from "../common/Spinner/Spinner";
 import {
-  followThunk,
-  unfollowThunk,
-  getUsersThunk
+    followThunk,
+    unfollowThunk,
+    getUsersThunk
 } from "../../redux/usersReducer";
 
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
 class UsersContainer extends React.Component {
-  componentDidMount() {
-    // обращаемся к Thunk
-    this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
-  }
+    componentDidMount() {
+        // обращаемся к Thunk
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
+    }
 
-  // изменение (переключение) страницы
-  onPageChanged = (pageNumber) => {
-    // обращаемся к Thunk
-    this.props.getUsersThunk(pageNumber, this.props.pageSize);
-  }
+    // изменение (переключение) страницы
+    onPageChanged = (pageNumber) => {
+        // обращаемся к Thunk
+        this.props.getUsersThunk(pageNumber, this.props.pageSize);
+    }
 
-  render() {
-    // console.log(this.props)
-    return <>
-      {this.props.isFetching ?
-        <Spinner/> :
-        <Users totalCount={this.props.totalCount}
-               pageSize={this.props.pageSize}
-               currentPage={this.props.currentPage}
-               users={this.props.users}
-               follow={this.props.followThunk}
-               unfollow={this.props.unfollowThunk}
-               onPageChanged={this.onPageChanged}
-               followingInProgress={this.props.followingInProgress}
-        />}
-    </>
-  }
+    render() {
+        // console.log(this.props)
+        return <>
+            {this.props.isFetching ?
+                <Spinner/> :
+                <Users totalCount={this.props.totalCount}
+                       pageSize={this.props.pageSize}
+                       currentPage={this.props.currentPage}
+                       users={this.props.users}
+                       follow={this.props.followThunk}
+                       unfollow={this.props.unfollowThunk}
+                       onPageChanged={this.onPageChanged}
+                       followingInProgress={this.props.followingInProgress}
+                />}
+        </>
+    }
 }
 
 // функция принимающая весь state приложения
 let mapStateToProps = (state) => {
-  return {             // возвращает объект с данными которые нам нужны
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalCount: state.usersPage.totalCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress
-  }
+    return {             // возвращает объект с данными которые нам нужны
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalCount: state.usersPage.totalCount,
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
+    }
 }
 
 
 export default connect(mapStateToProps,
-  // Вместо функции mapDispatchToProps с диспатчами, коллбэками...
-  // делаем объектами, они ссылаются на объекты actionCreator в редаксе и все работает благодаря connect пример follow: follow
-  // ! Важная справка: если передавать в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента
-  {followThunk, unfollowThunk, getUsersThunk}
+    // Вместо функции mapDispatchToProps с диспатчами, коллбэками...
+    // делаем объектами, они ссылаются на объекты actionCreator в редаксе и все работает благодаря connect пример follow: follow
+    // ! Важная справка: если передавать в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента
+    {followThunk, unfollowThunk, getUsersThunk}
 )(UsersContainer);

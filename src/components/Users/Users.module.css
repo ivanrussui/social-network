@@ -1,22 +1,22 @@
 .users {
-  padding: 10px;
+    padding: 10px;
 }
 
 .users span {
-  cursor: pointer;
-  padding: 2px;
+    cursor: pointer;
+    padding: 2px;
 }
 
 .userInfo {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .userImg {
-  width: 75px;
-  height: 75px;
-  display: block;
+    width: 75px;
+    height: 75px;
+    display: block;
 }
 
 .selectedPage {
-  font-weight: bold;
+    font-weight: bold;
 }
