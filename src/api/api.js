@@ -3,7 +3,7 @@ import * as axios from "axios";
 // создаем instance сущность объекта, настраиваем и к нему потом обращаемся
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    withCredentials: true, // для кроссдоменных запросов передаем что мы авторизованы
+    withCredentials: true, // для кросс-доменных запросов передаем что мы авторизованы
     headers: {
         'API-KEY': 'c34375ee-6aa1-48d6-a921-47103a0c7e23'
     }
