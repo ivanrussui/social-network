@@ -1,6 +1,6 @@
-// обернули в переменные action.type из actionCreator
 import {profileAPI} from "../api/api";
 
+// обернули в переменные action.type из actionCreator
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';

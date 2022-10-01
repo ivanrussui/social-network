@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import plug from "../../assets/img/plug.png";
-import spider from '../../assets/img/spider-man.webp'
+// import spider from '../../assets/img/spider-man.webp'
 import Spinner from "../common/Spinner/Spinner";
 
 const Header = (props) => {
@@ -23,10 +23,19 @@ const Header = (props) => {
 
 
             <div className={s.loginBlock}>
-                { photos ?
-                    <img src={photos} alt="Avatar"/> :
-                    <img src={plug} alt='Plug'/>
+
+                {props.isAuth ?
+                    photos ?
+                        <img src={photos} alt="Avatar"/> :
+                        <img src={plug} alt='Plug'/>
+                    : <NavLink to={'/login'}>Login</NavLink>
                 }
+
+                {/*{ photos ?*/}
+                {/*    <img src={photos} alt="Avatar"/> :*/}
+                {/*    <img src={plug} alt='Plug'/>*/}
+                {/*}*/}
+
                 {/*{ id ?*/}
                 {/*  <span>dfsdf</span> :*/}
                 {/*  <span>dfsdf2</span>*/}

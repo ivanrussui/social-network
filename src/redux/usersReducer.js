@@ -1,6 +1,6 @@
-// обернули в переменные action.type из actionCreator
 import {usersAPI} from "../api/api";
 
+// обернули в переменные action.type из actionCreator
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
