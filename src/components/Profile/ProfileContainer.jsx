@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileThunk} from "../../redux/profileReducer";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -18,12 +18,15 @@ class ProfileContainer extends React.Component {
 
     render() {
         // debugger;
-        return <Profile {...this.props} profile={this.props.profile}/>
+        if (!this.props.isAuth) return <Navigate to={'/login'} />;
+
+        return <Profile {...this.props} profile={this.props.profile}/>;
     }
 }
 
 let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)

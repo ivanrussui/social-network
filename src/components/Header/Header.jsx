@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
+import logo from "../../logo.svg";
 import plug from "../../assets/img/plug.png";
-import spider from '../../assets/img/spider-man.webp'
+// import spider from '../../assets/img/spider-man.webp'
 import Spinner from "../common/Spinner/Spinner";
 
 const Header = (props) => {
@@ -17,16 +18,26 @@ const Header = (props) => {
     return (
         <header className={s.header}>
             <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-                alt="logo"
+                // src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
+                src={logo}
+                alt={"logo"}
             />
 
 
             <div className={s.loginBlock}>
-                { photos ?
-                    <img src={photos} alt="Avatar"/> :
-                    <img src={plug} alt='Plug'/>
+
+                {props.isAuth ?
+                    photos ?
+                        <img src={photos} alt="Avatar"/> :
+                        <img src={plug} alt='Plug'/>
+                    : <NavLink to={'/login'}>Login</NavLink>
                 }
+
+                {/*{ photos ?*/}
+                {/*    <img src={photos} alt="Avatar"/> :*/}
+                {/*    <img src={plug} alt='Plug'/>*/}
+                {/*}*/}
+
                 {/*{ id ?*/}
                 {/*  <span>dfsdf</span> :*/}
                 {/*  <span>dfsdf2</span>*/}

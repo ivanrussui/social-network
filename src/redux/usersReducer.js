@@ -1,6 +1,6 @@
-// обернули в переменные action.type из actionCreator
 import {usersAPI} from "../api/api";
 
+// обернули в переменные action.type из actionCreator
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -21,7 +21,7 @@ let initialState = {
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FOLLOW:   // подисаться
+        case FOLLOW:   // подписаться
             return {
                 ...state,   // поверхностное копирование
                 users: state.users.map(u => {   // делаем копию users, map возвращает новый массив
