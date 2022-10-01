@@ -2,11 +2,13 @@
     position: relative;
     grid-area: h;
     background-color: indigo;
-    padding-left: 5px;
+    display: flex;
+    justify-content: space-between;
+    /*padding-left: 5px;*/
 }
 
 .header img {
-    /*width: 60px;*/
+    display: inline-block;
     height: 100%;
 }
 
@@ -15,18 +17,21 @@
     /*top: 50%;*/
     /*transform: translateY(-50%);*/
     /*right: 5px;*/
-    float: right;
+    /*float: right;*/
     color: aqua;
     display: flex;
     align-items: center;
+    /*padding: 8px 17px;*/
+    padding-right: 17px;
 }
 
 .loginBlock a {
+    /*display: grid;*/
+    /*place-items: center;*/
     color: white;
 }
 
 .loginBlock img {
-    /*width: 50px;*/
-    height: 60px;
+    height: 44px;
 }
 
