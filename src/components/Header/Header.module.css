@@ -4,7 +4,6 @@
     background-color: indigo;
     display: flex;
     justify-content: space-between;
-    /*padding-left: 5px;*/
 }
 
 .header img {
@@ -13,21 +12,13 @@
 }
 
 .loginBlock {
-    /*position: absolute;*/
-    /*top: 50%;*/
-    /*transform: translateY(-50%);*/
-    /*right: 5px;*/
-    /*float: right;*/
     color: aqua;
     display: flex;
     align-items: center;
-    /*padding: 8px 17px;*/
-    padding-right: 17px;
+    padding-right: 15px;
 }
 
 .loginBlock a {
-    /*display: grid;*/
-    /*place-items: center;*/
     color: white;
 }
 
