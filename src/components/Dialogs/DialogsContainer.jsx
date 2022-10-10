@@ -1,6 +1,18 @@
 import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 import {connect} from "react-redux";
+import {Navigate} from "react-router-dom";
+import React from "@types/react/package.json";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";  // todo хз это с ХОКом пришло попробуй удалить
+
+// HOC
+// let AuthRedirectComponent = (props) => {
+//     if (!this.props.isAuth) return <Navigate to={'/login'} />;
+//     return <Dialogs {...props} />;
+// }
+
+let AuthRedirectComponent =  withAuthRedirect(Dialogs);
+
 
 let mapStateToProps = (state) => {
     return {
@@ -19,7 +31,7 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 export default DialogsContainer;
 
