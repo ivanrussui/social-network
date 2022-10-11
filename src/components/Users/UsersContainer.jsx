@@ -8,6 +8,7 @@ import {
     getUsersThunk
 } from "../../redux/usersReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import Dialogs from "../Dialogs/Dialogs";
 
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
@@ -56,7 +57,7 @@ let mapStateToProps = (state) => {
 }
 
 // HOC
-// let AuthRedirectComponent = withAuthRedirect(UsersContainer);
+// let AuthRedirectComponent =  withAuthRedirect(Dialogs);
 
 // HOC альтернативно надо им обернуть connect, но так еще более запутанно
 export default withAuthRedirect(connect(mapStateToProps,
