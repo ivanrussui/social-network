@@ -7,6 +7,7 @@ import {
     unfollowThunk,
     getUsersThunk
 } from "../../redux/usersReducer";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
@@ -40,6 +41,8 @@ class UsersContainer extends React.Component {
     }
 }
 
+
+
 // функция принимающая весь state приложения
 let mapStateToProps = (state) => {
     return {             // возвращает объект с данными которые нам нужны
@@ -52,10 +55,13 @@ let mapStateToProps = (state) => {
     }
 }
 
+// HOC
+// let AuthRedirectComponent = withAuthRedirect(UsersContainer);
 
-export default connect(mapStateToProps,
+// HOC альтернативно надо им обернуть connect, но так еще более запутанно
+export default withAuthRedirect(connect(mapStateToProps,
     // Вместо функции mapDispatchToProps с диспатчами, коллбэками...
     // делаем объектами, они ссылаются на объекты actionCreator в редаксе и все работает благодаря connect пример follow: follow
     // ! Важная справка: если передавать в connect вторым аргументом не mapDispatchToProps, а объект с AC, то connect оборачивает AC в функцию-обертку () => store.dispatch(AC) и передаёт в props компонента
     {followThunk, unfollowThunk, getUsersThunk}
-)(UsersContainer);
+)(UsersContainer));

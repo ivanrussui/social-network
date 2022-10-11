@@ -27,8 +27,7 @@ class ProfileContainer extends React.Component {
 let AuthRedirectComponent =  withAuthRedirect(ProfileContainer);
 
 let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
-    profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    profile: state.profilePage.profile
 })
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
