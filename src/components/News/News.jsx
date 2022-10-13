@@ -1,5 +1,12 @@
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+
 const News = () => {
-    return <div>News</div>
+    return <h1 style={{paddingLeft: '10px', color: 'indigo'}}>News</h1>
 };
 
-export default News;
+// HOC
+let AuthRedirectComponent =  withAuthRedirect(News);
+
+export default AuthRedirectComponent;
+
+
