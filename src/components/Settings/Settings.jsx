@@ -1,13 +1,10 @@
-import React from 'react';
-import s from './Settings.module.css';
-
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 const Settings = () => {
-    return (
-        <div>
-            Settings
-        </div>
-    );
+    return <h1 style={{paddingLeft: '10px', color: 'indigo'}}>Settings</h1>
 };
 
-export default Settings;
+// HOC
+let AuthRedirectComponent = withAuthRedirect(Settings);
+
+export default AuthRedirectComponent;

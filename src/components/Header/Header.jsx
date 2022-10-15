@@ -30,7 +30,8 @@ const Header = (props) => {
                     photos ?
                         <img src={photos} alt="Avatar"/> :
                         <img src={plug} alt='Plug'/>
-                    : <NavLink to={'/login'}>Login</NavLink>
+                    : <a target={"_blank"} href={'https://social-network.samuraijs.com/'}>Login</a>
+                    // : <NavLink to={'/login'}>Login</NavLink>
                 }
 
                 {/*{ photos ?*/}
