@@ -1,12 +1,15 @@
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 const News = () => {
     return <h1 style={{paddingLeft: '10px', color: 'indigo'}}>News</h1>
 };
 
 // HOC
-let AuthRedirectComponent =  withAuthRedirect(News);
+// let AuthRedirectComponent =  withAuthRedirect(News);
 
-export default AuthRedirectComponent;
+export default compose(
+    withAuthRedirect
+)(News);
 
 

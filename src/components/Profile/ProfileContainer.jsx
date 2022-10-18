@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getProfileThunk} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -23,9 +24,6 @@ class ProfileContainer extends React.Component {
     }
 }
 
-// HOC
-let AuthRedirectComponent =  withAuthRedirect(ProfileContainer);
-
 let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
     profile: state.profilePage.profile
 })
@@ -44,5 +42,15 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {getProfileThunk})(withRouter(AuthRedirectComponent));
+// HOC
+// let AuthRedirectComponent =  withAuthRedirect(ProfileContainer);
+
+// export default connect(mapStateToProps, {getProfileThunk})(withRouter(AuthRedirectComponent));
+
+export default compose(
+    connect(mapStateToProps, {getProfileThunk}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);
+
 
