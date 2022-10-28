@@ -3,9 +3,9 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogsItem {
-    padding: 10px;
-}
+/*.dialogsItem {*/
+/*    padding: 10px;*/
+/*}*/
 
 /*.dialogsItem .active {*/
 /*    color: red;*/
@@ -19,9 +19,9 @@
     color: gold;
 }
 
-.messages {
-    padding: 10px;
-}
+/*.messages {*/
+/*    padding: 10px;*/
+/*}*/
 
 .dialog img {
     width: 50px;
