@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileThunk} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+// import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
@@ -50,7 +50,7 @@ function withRouter(Component) {
 export default compose(
     connect(mapStateToProps, {getProfileThunk}),
     withRouter,
-    withAuthRedirect
+    // withAuthRedirect
 )(ProfileContainer);
 
 

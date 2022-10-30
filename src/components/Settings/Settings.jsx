@@ -2,7 +2,7 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 const Settings = () => {
-    return <h1 style={{paddingLeft: '10px', color: 'indigo'}}>Settings</h1>
+    return <h1 style={{ color: 'indigo'}}>Settings</h1>
 };
 
 // HOC
