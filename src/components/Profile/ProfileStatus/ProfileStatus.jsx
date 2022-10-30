@@ -1,11 +1,11 @@
 import React from "react";
-import styles from './ProgileStatus.module.css';
+import styles from './ProfileStatus.module.css';
 
 class ProfileStatus extends React.Component {
-    state = {editMode: false};
+    state = {editMode: false}; // создаем localState
 
     changeStatusTrue = () => {
-        this.setState({
+        this.setState({   // setState меняет state
             editMode: true
         });
     };
@@ -22,12 +22,12 @@ class ProfileStatus extends React.Component {
             <div className={styles.ProfileStatus}>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.changeStatusTrue}>{this.props.status} </span>
+                        <span onDoubleClick={this.changeStatusTrue}>{this.props.status}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input onBlur={this.changeStatusFalse} type="text" value={this.props.status}/>
+                        <input autoFocus={true } onBlur={this.changeStatusFalse} type="text" value={this.props.status}/>
                     </div>
                 }
             </div>
