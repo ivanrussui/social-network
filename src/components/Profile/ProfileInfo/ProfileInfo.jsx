@@ -56,7 +56,8 @@ const ProfileInfo = (props) => {
 
             </div>
 
-            <ProfileStatus status={'Hey man! Whats app?'}/>
+            {/*<ProfileStatus status={'Hey man! Whats app?'}/>*/}
+            <ProfileStatus/>
 
         </div>
     );
