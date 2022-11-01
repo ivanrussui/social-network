@@ -4,11 +4,13 @@ import {profileAPI} from "../api/api";
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const CHANGE_STATUS = 'CHANGE-STATUS';
 
 let initialState = {
     posts: [{id: 1, message: 'Hello world!', count: 10}, {id: 2, message: 'React it\'s cool', count: 15}],
     newPostText: 'React SamuraiJS',
-    profile: null
+    profile: null,
+    statusText: `I'm JS Ninja`
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -24,6 +26,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,         // поверхностное копирование
                 newPostText: '',
                 posts: [...state.posts, newPost]    // глубокое копирование, вместо push сразу пишем
+            };
+        }
+        case CHANGE_STATUS: {
+            return {
+                ...state,
+                statusText: action.statusText
             };
         }
         case UPDATE_NEW_POST_TEXT: { // обновление ввода текста в посты Profile
@@ -47,6 +55,7 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+export const changeStatusText = (statusText) => ({type: CHANGE_STATUS, statusText});
 
 
 // ThunkCreator
