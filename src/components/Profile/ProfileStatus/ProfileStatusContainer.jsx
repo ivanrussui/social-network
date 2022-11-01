@@ -1,4 +1,3 @@
-import styles from './ProfileStatus.module.css';
 import {changeStatusText} from "../../../redux/profileReducer";
 import {connect} from "react-redux";
 import ProfileStatus from "./ProfileStatus";

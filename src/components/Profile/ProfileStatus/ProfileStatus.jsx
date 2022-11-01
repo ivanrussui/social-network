@@ -12,14 +12,13 @@ class ProfileStatus extends React.Component {
         // statusText: `I'm JS Ninja`
     };
 
-    changeStatusTrue = (props) => {
+    changeStatusTrue = (e) => {
         this.setState({   // setState меняет state
             editMode: true,
             // statusText: e.currentTarget.value
         });
         let statusText = this.newStatusText.current.value;
         this.props.changeStatusText(statusText);
-        // console.log(props.this.changeStatusText)
     };
 
     changeStatusFalse = (e) => {
@@ -44,7 +43,7 @@ class ProfileStatus extends React.Component {
                     <div>
                         {/*<span onDoubleClick={this.changeStatusTrue}>{this.props.status}</span>*/}
                         {/*<span onDoubleClick={this.changeStatusTrue} >{this.state.statusText}</span>*/}
-                        <span onDoubleClick={this.changeStatusTrue} ref={this.newStatusText}>{this.props.statusText} </span>
+                        <span onDoubleClick={this.changeStatusTrue} ref={this.newStatusText}>{this.props.statusText}</span>
                     </div>
                 }
                 {this.state.editMode &&
