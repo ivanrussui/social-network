@@ -28,12 +28,6 @@ const profileReducer = (state = initialState, action) => {
                 posts: [...state.posts, newPost]    // глубокое копирование, вместо push сразу пишем
             };
         }
-        case CHANGE_STATUS: {
-            return {
-                ...state,
-                statusText: action.statusText
-            };
-        }
         case UPDATE_NEW_POST_TEXT: { // обновление ввода текста в посты Profile
             return {
                 ...state,
@@ -45,6 +39,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile
             }
+        }
+        case CHANGE_STATUS: {  // изменение статуса
+            return {
+                ...state,
+                statusText: action.statusText
+            };
         }
         default:
             return state;

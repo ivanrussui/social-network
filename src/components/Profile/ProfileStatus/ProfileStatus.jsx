@@ -13,10 +13,10 @@ class ProfileStatus extends React.Component {
     };
 
     changeStatusTrue = (e) => {
-        this.setState({   // setState меняет state
-            editMode: true,
+        // this.setState({   // setState меняет state
+        //     editMode: true,
             // statusText: e.currentTarget.value
-        });
+        // });
         let statusText = this.newStatusText.current.value;
         this.props.changeStatusText(statusText);
     };
@@ -43,15 +43,18 @@ class ProfileStatus extends React.Component {
                     <div>
                         {/*<span onDoubleClick={this.changeStatusTrue}>{this.props.status}</span>*/}
                         {/*<span onDoubleClick={this.changeStatusTrue} >{this.state.statusText}</span>*/}
-                        <span onDoubleClick={this.changeStatusTrue} ref={this.newStatusText}>{this.props.statusText}</span>
+                        {/*<span onDoubleClick={this.changeStatusTrue} ref={this.newStatusText}>{this.props.statusText}</span>*/}
+                        {/*<span onDoubleClick={this.changeStatusTrue} ref={this.newStatusText}>{this.props.statusText}</span>*/}
+                        <input onChange={this.changeStatusTrue} ref={this.newStatusText} value={this.props.statusText} type="text"/>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        {/*<input autoFocus={true} onBlur={this.changeStatusFalse} type="text" value={this.props.status}/>*/}
-                        {/*<input autoFocus={true} type={'text'} onBlur={this.changeStatusFalse}*/}
-                        {/*       defaultValue={`I'm JS Ninja`}  value={this.state.statusText}/>*/}
-                        <input autoFocus={true} onBlur={this.changeStatusFalse} ref={this.newStatusText} value={this.props.statusText} type="text"/>
+                {/*        /!*<input autoFocus={true} onBlur={this.changeStatusFalse} type="text" value={this.props.status}/>*!/*/}
+                {/*        /!*<input autoFocus={true} type={'text'} onBlur={this.changeStatusFalse}*!/*/}
+                {/*        /!*       defaultValue={`I'm JS Ninja`}  value={this.state.statusText}/>*!/*/}
+                {/*        /!*<input autoFocus={true} onBlur={this.changeStatusFalse} ref={this.newStatusText} value={this.props.statusText} type="text"/>*!/*/}
+                        <input autoFocus={true} onBlur={this.changeStatusFalse} type="text"/>
                     </div>
                 }
             </div>
