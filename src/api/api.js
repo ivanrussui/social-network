@@ -15,21 +15,27 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data);
     },
-    deleteUser(id) {
-        return instance.delete(`follow/${id}`)
+    deleteUser(userId) {
+        return instance.delete(`follow/${userId}`)
             .then(response => response.data);
     },
-    postUser(id) {
-        return instance.post(`follow/${id}`)
+    postUser(userId) {
+        return instance.post(`follow/${userId}`)
             .then(response => response.data);
     }
 }
 
 export const profileAPI = {
-    getProfile(profileId = 2) {
-        return instance.get(`profile/${profileId}`)
+    getProfile(userId = 2) {
+        return instance.get(`profile/${userId}`)
             .then(response => response.data);
-    }
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    // updateStatus() {
+    //     return instance.update(`profile/status`, { status: status })
+    // }
 }
 
 export const authAPI = {
