@@ -57,9 +57,11 @@ const ProfileInfo = (props) => {
 
             </div>
 
-            {/*<ProfileStatus status={'Hey man! Whats app?'}/>*/}
-            {/*<ProfileStatus/>*/}
-            <ProfileStatusContainer/>
+            {/* для моего изменения статуса коментил */}
+            <ProfileStatus status={'Hey man! Whats app?'}/>
+
+            {/*// для моего изменения статуса*/}
+            {/*<ProfileStatusContainer/>*/}
 
         </div>
     );
