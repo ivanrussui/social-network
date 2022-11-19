@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileThunk} from "../../redux/profileReducer";
+import {getProfileThunk, getStatusThunk} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 // import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -16,16 +16,18 @@ class ProfileContainer extends React.Component {
 
         // обращаемся к Thunk
         this.props.getProfileThunk(profileId);
+        this.props.getStatusThunk(profileId);
     }
 
     render() {
         // debugger;
-        return <Profile {...this.props} profile={this.props.profile}/>;
+        return <Profile {...this.props} profile={this.props.profile} status={this.props.status}/>;
     }
 }
 
 let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    status: state.profilePage.status
 })
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
@@ -41,14 +43,13 @@ function withRouter(Component) {
 
     return ComponentWithRouterProp;
 }
-
 // HOC
 // let AuthRedirectComponent =  withAuthRedirect(ProfileContainer);
 
 // export default connect(mapStateToProps, {getProfileThunk})(withRouter(AuthRedirectComponent));
 
 export default compose(
-    connect(mapStateToProps, {getProfileThunk}),
+    connect(mapStateToProps, {getProfileThunk, getStatusThunk}),
     withRouter,
     // withAuthRedirect
 )(ProfileContainer);

@@ -1,20 +1,29 @@
-import {changeStatusText} from "../../../redux/profileReducer";
+// import {changeStatusText} from "../../../redux/profileReducer";
 import {connect} from "react-redux";
 import ProfileStatus from "./ProfileStatus";
+// import {getStatus, updateStatus} from "../../../redux/profileReducer";
 
 let mapStateToProps = (state) => {
     return {
-        statusText: state.profilePage.statusText
-    }
-}
-let mapDispatchToProps = (dispatch) => {
-    return {
-        changeStatusText: (statusText) => {
-            dispatch(changeStatusText(statusText));
-        }
+        status: state.profilePage.status
+
+        // для моего изменения статуса
+        // statusText: state.profilePage.statusText
     }
 }
 
-const ProfileStatusContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileStatus);
+// для моего изменения статуса
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         changeStatusText: (statusText) => {
+//             dispatch(changeStatusText(statusText));
+//         }
+//     }
+// }
 
-export default ProfileStatusContainer;
+// для моего изменения статуса
+// const ProfileStatusContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileStatus);
+
+// const ProfileStatusContainer = connect(mapStateToProps, {getStatus, updateStatus})(ProfileStatus);
+
+// export default ProfileStatusContainer;

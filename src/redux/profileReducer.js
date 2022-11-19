@@ -4,13 +4,19 @@ import {profileAPI} from "../api/api";
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
-const CHANGE_STATUS = 'CHANGE-STATUS';
+const SET_STATUS = 'SET-STATUS';
+
+// для моего изменения статуса
+// const CHANGE_STATUS = 'CHANGE-STATUS';
 
 let initialState = {
     posts: [{id: 1, message: 'Hello world!', count: 10}, {id: 2, message: 'React it\'s cool', count: 15}],
     newPostText: 'React SamuraiJS',
     profile: null,
-    statusText: `I'm JS Ninja`
+    status: ''
+
+    // для моего изменения статуса
+    // statusText: `I'm JS Ninja`
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -40,12 +46,20 @@ const profileReducer = (state = initialState, action) => {
                 profile: action.profile
             }
         }
-        case CHANGE_STATUS: {  // изменение статуса
+        case SET_STATUS: {  // получение статуса
             return {
                 ...state,
-                statusText: action.statusText
+                status: action.status
             };
         }
+
+        // для моего изменения статуса
+        // case CHANGE_STATUS: {  // изменение статуса
+        //     return {
+        //         ...state,
+        //         statusText: action.statusText
+        //     };
+        // }
         default:
             return state;
     }
@@ -55,13 +69,32 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
-export const changeStatusText = (statusText) => ({type: CHANGE_STATUS, statusText});
+export const setStatus = (status) => ({type: SET_STATUS, status});
+
+// для моего изменения статуса
+// export const changeStatusText = (statusText) => ({type: CHANGE_STATUS, statusText});
 
 
 // ThunkCreator
 export const getProfileThunk = (profileId) => dispatch => {
     profileAPI.getProfile(profileId).then(data => {
         dispatch(setUserProfile(data));
+    });
+}
+
+export const getStatusThunk = (profileId) => dispatch => {
+    profileAPI.getStatus(profileId).then(response => {
+        // debugger
+        dispatch(setStatus(response.data));
+    });
+}
+
+// todo обрати вним на response в then
+export const updateStatusThunk = (status) => dispatch => {
+    profileAPI.updateStatus(status).then(data => {
+        if (data.resultCode === 0){
+            dispatch(setStatus(status));
+        }
     });
 }
 
