@@ -83,16 +83,16 @@ export const getProfileThunk = (profileId) => dispatch => {
 }
 
 export const getStatusThunk = (profileId) => dispatch => {
-    profileAPI.getStatus(profileId).then(response => {
+    profileAPI.getStatus(profileId).then(data => {
         // debugger
-        dispatch(setStatus(response.data));
+        dispatch(setStatus(data));
     });
 }
 
-// todo обрати вним на response в then
 export const updateStatusThunk = (status) => dispatch => {
     profileAPI.updateStatus(status).then(data => {
-        if (data.resultCode === 0){
+        debugger
+        if (data.resultCode === 0) {
             dispatch(setStatus(status));
         }
     });

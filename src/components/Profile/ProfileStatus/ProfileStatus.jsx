@@ -8,11 +8,14 @@ class ProfileStatus extends React.Component {
     //     this.newStatusText = React.createRef();
     // }
 
-    state = { editMode: false }; // создаем localState
+    state = {       // создаем localState
+        editMode: false,
+        status: this.props.status
+    };
 
     changeStatusTrue = () => {
         this.setState({   // setState меняет state
-            editMode: true,
+            editMode: true
         });
 
         // для моего изменения статуса
@@ -24,14 +27,22 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false,
         });
+        this.props.updateStatus(this.state.status);
 
         // для моего изменения статуса
         // let statusText = this.newStatusText.current.value;
         // this.props.changeStatusText(statusText);
     };
 
+    onStatusChange = (e) => {
+        this.setState({
+            status: e.currentTarget.value
+        });
+    }
+
 
     render() {
+        // console.log(this.props)
         // console.log(this.state)
         return (
             <div className={styles.ProfileStatus}>
@@ -45,7 +56,7 @@ class ProfileStatus extends React.Component {
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.changeStatusFalse} type="text" value={this.props.status}/>
+                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.changeStatusFalse} value={this.state.status}/>
 
                         {/*// для моего изменения статуса*/}
                         {/*<input autoFocus={true} onBlur={this.changeStatusFalse} type="text"/>*/}

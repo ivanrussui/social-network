@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileThunk, getStatusThunk} from "../../redux/profileReducer";
+import {getProfileThunk, getStatusThunk, updateStatusThunk} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 // import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -21,7 +21,9 @@ class ProfileContainer extends React.Component {
 
     render() {
         // debugger;
-        return <Profile {...this.props} profile={this.props.profile} status={this.props.status}/>;
+        // console.log(this.props.updateStatus)
+
+        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>;
     }
 }
 
@@ -49,7 +51,7 @@ function withRouter(Component) {
 // export default connect(mapStateToProps, {getProfileThunk})(withRouter(AuthRedirectComponent));
 
 export default compose(
-    connect(mapStateToProps, {getProfileThunk, getStatusThunk}),
+    connect(mapStateToProps, {getProfileThunk, getStatusThunk, updateStatusThunk}),
     withRouter,
     // withAuthRedirect
 )(ProfileContainer);

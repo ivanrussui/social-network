@@ -31,10 +31,12 @@ export const profileAPI = {
             .then(response => response.data);
     },
     getStatus(profileId) {
-        return instance.get(`profile/status/${profileId}`);
+        return instance.get(`profile/status/${profileId}`)
+            .then(response => response.data);
     },
-    updateStatus() {
-        return instance.update(`profile/status`, { status: 'status' });
+    updateStatus(status) {
+        return instance.put(`profile/status`, { status: status })
+            .then(response => response.data);
     }
 }
 
