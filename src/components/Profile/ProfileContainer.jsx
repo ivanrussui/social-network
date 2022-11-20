@@ -23,7 +23,7 @@ class ProfileContainer extends React.Component {
         // debugger;
         // console.log(this.props.updateStatus)
 
-        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>;
+        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusThunk}/>;
     }
 }
 
