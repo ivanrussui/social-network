@@ -48,7 +48,7 @@ class ProfileStatus extends React.Component {
             <div className={styles.ProfileStatus}>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.changeStatusTrue}>{this.props.status}</span>
+                        <span onDoubleClick={this.changeStatusTrue}>{this.props.status || 'No Status'}</span>
 
                         {/*// для моего изменения статуса*/}
                         {/*<input onChange={this.changeStatusTrue} ref={this.newStatusText} value={this.props.statusText} type="text"/>*/}
