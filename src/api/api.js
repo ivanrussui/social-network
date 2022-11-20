@@ -15,12 +15,12 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data);
     },
-    deleteUser(id) {
-        return instance.delete(`follow/${id}`)
+    deleteUser(profileId) {
+        return instance.delete(`follow/${profileId}`)
             .then(response => response.data);
     },
-    postUser(id) {
-        return instance.post(`follow/${id}`)
+    postUser(profileId) {
+        return instance.post(`follow/${profileId}`)
             .then(response => response.data);
     }
 }
@@ -28,6 +28,14 @@ export const usersAPI = {
 export const profileAPI = {
     getProfile(profileId = 2) {
         return instance.get(`profile/${profileId}`)
+            .then(response => response.data);
+    },
+    getStatus(profileId) {
+        return instance.get(`profile/status/${profileId}`)
+            .then(response => response.data);
+    },
+    updateStatus(status) {
+        return instance.put(`profile/status`, { status: status })
             .then(response => response.data);
     }
 }
