@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 import Spinner from "../../common/Spinner/Spinner";
 import plug from '../../../assets/img/plug.png';
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
-// import ProfileStatusContainer from "../ProfileStatus/ProfileStatusContainer";
+import ProfileStatusContainer from "../ProfileStatus/ProfileStatusContainer";
 // import mainBg from '../../../assets/img/main-bg.jpg';
 
 const ProfileInfo = (props) => {
@@ -57,12 +57,7 @@ const ProfileInfo = (props) => {
             </div>
 
             <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
-
-            {/* для моего изменения статуса коментил */}
-            {/*<ProfileStatus status={'Hey man! Whats app?'}/>*/}
-
-            {/*// для моего изменения статуса*/}
-            {/*<ProfileStatusContainer/>*/}
+            {/*<ProfileStatusContainer/>  /!*если статус через ProfileStatusContainer*!/*/}
 
         </div>
     );
