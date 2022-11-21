@@ -26,7 +26,8 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getProfile(profileId = 2) {
+    getProfile(profileId) {
+    // getProfile(profileId = 2) { // хз зачем тут id 2 Димыча
         return instance.get(`profile/${profileId}`)
             .then(response => response.data);
     },
