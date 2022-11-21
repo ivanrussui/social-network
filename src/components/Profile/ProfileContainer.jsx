@@ -11,13 +11,13 @@ class ProfileContainer extends React.Component {
         // debugger;
         let profileId = this.props.router.params.userId;
         if (!profileId) {
-            profileId = 25141 // мой id
-            // profileId = 2  //  Димыча
+            // profileId = 25141 // мой id
+            profileId = 2  //  Димыча
         }
 
         // обращаемся к Thunk
-        this.props.getProfileThunk(profileId);
-        this.props.getStatusThunk(profileId);
+        // this.props.getProfileThunk(profileId);
+        this.props.getStatusThunk(profileId); // не нужно если статус через ProfileStatusContainer
     }
 
     render() {
@@ -25,12 +25,13 @@ class ProfileContainer extends React.Component {
         // console.log(this.props.updateStatus)
 
         return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusThunk}/>;
+        // return <Profile {...this.props} profile={this.props.profile} />; // если статус через ProfileStatusContainer
     }
 }
 
 let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status  // не нужно если статус через ProfileStatusContainer
 })
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
