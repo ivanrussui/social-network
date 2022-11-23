@@ -25,7 +25,7 @@ class ProfileStatus extends React.Component {
 
     changeStatusFalse = () => {
         this.setState({
-            editMode: false,
+            editMode: false
         });
         this.props.updateStatus(this.state.status);
 

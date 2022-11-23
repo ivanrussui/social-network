@@ -16,7 +16,7 @@ class ProfileContainer extends React.Component {
         }
 
         // обращаемся к Thunk
-        // this.props.getProfileThunk(profileId);
+        this.props.getProfileThunk(profileId);
         this.props.getStatusThunk(profileId); // не нужно если статус через ProfileStatusContainer
     }
 
