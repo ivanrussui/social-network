@@ -11,8 +11,8 @@ class ProfileContainer extends React.Component {
         // debugger;
         let profileId = this.props.router.params.userId;
         if (!profileId) {
-            // profileId = 25141 // мой id
-            profileId = 2  //  Димыча
+            profileId = 25141 // мой id
+            // profileId = 2  //  Димыча
         }
 
         // обращаемся к Thunk
