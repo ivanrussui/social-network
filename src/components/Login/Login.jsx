@@ -1,6 +1,8 @@
 import {Field, reduxForm} from "redux-form";
+import {getAuthLoginThunk, setAuthUserLogin} from "../../redux/authReducer";
 
 const LoginForm = (props) => {
+// debugger
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -23,9 +25,20 @@ const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm)
 
-const Login = () => {
+const Login = (props) => {
     const onSubmit = (formData) => {
+        props.getAuthLoginThunk(formData.login, formData.password);
+        console.log(formData.login, formData.password);
         console.log(formData)
+        // props.setAuthUserLogin(formData);
+        // props.getAuthLoginThunk(formData);
+        // props.isAuth = true;
+        // console.log(formData.password)
+        // login: formData.login;
+        // password: formData.password;
+        // debugger
+
+        // props.
     }
     return (
         <>

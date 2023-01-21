@@ -10,6 +10,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginContainer from "./components/Login/LoginContainer";
 
 // let path = ['/', '/profile/*', '/profile/:userId', '/dialogs/*', '/users' ]
 // console.log(path[3])
@@ -51,7 +52,7 @@ const App = () => {
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
                     <Route path="/login"
-                           element={<LoginPage/>}/>
+                           element={<LoginContainer/>}/>
                 </Routes>
             </div>
         </div>
