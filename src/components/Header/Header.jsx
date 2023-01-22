@@ -27,11 +27,12 @@ const Header = (props) => {
             <div className={s.loginBlock}>
 
                 {props.isAuth ?
-                    photos ?
-                        <img src={photos} alt="Avatar"/> :
-                        <img src={plug} alt='Plug'/>
-                    : <a target={"_blank"} href={'https://social-network.samuraijs.com/'}>Login</a>
-                    // : <NavLink to={'/login'}>Login</NavLink>
+                    // photos ?
+                    //     <img src={photos} alt="Avatar"/> :
+                    //     <img src={plug} alt='Plug'/>
+                    // : <a target={"_blank"} href={'https://social-network.samuraijs.com/'}>Login</a>
+                    <div>{props.getAuthLogoutThunk} <button onClick={props.getAuthLogoutThunk}>Logout</button></div>
+                    : <NavLink to={'/login'}>Login</NavLink>
                 }
 
                 {/*{ photos ?*/}
