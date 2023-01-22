@@ -1,7 +1,7 @@
 import React from 'react';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {connect} from "react-redux";
-import {getAuthLoginThunk} from "../../redux/authReducer";
+import {getAuthLoginThunk, getAuthLogoutThunk} from "../../redux/authReducer";
 import Login from "./Login";
 
 class LoginContainer extends React.Component {

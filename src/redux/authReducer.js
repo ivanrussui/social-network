@@ -2,7 +2,7 @@
 import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
-const SET_USER_LOGIN = 'SET_USER_LOGIN';
+// const SET_USER_LOGIN = 'SET_USER_LOGIN';
 
 let initialState = {
     id: null,
@@ -19,15 +19,23 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,   // поверхностное копирование
                 ...action.data, // в data будут сидеть id, email, login
-                isAuth: true
+        //         isAuth: {
+        //             if  (isAuth === true) {
+        //                 return true
+        // }   esle {
+        //                 false
+        // }
+                    // isAuth: true ? true : false
+            // }
+                // isAuth: true
             };
 
-        case SET_USER_LOGIN:
-            return {
-                ...state,
-                ...action.data,
-                isAuth: true
-            };
+        // case SET_USER_LOGIN:
+        //     return {
+        //         ...state,
+        //         ...action.data,
+        //         isAuth: true
+        //     };
         default:
             return state;
     }
@@ -52,9 +60,15 @@ export const getAuthMeThunk = () => (dispatch) => {
 export const getAuthLoginThunk = (email, password) => (dispatch) => {
     authAPI.postAuthLogin(email, password).then(data => {
         if (data.resultCode === 0) {
-            // let {email, password} = data.data;
             dispatch(setAuthUserData());
-            // dispatch(setAuthUserData(email, password, true));
+        }
+    })
+}
+
+export const getAuthLogoutThunk = () => (dispatch) => {
+    authAPI.postAuthLogout().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false));
         }
     })
 }

@@ -1,12 +1,11 @@
 import {Field, reduxForm} from "redux-form";
-import {getAuthLoginThunk, setAuthUserLogin} from "../../redux/authReducer";
 
 const LoginForm = (props) => {
 // debugger
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} name={'login'} component={'input'}/>
+                <Field placeholder={'Email'} name={'email'} component={'input'}/>
             </div>
             <div>
                 <Field placeholder={'Password'} name={'password'} component={'input'}/>
@@ -22,38 +21,22 @@ const LoginForm = (props) => {
 }
 
 const LoginReduxForm = reduxForm({
-    form: 'login'
-})(LoginForm)
+    form: 'login',
+})(LoginForm);
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        props.getAuthLoginThunk(formData.login, formData.password);
-        console.log(formData.login, formData.password);
+        props.getAuthLoginThunk(formData.email, formData.password);
+        console.log(formData.email, formData.password);
         console.log(formData)
-        // props.setAuthUserLogin(formData);
-        // props.getAuthLoginThunk(formData);
-        // props.isAuth = true;
-        // console.log(formData.password)
-        // login: formData.login;
-        // password: formData.password;
-        // debugger
-
-        // props.
     }
     return (
         <>
-            <a style={{
-                display: 'inline-block',
-                fontSize: '2em',
-                margin: '0.67em',
-                fontWeight: 'bold',
-                textDecoration: 'none'
-            }}
-               target={'_blank'} href={'https://social-network.samuraijs.com/'}>LOGIN</a>
+            <h1 style={{ color: 'indigo' }}>LOGIN</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
+            {/*<button onClick={props.getAuthLogoutThunk}>Logout</button>*/}
         </>
     )
-    // return <h1 style={{paddingLeft: '10px', color: 'indigo'}}>LOGIN</h1>
 }
 
 

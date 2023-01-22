@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {getProfileThunk} from "../../redux/profileReducer";
-import {getAuthMeThunk} from "../../redux/authReducer";
+import {getAuthLogoutThunk, getAuthMeThunk} from "../../redux/authReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 class HeaderContainer extends React.Component {
@@ -50,4 +50,4 @@ function withRouter(Component) {
 }
 
 
-export default connect(mapStateToProps, {getProfileThunk, getAuthMeThunk})(withRouter(HeaderContainer));
+export default connect(mapStateToProps, {getProfileThunk, getAuthMeThunk, getAuthLogoutThunk})(withRouter(HeaderContainer));
