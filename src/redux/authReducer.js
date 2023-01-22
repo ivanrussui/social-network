@@ -19,23 +19,8 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,   // поверхностное копирование
                 ...action.data, // в data будут сидеть id, email, login
-        //         isAuth: {
-        //             if  (isAuth === true) {
-        //                 return true
-        // }   esle {
-        //                 false
-        // }
-                    // isAuth: true ? true : false
-            // }
                 // isAuth: true
             };
-
-        // case SET_USER_LOGIN:
-        //     return {
-        //         ...state,
-        //         ...action.data,
-        //         isAuth: true
-        //     };
         default:
             return state;
     }
@@ -60,7 +45,7 @@ export const getAuthMeThunk = () => (dispatch) => {
 export const getAuthLoginThunk = (email, password) => (dispatch) => {
     authAPI.postAuthLogin(email, password).then(data => {
         if (data.resultCode === 0) {
-            dispatch(setAuthUserData());
+            dispatch(getAuthMeThunk());
         }
     })
 }

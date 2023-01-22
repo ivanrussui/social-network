@@ -1,4 +1,7 @@
 import {Field, reduxForm} from "redux-form";
+import {Navigate} from "react-router-dom";
+import {connect} from "react-redux";
+import {getAuthLoginThunk} from "../../redux/authReducer";
 
 const LoginForm = (props) => {
 // debugger
@@ -27,17 +30,20 @@ const LoginReduxForm = reduxForm({
 const Login = (props) => {
     const onSubmit = (formData) => {
         props.getAuthLoginThunk(formData.email, formData.password);
-        console.log(formData.email, formData.password);
-        console.log(formData)
+    }
+    if (props.isAuth) {
+        return <Navigate to={'/profile'} />
     }
     return (
         <>
             <h1 style={{ color: 'indigo' }}>LOGIN</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
-            {/*<button onClick={props.getAuthLogoutThunk}>Logout</button>*/}
         </>
     )
 }
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
 
 
-export default Login;
+export default connect (mapStateToProps, {getAuthLoginThunk})(Login);
