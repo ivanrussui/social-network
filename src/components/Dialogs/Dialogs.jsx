@@ -1,6 +1,24 @@
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Mesage';
+import { Field, reduxForm } from 'redux-form';
+
+const DialogForm = (props) => {
+  return (
+      <form onSubmit={props.handleSubmit}>
+          <div>
+              <Field name={'textarea'} component={'textarea'} />
+          </div>
+          <div>
+              <button>SEND</button>
+          </div>
+      </form>
+  )
+}
+
+const DialogReduxForm = reduxForm({
+    form: 'dialog',
+})(DialogForm);
 
 const Dialogs = (props) => {
 
@@ -22,6 +40,10 @@ const Dialogs = (props) => {
 
     // if (!props.isAuth) return <Navigate to={'/login'} />;
 
+    const onSubmit = (formData) => {
+        console.log(formData);
+    };
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
@@ -29,16 +51,17 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <div>
-            <textarea onChange={onNewMessageChange}
-                      value={newMessageBody}
-                      placeholder="Enter your message"/>
-                    </div>
-                    <div>
-                        <button onClick={onSendMessageClick}>Send</button>
-                    </div>
-                </div>
+                <DialogReduxForm onSubmit={onSubmit}/>
+            {/*    <div>*/}
+            {/*        <div>*/}
+            {/*<textarea onChange={onNewMessageChange}*/}
+            {/*          value={newMessageBody}*/}
+            {/*          placeholder="Enter your message"/>*/}
+            {/*        </div>*/}
+            {/*        <div>*/}
+            {/*            <button onClick={onSendMessageClick}>Send</button>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
             </div>
         </div>
     );
