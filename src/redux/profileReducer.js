@@ -2,7 +2,6 @@ import {profileAPI} from "../api/api";
 
 // обернули в переменные action.type из actionCreator
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 
@@ -10,8 +9,11 @@ const SET_STATUS = 'SET-STATUS';
 // const CHANGE_STATUS = 'CHANGE-STATUS';
 
 let initialState = {
-    posts: [{id: 1, message: 'Hello world!', count: 10}, {id: 2, message: 'React it\'s cool', count: 15}],
-    newPostText: 'React SamuraiJS',
+    posts: [
+        {id: 1, message: 'Hello world!', count: 10},
+        {id: 2, message: 'React it\'s cool', count: 15}
+    ],
+    // newPostText: 'React SamuraiJS',
     profile: null,
     status: ''
 
@@ -25,19 +27,13 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: { // добавление постов Profile; ADD_POST это переменная action type из action creator
             let newPost = {
                 id: 3,
-                message: state.newPostText,
+                message: action.newPostText,
                 count: 0
             };
             return {
                 ...state,         // поверхностное копирование
-                newPostText: '',
+                // newPostText: '',
                 posts: [...state.posts, newPost]    // глубокое копирование, вместо push сразу пишем
-            };
-        }
-        case UPDATE_NEW_POST_TEXT: { // обновление ввода текста в посты Profile
-            return {
-                ...state,
-                newPostText: action.newText
             };
         }
         case SET_USER_PROFILE: { // получаем профиль юзера
@@ -66,8 +62,7 @@ const profileReducer = (state = initialState, action) => {
 }
 
 // наши actionCreator
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 
