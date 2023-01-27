@@ -8,7 +8,7 @@ const PostForm = (props) => {
   return  (
       <form onSubmit={props.handleSubmit}>
           <div>
-              <Field name={'textarea'} component={'textarea'} />
+              <Field name={'newPostText'} component={'textarea'} />
           </div>
           <div>
               <button>SEND</button>
@@ -17,32 +17,23 @@ const PostForm = (props) => {
   )
 }
 
-const PostReduxForm = reduxForm({
-    form: 'post',
-})(PostForm);
+const PostReduxForm = reduxForm({form: 'post'})(PostForm);
 
 const MyPosts = (props) => {
 // debugger;
     let postsElements = props.posts.map(p => <Post message={p.message} count={p.count} id={p.id} key={p.message}/>);
-
     let newPostElement = React.createRef();
-
-    let onAddPost = () => {  // добавить пост
-        props.addPost();
-    };
-
-    let onPostChange = () => {  // изменение текста поста
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
-    };
-    const onSubmit = (formData) => {
-        console.log(formData);
+    // let onAddPost = () => {  // добавить пост
+    //     props.addPost();
+    // };
+    const onAddPost = (post) => {
+        props.addPost(post.newPostText);
     };
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <PostReduxForm onSubmit={onSubmit}/>
+            <PostReduxForm onSubmit={onAddPost}/>
             {/*<div>*/}
                 {/*<div>*/}
                 {/*    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>*/}

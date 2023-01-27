@@ -7,7 +7,7 @@ const DialogForm = (props) => {
   return (
       <form onSubmit={props.handleSubmit}>
           <div>
-              <Field name={'textarea'} component={'textarea'} />
+              <Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message'} />
           </div>
           <div>
               <button>SEND</button>
@@ -16,9 +16,7 @@ const DialogForm = (props) => {
   )
 }
 
-const DialogReduxForm = reduxForm({
-    form: 'dialog',
-})(DialogForm);
+const DialogReduxForm = reduxForm({form: 'dialog'})(DialogForm);
 
 const Dialogs = (props) => {
 
@@ -29,19 +27,16 @@ const Dialogs = (props) => {
     let messagesElements = state.messages.map(m => <Message message={m.message} id={m.id} key={m.message}/>);
     let newMessageBody = state.newMessageBody;
 
-    let onSendMessageClick = () => {  // отправка сообщения
-        props.sendMessage();
-    };
-
-    let onNewMessageChange = (e) => {  // изменение текста
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
-    };
+    // let onSendMessageClick = () => {  // отправка сообщения
+    //     props.sendMessage();
+    // };
 
     // if (!props.isAuth) return <Navigate to={'/login'} />;
 
-    const onSubmit = (formData) => {
-        console.log(formData);
+    const addNewMessage = (message) => {
+        // console.log(message.newMessageBody);
+        props.sendMessage(message.newMessageBody);
+
     };
 
     return (
@@ -51,7 +46,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <DialogReduxForm onSubmit={onSubmit}/>
+                <DialogReduxForm onSubmit={addNewMessage}/>
             {/*    <div>*/}
             {/*        <div>*/}
             {/*<textarea onChange={onNewMessageChange}*/}
