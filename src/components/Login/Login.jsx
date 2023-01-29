@@ -2,7 +2,7 @@ import {Field, reduxForm} from "redux-form";
 import {Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {getAuthLoginThunk} from "../../redux/authReducer";
-import { Input } from '../common/FormsControls/FormsControls';
+import { FormControl, Input } from '../common/FormsControls/FormsControls';
 import { minLengthCreator, required } from '../../utils/validators/validators';
 
 const minLength2 = minLengthCreator(2);
@@ -14,15 +14,15 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Email'} name={'email'} component={Input}
+                <Field placeholder={'Email'} name={'email'} component={FormControl} typeField={'input'}
                        validate={[required, minLength2]}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} component={Input}
+                <Field placeholder={'Password'} name={'password'} component={FormControl} typeField={'input'}
                        validate={[required, minLength8]}/>
             </div>
             <div>
-                <Field type={'checkbox'} name={'rememberMe'} component={Input}
+                <Field type={'checkbox'} name={'rememberMe'} component={FormControl} typeField={'input'}
                        validate={[required]}/>remember me
             </div>
             <div>
