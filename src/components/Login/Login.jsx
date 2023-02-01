@@ -2,7 +2,7 @@ import {Field, reduxForm} from "redux-form";
 import {Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {getAuthLoginThunk} from "../../redux/authReducer";
-import { FormControl, Input } from '../common/FormsControls/FormsControls';
+import { FormControl } from '../common/FormsControls/FormsControls';
 import { minLengthCreator, required } from '../../utils/validators/validators';
 
 const minLength2 = minLengthCreator(2);
@@ -38,7 +38,7 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        props.getAuthLoginThunk(formData.email, formData.password);
+        props.getAuthLoginThunk(formData.email, formData.password, formData.rememberMe);
     }
     if (props.isAuth) {
         return <Navigate to={'/profile'} />
