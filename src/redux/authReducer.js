@@ -1,4 +1,3 @@
-// обернули в переменные action.type из actionCreator
 import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
@@ -18,8 +17,7 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:   // получить у юзера дэйта
             return {
                 ...state,   // поверхностное копирование
-                ...action.data, // в data будут сидеть id, email, login
-                // isAuth: true
+                ...action.payload, // в payload будут сидеть id, email, login
             };
         default:
             return state;
@@ -27,9 +25,7 @@ const authReducer = (state = initialState, action) => {
 }
 
 // наши actionCreator
-// export const setAuthUserData = (id, email, login) => ({type: SET_USER_DATA, data: {id, email, login}});
-export const setAuthUserData = (id, email, login, isAuth) => ({type: SET_USER_DATA, data: {id, email, login, isAuth}});
-// export const setAuthUserLogin = (email, password, isAuth) => ({type: SET_USER_LOGIN, data: {email, password, isAuth}});
+export const setAuthUserData = (id, email, login, isAuth) => ({type: SET_USER_DATA, payload: {id, email, login, isAuth}});
 
 
 // ThunkCreator
@@ -42,8 +38,8 @@ export const getAuthMeThunk = () => (dispatch) => {
     });
 }
 
-export const getAuthLoginThunk = (email, password) => (dispatch) => {
-    authAPI.postAuthLogin(email, password).then(data => {
+export const getAuthLoginThunk = (email, password, rememberMe) => (dispatch) => {
+    authAPI.postAuthLogin(email, password, rememberMe).then(data => {
         if (data.resultCode === 0) {
             dispatch(getAuthMeThunk());
         }
@@ -51,21 +47,12 @@ export const getAuthLoginThunk = (email, password) => (dispatch) => {
 }
 
 export const getAuthLogoutThunk = () => (dispatch) => {
-    authAPI.postAuthLogout().then(data => {
+    authAPI.deleteAuthLogout().then(data => {
         if (data.resultCode === 0) {
             dispatch(setAuthUserData(null, null, null, false));
         }
     })
 }
-
-// export const getAuthLoginThunk = () => (dispatch) => {
-//     authAPI.postAuthLogin().then(data => {
-//         if (data.resultCode === 0) {
-//             let {email, password} = data.data;
-//             dispatch(setAuthUserLogin(email, password));
-//         }
-//     })
-// }
 
 
 export default authReducer;
