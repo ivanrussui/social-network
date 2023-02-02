@@ -8,10 +8,11 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        // debugger;
+        debugger;
         let profileId = this.props.router.params.userId;
         if (!profileId) {
-            profileId = 25141 // мой id
+            profileId = this.props.authorizedProfileId;
+            // profileId = 25141 // мой id
             // profileId = 2  //  Димыча
         }
 
@@ -31,7 +32,9 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
     profile: state.profilePage.profile,
-    status: state.profilePage.status  // не нужно если статус через ProfileStatusContainer
+    status: state.profilePage.status,  // не нужно если статус через ProfileStatusContainer
+    authorizedProfileId: state.auth.id,
+    isAuth: state.auth.isAuth
 })
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
