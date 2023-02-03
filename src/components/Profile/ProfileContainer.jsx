@@ -8,7 +8,6 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        debugger;
         let profileId = this.props.router.params.userId;
         if (!profileId) {
             profileId = this.props.authorizedProfileId;
