@@ -9,7 +9,7 @@ const News = () => {
 // let AuthRedirectComponent =  withAuthRedirect(News);
 
 export default compose(
-    withAuthRedirect
+    // withAuthRedirect
 )(News);
 
 

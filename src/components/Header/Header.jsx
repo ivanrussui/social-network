@@ -7,7 +7,7 @@ import plug from "../../assets/img/plug.png";
 import Spinner from "../common/Spinner/Spinner";
 
 const Header = (props) => {
-    console.log(props)
+    // console.log(props)
     // if (!props.profile) { // если в props profile нет или null или undefined
     //     return <Spinner/> // отображаем спиннер
     // }

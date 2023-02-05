@@ -9,5 +9,5 @@ const Music = () => {
 // let AuthRedirectComponent = withAuthRedirect(Music);
 
 export default compose(
-    withAuthRedirect
+    // withAuthRedirect
 )(Music);

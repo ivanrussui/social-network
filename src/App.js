@@ -28,23 +28,12 @@ class App extends React.Component {
 
         return (
             <div className="app-wrapper">
-                {/*<HeaderContainer/>*/}
-                <Routes>
-                    <Route path='/*' element={<HeaderContainer/>}/>
-                </Routes>
+                <HeaderContainer/>
+                {/*<Routes>*/}
+                {/*    <Route path='/*' element={<HeaderContainer/>}/>*/}
+                {/*</Routes>*/}
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    {/*<Routes>*/}
-                    {/*    <Route path='/profile/*' element={<ProfileContainer/>}/>*/}
-                    {/*    <Route path='/profile/:userId' element={<ProfileContainer/>}/>*/}
-                    {/*    <Route path="/dialogs/*" element={<DialogsContainer/>}/>*/}
-                    {/*    <Route path="/dialogs" element={<DialogsContainer/>}/>*/}
-                    {/*    <Route path="/users" element={<UsersContainer/>}/>*/}
-                    {/*    <Route path="/news" element={<News/>}/>*/}
-                    {/*    <Route path="/music" element={<Music/>}/>*/}
-                    {/*    <Route path="/settings" element={<Settings/>}/>*/}
-                    {/*    <Route path="/login" element={<LoginPage/>}/>*/}
-                    {/*</Routes>*/}
                     <Routes>
                         <Route path='/profile/*' element={<ProfileContainer/>}/>
                         <Route path='/profile/:userId' element={<ProfileContainer/>}/>
@@ -84,4 +73,3 @@ function withRouter(Component) {
 export default compose(
     withRouter,
     connect(mapStateToProps, {initializedAppThunk}))(App);
-    // connect(mapStateToProps, {getProfileThunk, getAuthMeThunk}))(App);

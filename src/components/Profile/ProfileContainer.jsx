@@ -2,33 +2,74 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileThunk, getStatusThunk, updateStatusThunk} from "../../redux/profileReducer";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
-// import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {compose} from "redux";
+import {Navigate} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
-    componentDidMount() {
-        let profileId = this.props.router.params.userId;
-        if (!profileId) {
-            profileId = this.props.authorizedProfileId;
-            if (!profileId) {
-                this.props.history.push('/login');
-            }
-            // profileId = 25141 // мой id
-            // profileId = 2  //  Димыча
+    constructor(props) {
+        super( props );
+        this.state = {
+            isShowMyProfile: true
         }
+    }
 
-        // обращаемся к Thunk
-        this.props.getProfileThunk(profileId);
-        this.props.getStatusThunk(profileId); // не нужно если статус через ProfileStatusContainer
+    componentDidMount() {
+        // let profileId = this.props.router.params.userId;
+        let profileId = this.props.router.params.userId;
+        let authorisedProfileId = this.props.authorizedProfileId;
+        // debugger
+        // if (!profileId) {
+        //     profileId = this.props.authorizedProfileId;
+        //     // profileId = 25141 // мой id
+        //     // profileId = 2  //  Димыча
+        // }
+
+        if (profileId) {
+
+            this.props.getProfileThunk( profileId );
+            this.props.getStatusThunk( profileId );
+
+        } else {
+            if (this.props.isAuth) {
+                this.props.getProfileThunk( authorisedProfileId );
+                this.props.getStatusThunk( authorisedProfileId );
+            }
+        }
+        // // обращаемся к Thunk
+        // this.props.getProfileThunk(profileId);
+        // this.props.getStatusThunk(profileId); // не нужно если статус через ProfileStatusContainer
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        let profileId = +this.props.router.params.userId;
+        let authorisedProfileId = this.props.authorizedProfileId;
+        let isShowMyProfile = this.state.isShowMyProfile;
+
+        if (isShowMyProfile) {
+
+            if (profileId === authorisedProfileId) {
+                this.setState( {isShowMyProfile: false} )
+            }
+
+            if (!profileId && this.props.isAuth) {
+                this.props.getProfileThunk( authorisedProfileId );
+                this.props.getStatusThunk( authorisedProfileId );
+                this.setState( {isShowMyProfile: false} )
+            }
+        }
     }
 
     render() {
+        if (!this.props.isAuth && !this.props.router.params.userId) {
+            return <Navigate to={'/login'} />
+        }
         return (
             <Profile {...this.props} profile={this.props.profile}
                         status={this.props.status} updateStatus={this.props.updateStatusThunk}/>
         )
-        // return <Profile {...this.props} profile={this.props.profile} />; // если статус через ProfileStatusContainer
     }
 }
 
@@ -52,14 +93,11 @@ function withRouter(Component) {
 
     return ComponentWithRouterProp;
 }
-// HOC
-// let AuthRedirectComponent =  withAuthRedirect(ProfileContainer);
-
-// export default connect(mapStateToProps, {getProfileThunk})(withRouter(AuthRedirectComponent));
 
 export default compose(
     connect(mapStateToProps, {getProfileThunk, getStatusThunk, updateStatusThunk}),
     withRouter,
+    // withNavigate
     // withAuthRedirect
 )(ProfileContainer);
 
