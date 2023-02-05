@@ -11,6 +11,9 @@ class ProfileContainer extends React.Component {
         let profileId = this.props.router.params.userId;
         if (!profileId) {
             profileId = this.props.authorizedProfileId;
+            if (!profileId) {
+                this.props.history.push('/login');
+            }
             // profileId = 25141 // мой id
             // profileId = 2  //  Димыча
         }
@@ -21,10 +24,10 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        // debugger;
-        // console.log(this.props.updateStatus)
-
-        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusThunk}/>;
+        return (
+            <Profile {...this.props} profile={this.props.profile}
+                        status={this.props.status} updateStatus={this.props.updateStatusThunk}/>
+        )
         // return <Profile {...this.props} profile={this.props.profile} />; // если статус через ProfileStatusContainer
     }
 }

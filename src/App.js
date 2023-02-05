@@ -11,31 +11,40 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import { connect } from 'react-redux';
-import { getProfileThunk } from './redux/profileReducer';
-import { getAuthMeThunk } from './redux/authReducer';
 import { compose } from 'redux';
+import { initializedAppThunk } from './redux/appReducer';
+import Spinner from './components/common/Spinner/Spinner';
 
 class App extends React.Component {
     componentDidMount() {
-        // let profileId = this.props.router.params.userId;
-        // if (!profileId) {
-        //     profileId = this.props.authorizedProfileId;
-        //     // profileId = 25141 // мой id
-        //     // profileId = 2  //  Димыча
-        // }
-
-        this.props.getAuthMeThunk();
+        this.props.initializedAppThunk();
         // this.props.getAuthMeThunk(profileId);
         // this.props.getProfileThunk(profileId);
     }
     render() {
+        if (!this.props.initialized) {
+            return <Spinner/>
+        }
+
         return (
             <div className="app-wrapper">
+                {/*<HeaderContainer/>*/}
                 <Routes>
                     <Route path='/*' element={<HeaderContainer/>}/>
                 </Routes>
                 <Navbar/>
                 <div className="app-wrapper-content">
+                    {/*<Routes>*/}
+                    {/*    <Route path='/profile/*' element={<ProfileContainer/>}/>*/}
+                    {/*    <Route path='/profile/:userId' element={<ProfileContainer/>}/>*/}
+                    {/*    <Route path="/dialogs/*" element={<DialogsContainer/>}/>*/}
+                    {/*    <Route path="/dialogs" element={<DialogsContainer/>}/>*/}
+                    {/*    <Route path="/users" element={<UsersContainer/>}/>*/}
+                    {/*    <Route path="/news" element={<News/>}/>*/}
+                    {/*    <Route path="/music" element={<Music/>}/>*/}
+                    {/*    <Route path="/settings" element={<Settings/>}/>*/}
+                    {/*    <Route path="/login" element={<LoginPage/>}/>*/}
+                    {/*</Routes>*/}
                     <Routes>
                         <Route path='/profile/*' element={<ProfileContainer/>}/>
                         <Route path='/profile/:userId' element={<ProfileContainer/>}/>
@@ -53,8 +62,9 @@ class App extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    authorizedProfileId: state.auth.id,
-    isAuth: state.auth.isAuth
+    initialized: state.app.initialized
+    // authorizedProfileId: state.auth.id,
+    // isAuth: state.auth.isAuth
 })
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
@@ -73,4 +83,5 @@ function withRouter(Component) {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {getProfileThunk, getAuthMeThunk}))(App);
+    connect(mapStateToProps, {initializedAppThunk}))(App);
+    // connect(mapStateToProps, {getProfileThunk, getAuthMeThunk}))(App);
