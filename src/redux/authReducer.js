@@ -8,9 +8,9 @@ let initialState = {
     id: null,
     email: null,
     login: null,
-    password: null,
+    // password: null,
     isAuth: false,
-    avatar: null
+    // avatar: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -30,8 +30,8 @@ export const setAuthUserData = (id, email, login, isAuth) => ({type: SET_USER_DA
 
 
 // ThunkCreator
-export const getAuthMeThunk = () => (dispatch) => {
-    authAPI.getAuthMe().then(data => {
+export const getAuthUserDataThunk = () => (dispatch) => {
+    return authAPI.getAuthMe().then(data => {
         if (data.resultCode === 0) {
             let {id, email, login} = data.data;
             dispatch(setAuthUserData(id, email, login, true));
@@ -42,7 +42,7 @@ export const getAuthMeThunk = () => (dispatch) => {
 export const getAuthLoginThunk = (email, password, rememberMe) => (dispatch) => {
     authAPI.postAuthLogin(email, password, rememberMe).then(data => {
         if (data.resultCode === 0) {
-            dispatch(getAuthMeThunk());
+            dispatch(getAuthUserDataThunk());
         } else {
             let messages = data.messages.length > 0 ? data.messages[0] : 'Some Error';
             dispatch(stopSubmit('login', {_error: messages}));

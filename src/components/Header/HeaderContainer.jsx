@@ -1,23 +1,10 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {getProfileThunk} from "../../redux/profileReducer";
-import {getAuthLogoutThunk, getAuthMeThunk} from "../../redux/authReducer";
+import {getAuthLogoutThunk} from "../../redux/authReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 class HeaderContainer extends React.Component {
-    componentDidMount() {
-        let profileId = this.props.router.params.userId;
-        if (!profileId) {
-            profileId = 25141 // мой id
-            // profileId = 2  //  Димыча
-        }
-
-        // обращаемся к Thunk
-        this.props.getAuthMeThunk();
-        this.props.getProfileThunk(profileId);
-    }
-
     render() {
         // debugger
         // console.log(this.props)
@@ -50,4 +37,4 @@ function withRouter(Component) {
 }
 
 
-export default connect(mapStateToProps, {getProfileThunk, getAuthMeThunk, getAuthLogoutThunk})(withRouter(HeaderContainer));
+export default connect(mapStateToProps, {getAuthLogoutThunk})(withRouter(HeaderContainer));
