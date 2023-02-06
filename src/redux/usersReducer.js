@@ -87,6 +87,7 @@ export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_FO
 export const getUsersThunk = (currentPage, pageSize) => {
     return dispatch => {
         dispatch(toggleIsFetching(true)); // spinner = true
+        dispatch(setCurrentPage(currentPage)); // меняется активная кнопка при переключении пагинации
 
         // получаем юзеров с сервера
         usersAPI.getUsers(currentPage, pageSize).then(data => {
@@ -94,7 +95,6 @@ export const getUsersThunk = (currentPage, pageSize) => {
             dispatch(toggleIsFetching(false)); // spinner = false
             dispatch(setUsers(data.items));
             dispatch(setTotalCount(data.totalCount));
-            dispatch(setCurrentPage(currentPage)); // меняется активная кнопка при переключении пагинации
         });
     }
 }

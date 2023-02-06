@@ -7,8 +7,15 @@ import {
     unfollowThunk,
     getUsersThunk
 } from "../../redux/usersReducer";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalCount,
+    getUsers
+} from '../../redux/usersSelectors';
 
 
 // классовая компонента делающая гет запросы и передающая параметры чистой функции Users
@@ -43,14 +50,25 @@ class UsersContainer extends React.Component {
 }
 
 // функция принимающая весь state приложения
+// let mapStateToProps = (state) => {
+//     return {             // возвращает объект с данными которые нам нужны
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalCount: state.usersPage.totalCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     }
+// }
+
 let mapStateToProps = (state) => {
-    return {             // возвращает объект с данными которые нам нужны
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+    return {
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
