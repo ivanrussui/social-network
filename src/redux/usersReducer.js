@@ -16,11 +16,13 @@ let initialState = {
     // currentPage: 4120,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    fake: 0
 };
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "FAKE": return {...state, fake: state.fake + 1}
         case FOLLOW:   // подписаться
             return {
                 ...state,   // поверхностное копирование
