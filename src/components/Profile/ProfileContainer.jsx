@@ -63,6 +63,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+        // console.log('Render Profile');
         if (!this.props.isAuth && !this.props.router.params.userId) {
             return <Navigate to={'/login'} />
         }
@@ -73,12 +74,22 @@ class ProfileContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
+// let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
+//     profile: state.profilePage.profile,
+//     status: state.profilePage.status,  // не нужно если статус через ProfileStatusContainer
+//     authorizedProfileId: state.auth.id,
+//     isAuth: state.auth.isAuth
+// })
+
+let mapStateToProps = (state) => {
+    // console.log('mapStateToProps Profile');
+    return ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status,  // не нужно если статус через ProfileStatusContainer
+    status: state.profilePage.status,
     authorizedProfileId: state.auth.id,
     isAuth: state.auth.isAuth
-})
+    })
+}
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
 function withRouter(Component) {
