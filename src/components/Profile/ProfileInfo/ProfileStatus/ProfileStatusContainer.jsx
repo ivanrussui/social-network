@@ -1,5 +1,5 @@
 import React from "react";
-import {changeStatusText, getStatusThunk, updateStatusThunk} from "../../../redux/profileReducer";
+import {changeStatusText, getStatusThunk, updateStatusThunk} from "../../../../redux/profileReducer";
 import {connect} from "react-redux";
 import ProfileStatus from "./ProfileStatus";
 import {compose} from "redux";
