@@ -2,8 +2,9 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Spinner from "../../common/Spinner/Spinner";
 import plug from '../../../assets/img/plug.png';
-import ProfileStatus from '../ProfileStatus/ProfileStatus';
-import ProfileStatusContainer from "../ProfileStatus/ProfileStatusContainer";
+import ProfileStatus from './ProfileStatus/ProfileStatus';
+import ProfileStatusContainer from "./ProfileStatus/ProfileStatusContainer";
+import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWihtHooks";
 // import mainBg from '../../../assets/img/main-bg.jpg';
 
 const ProfileInfo = (props) => {
@@ -16,12 +17,6 @@ const ProfileInfo = (props) => {
 
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img className={s.image}*/}
-            {/*         src={mainBg}*/}
-            {/*         alt={"img"}*/}
-            {/*    />*/}
-            {/*</div>*/}
             <div className={s.descriptionBlock}>
                 {photos ?
                     <img src={photos} alt="avatar"/> :
@@ -56,7 +51,8 @@ const ProfileInfo = (props) => {
 
             </div>
 
-            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+            {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
             {/*<ProfileStatusContainer/>  /!*если статус через ProfileStatusContainer*!/*/}
 
         </div>
