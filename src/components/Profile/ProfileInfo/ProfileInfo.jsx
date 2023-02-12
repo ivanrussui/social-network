@@ -2,16 +2,12 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Spinner from "../../common/Spinner/Spinner";
 import plug from '../../../assets/img/plug.png';
-import ProfileStatus from './ProfileStatus/ProfileStatus';
-import ProfileStatusContainer from "./ProfileStatus/ProfileStatusContainer";
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWihtHooks";
-// import mainBg from '../../../assets/img/main-bg.jpg';
 
 const ProfileInfo = (props) => {
     if (!props.profile) { // если в props profile нет или null или undefined
         return <Spinner/> // отображаем спиннер
     }
-
     const photos = props.profile.photos.large;
     const contacts = props.profile.contacts;
 
