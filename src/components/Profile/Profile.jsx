@@ -3,7 +3,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 const Profile = (props) => {
-    // console.log(props)
+    // console.log('profile')
     return (
         <>
             <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
