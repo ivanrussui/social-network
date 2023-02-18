@@ -15,7 +15,6 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidMount() {
-        // let profileId = this.props.router.params.userId;
         let profileId = this.props.router.params.userId;
         let authorisedProfileId = this.props.authorizedProfileId;
         // debugger
@@ -36,10 +35,6 @@ class ProfileContainer extends React.Component {
                 this.props.getStatusThunk( authorisedProfileId );
             }
         }
-        // // обращаемся к Thunk
-        // this.props.getProfileThunk(profileId);
-        // this.props.getStatusThunk(profileId); // не нужно если статус через ProfileStatusContainer
-
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -63,6 +58,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+
         // console.log('Render Profile');
         if (!this.props.isAuth && !this.props.router.params.userId) {
             return <Navigate to={'/login'} />
@@ -73,13 +69,6 @@ class ProfileContainer extends React.Component {
         )
     }
 }
-
-// let mapStateToProps = (state) => ({ // когда функ возвр объект мы должны ставить обычные скобки ( ) а потом фигурные { }
-//     profile: state.profilePage.profile,
-//     status: state.profilePage.status,  // не нужно если статус через ProfileStatusContainer
-//     authorizedProfileId: state.auth.id,
-//     isAuth: state.auth.isAuth
-// })
 
 let mapStateToProps = (state) => {
     // console.log('mapStateToProps Profile');
