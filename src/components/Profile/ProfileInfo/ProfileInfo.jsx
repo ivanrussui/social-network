@@ -49,8 +49,6 @@ const ProfileInfo = (props) => {
 
             <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
-            {/*<ProfileStatusContainer/>  /!*если статус через ProfileStatusContainer*!/*/}
-
         </div>
     );
 };
