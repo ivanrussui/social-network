@@ -2,9 +2,9 @@ import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import logo from "../../logo.svg";
-import plug from "../../assets/img/plug.png";
+// import plug from "../../assets/img/plug.png";
 // import spider from '../../assets/img/spider-man.webp'
-import Spinner from "../common/Spinner/Spinner";
+// import Spinner from "../common/Spinner/Spinner";
 
 const Header = (props) => {
     // console.log(props)
@@ -19,11 +19,9 @@ const Header = (props) => {
                 src={logo}
                 alt={"logo"}
             />
-
-
             <div className={s.loginBlock}>
-                {props.isAuth ?
-                    <div>{props.getAuthLogoutThunk} <button onClick={props.getAuthLogoutThunk}>Logout</button></div>
+                {props.isAuth
+                    ? <div><button onClick={props.getAuthLogoutThunk}>Logout</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>

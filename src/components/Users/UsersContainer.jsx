@@ -33,7 +33,7 @@ class UsersContainer extends React.Component {
 
     render() {
         // console.log(this.props)
-        console.log('Render Users');
+        // console.log('Render Users');
         return <>
             {this.props.isFetching ?
                 <Spinner/> :
@@ -63,7 +63,7 @@ class UsersContainer extends React.Component {
 // }
 
 let mapStateToProps = (state) => {
-    console.log('mapStateToProps Users');
+    // console.log('mapStateToProps Users');
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
