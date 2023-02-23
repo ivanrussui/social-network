@@ -1,4 +1,9 @@
-import dialogsReducer, { cancelMessageCreator, sendMessageCreator } from './dialogsReducer';
+import dialogsReducer, {
+    addDialogCreator,
+    cancelMessageCreator,
+    deleteDialogCreator,
+    sendMessageCreator
+} from './dialogsReducer';
 
 let state = {
     dialogs: [
@@ -11,6 +16,7 @@ let state = {
     ]
 };
 
+// tests for messages
 test('length of messages should be incremented', () => {
     let action = sendMessageCreator('programmer');
     let newState = dialogsReducer(state, action);
@@ -39,4 +45,35 @@ test('after deleting length of messages shouldn\'t be decremented if id is incor
     let action = cancelMessageCreator(50);
     let newState = dialogsReducer(state, action);
     expect(newState.messages.length).toBe(5);
+});
+
+// tests for dialogs
+test('length of dialogs should be incremented', () => {
+    let action = addDialogCreator('frontend dev');
+    let newState = dialogsReducer(state, action);
+    expect(newState.dialogs.length).toBe(7);
+});
+
+test('text of new name should be correct', () => {
+    let action = addDialogCreator('frontend dev');
+    let newState = dialogsReducer(state, action);
+    expect(newState.dialogs[6].name).toBe('frontend dev');
+});
+
+test('id of new name should be correct', () => {
+    let action = addDialogCreator('frontend dev');
+    let newState = dialogsReducer(state, action);
+    expect(newState.dialogs[6].id).toBe(7);
+});
+
+test('after deleting length of dialogs should be decremented', () => {
+    let action = deleteDialogCreator(1);
+    let newState = dialogsReducer(state, action);
+    expect(newState.dialogs.length).toBe(5);
+});
+
+test('after deleting length of dialogs shouldn\'t be decremented if id is incorrect', () => {
+    let action = deleteDialogCreator(77);
+    let newState = dialogsReducer(state, action);
+    expect(newState.dialogs.length).toBe(6);
 });

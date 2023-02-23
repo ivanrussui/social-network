@@ -1,6 +1,8 @@
 // обернули в переменные action.type из actionCreator
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const CANCEL_MESSAGE = 'CANCEL-MESSAGE';
+const ADD_DIALOG = 'ADD-DIALOG';
+const DELETE_DIALOG = 'DELETE-DIALOG';
 
 let initialState = {
     dialogs: [
@@ -15,17 +17,31 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SEND_MESSAGE:  // добавление постов-сообщений Messages
+        case SEND_MESSAGE:  { // добавление постов-сообщений Messages
             let body = action.newMessageBody;
             return {
                 ...state,           // поверхностное копирование
                 messages: [...state.messages, {id: 6, message: body}]  // глубокое копирование, {вместо push сразу пишем}
             };
+        }
         case CANCEL_MESSAGE: {
             return {
                 ...state,
                 messages: state.messages.filter(m => m.id !== action.id)
             };
+        }
+        case  ADD_DIALOG: {
+            let body = action.newNameBody;
+            return {
+                ...state,
+                dialogs: [...state.dialogs, {id: 7, name: body}]
+            }
+        }
+        case DELETE_DIALOG: {
+            return {
+                ...state,
+                dialogs: state.dialogs.filter(d => d.id !== action.id)
+            }
         }
         default:
             return state;
@@ -35,5 +51,7 @@ const dialogsReducer = (state = initialState, action) => {
 // наши actionCreator
 export const sendMessageCreator = (newMessageBody) => ({type: SEND_MESSAGE, newMessageBody});
 export const cancelMessageCreator = (id) => ({type: CANCEL_MESSAGE, id});
+export const addDialogCreator = (newNameBody) => ({type: ADD_DIALOG, newNameBody});
+export const deleteDialogCreator = (id) => ({type: DELETE_DIALOG, id});
 
 export default dialogsReducer;
