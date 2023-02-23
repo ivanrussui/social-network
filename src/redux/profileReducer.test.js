@@ -18,7 +18,7 @@ test('length of posts should be incremented', () => {
     expect(newState.posts.length).toBe(3);
 });
 
-test('message of new post should be correct', () => {
+test('text of new post should be correct', () => {
     // 1. test data
     let action = addPostActionCreator('ivanrussui');
 
