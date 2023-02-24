@@ -1,15 +1,23 @@
+import { Field } from 'redux-form';
 import styles from './FormsControls.module.css';
 
-export const FormControl = ({input, meta, typeField, ...props}) => {
-    const showError = meta.touched && meta.error;
+export const FormControl = ({input, meta: {touched, error}, typeField, ...props}) => {
+    const showError = touched && error;
     return (
         <div className={styles.formControl + ' ' + (showError && styles.error)}>
             {typeField === 'textarea' && <textarea {...input} {...props} />}
             {typeField === 'input' && <input {...input} {...props} />}
-            {showError && <span>{meta.error}</span>}
+            {showError && <span>{error}</span>}
         </div>
     )
 }
+
+export const createField = (placeholder, name, component, typeField, validators = [], props = {}, text = '') => (
+    <div style={{display: 'flex'}}>
+        <Field placeholder={placeholder} name={name} component={component} typeField={typeField}
+               validate={validators} {...props}/>{text}
+    </div>
+)
 
 // export const Textarea = ({input, meta, ...props}) => {
 //     const showError = meta.touched && meta.error;

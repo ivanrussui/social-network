@@ -1,6 +1,8 @@
 import React from 'react';
-import './App.css';
 import { Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { initializedAppThunk } from './redux/appReducer';
 import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Music from './components/Music/Music';
@@ -10,10 +12,8 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { initializedAppThunk } from './redux/appReducer';
 import Spinner from './components/common/Spinner/Spinner';
+import './App.css';
 
 class App extends React.Component {
     componentDidMount() {
@@ -21,6 +21,7 @@ class App extends React.Component {
         // this.props.getAuthMeThunk(profileId);
         // this.props.getProfileThunk(profileId);
     }
+
     render() {
         if (!this.props.initialized) {
             return <Spinner/>
@@ -72,4 +73,5 @@ function withRouter(Component) {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initializedAppThunk}))(App);
+    connect(mapStateToProps, {initializedAppThunk})
+)(App);

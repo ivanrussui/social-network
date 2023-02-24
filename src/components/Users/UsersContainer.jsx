@@ -22,18 +22,18 @@ import {
 class UsersContainer extends React.Component {
     componentDidMount() {
         // обращаемся к Thunk
-        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
+        const {currentPage, pageSize} = this.props;
+        this.props.getUsersThunk(currentPage, pageSize);
     }
 
     // изменение (переключение) страницы
     onPageChanged = (pageNumber) => {
         // обращаемся к Thunk
-        this.props.getUsersThunk(pageNumber, this.props.pageSize);
+        const {pageSize} = this.props;
+        this.props.getUsersThunk(pageNumber, pageSize);
     }
 
     render() {
-        // console.log(this.props)
-        // console.log('Render Users');
         return <>
             {this.props.isFetching ?
                 <Spinner/> :
@@ -50,20 +50,7 @@ class UsersContainer extends React.Component {
     }
 }
 
-// функция принимающая весь state приложения
-// let mapStateToProps = (state) => {
-//     return {             // возвращает объект с данными которые нам нужны
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalCount: state.usersPage.totalCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
-
 let mapStateToProps = (state) => {
-    // console.log('mapStateToProps Users');
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),

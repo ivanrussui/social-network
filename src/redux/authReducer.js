@@ -1,7 +1,7 @@
-import {authAPI} from "../api/api";
+import { authAPI } from "../api/api";
 import { stopSubmit } from 'redux-form';
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'social-network/auth/SET_USER_DATA';
 // const SET_USER_LOGIN = 'SET_USER_LOGIN';
 
 let initialState = {
@@ -26,37 +26,37 @@ const authReducer = (state = initialState, action) => {
 }
 
 // наши actionCreator
-export const setAuthUserData = (id, email, login, isAuth) => ({type: SET_USER_DATA, payload: {id, email, login, isAuth}});
+export const setAuthUserData = (id, email, login, isAuth) => ({
+    type: SET_USER_DATA,
+    payload: {id, email, login, isAuth}
+});
 
 
 // ThunkCreator
-export const getAuthUserDataThunk = () => (dispatch) => {
-    return authAPI.getAuthMe().then(data => {
-        if (data.resultCode === 0) {
-            let {id, email, login} = data.data;
-            dispatch(setAuthUserData(id, email, login, true));
-        }
-    });
-}
+export const getAuthUserDataThunk = () => async (dispatch) => {
+    const data = await authAPI.getAuthMe();
+    if (data.resultCode === 0) {
+        let {id, email, login} = data.data;
+        dispatch(setAuthUserData(id, email, login, true));
+    }
+};
 
-export const getAuthLoginThunk = (email, password, rememberMe) => (dispatch) => {
-    authAPI.postAuthLogin(email, password, rememberMe).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(getAuthUserDataThunk());
-        } else {
-            let messages = data.messages.length > 0 ? data.messages[0] : 'Some Error';
-            dispatch(stopSubmit('login', {_error: messages}));
-        }
-    })
-}
+export const getAuthLoginThunk = (email, password, rememberMe) => async (dispatch) => {
+    const data = await authAPI.postAuthLogin(email, password, rememberMe);
+    if (data.resultCode === 0) {
+        dispatch(getAuthUserDataThunk());
+    } else {
+        let messages = data.messages.length > 0 ? data.messages[0] : 'Some Error';
+        dispatch(stopSubmit('login', {_error: messages}));
+    }
+};
 
-export const getAuthLogoutThunk = () => (dispatch) => {
-    authAPI.deleteAuthLogout().then(data => {
-        if (data.resultCode === 0) {
-            dispatch(setAuthUserData(null, null, null, false));
-        }
-    })
-}
+export const getAuthLogoutThunk = () => async (dispatch) => {
+    const data = await authAPI.deleteAuthLogout();
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false));
+    }
+};
 
 
 export default authReducer;

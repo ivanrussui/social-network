@@ -1,13 +1,11 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { getAuthLogoutThunk } from "../../redux/authReducer";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Header from "./Header";
-import {connect} from "react-redux";
-import {getAuthLogoutThunk} from "../../redux/authReducer";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 class HeaderContainer extends React.Component {
     render() {
-        // debugger
-        // console.log(this.props)
         return <Header {...this.props} />
         // return <Header {...this.props} profile={this.props.profile}/>
     }

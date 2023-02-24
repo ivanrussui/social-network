@@ -1,6 +1,6 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import s from './Header.module.css';
-import {NavLink} from "react-router-dom";
 import logo from "../../logo.svg";
 // import plug from "../../assets/img/plug.png";
 // import spider from '../../assets/img/spider-man.webp'
@@ -21,7 +21,9 @@ const Header = (props) => {
             />
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ? <div><button onClick={props.getAuthLogoutThunk}>Logout</button></div>
+                    ? <div>
+                        <button onClick={props.getAuthLogoutThunk}>Logout</button>
+                    </div>
                     : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
