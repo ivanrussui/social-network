@@ -1,4 +1,5 @@
 import { usersAPI } from "../api/api";
+import { updateObjectInArray } from '../utils/objectHelpers';
 
 // обернули в переменные action.type из actionCreator
 const FOLLOW = 'FOLLOW';
@@ -24,22 +25,12 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW:   // подписаться
             return {
                 ...state,   // поверхностное копирование
-                users: state.users.map(u => {   // делаем копию users, map возвращает новый массив
-                    if (u.id === action.userId) {    // если id совпадает, то
-                        return {...u, followed: true}  // возвращаем копию
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users, action.userId, ['id'], {followed: true})
             };
         case UNFOLLOW:  // отписаться
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users, action.userId, ['id'], {followed: false})
             };
         case SET_USERS: // получить юзеров
             return {
