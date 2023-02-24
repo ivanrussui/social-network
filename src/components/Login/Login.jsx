@@ -1,8 +1,8 @@
-import {Field, reduxForm} from "redux-form";
-import {Navigate} from "react-router-dom";
-import {connect} from "react-redux";
-import {getAuthLoginThunk} from "../../redux/authReducer";
-import { FormControl } from '../common/FormsControls/FormsControls';
+import { reduxForm } from "redux-form";
+import { Navigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { getAuthLoginThunk } from "../../redux/authReducer";
+import { createField, FormControl } from '../common/FormsControls/FormsControls';
 import { minLengthCreator, required } from '../../utils/validators/validators';
 
 import styles from '../common/FormsControls/FormsControls.module.css'
@@ -11,24 +11,13 @@ const minLength2 = minLengthCreator(2);
 const minLength8 = minLengthCreator(8);
 
 
-const LoginForm = ({error, ...props}) => {
-// debugger
-//     console.log(props)
-//     const showError = anyTouched && error;
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'Email'} name={'email'} component={FormControl} typeField={'input'}
-                       validate={[required, minLength2]}/>
-            </div>
-            <div>
-                <Field placeholder={'Password'} name={'password'} component={FormControl} typeField={'input'}
-                       validate={[required, minLength8]}/>
-            </div>
-            <div style={{display: 'flex'}}>
-                <Field type={'checkbox'} name={'rememberMe'} component={FormControl} typeField={'input'}/>remember me
-            </div>
-            { error && <span className={styles.formSummaryError}>{error}</span> }
+        <form onSubmit={handleSubmit}>
+            {createField('Email', 'email', FormControl, 'input', [required, minLength2])}
+            {createField('Password', 'password', FormControl, 'input', [required, minLength8], {type: 'password'})}
+            {createField(null, 'rememberMe', FormControl, 'input', [], {type: 'checkbox'}, 'remember me')}
+            {error && <span className={styles.formSummaryError}>{error}</span>}
             <div>
                 <button>Login</button>
             </div>
@@ -45,11 +34,11 @@ const Login = (props) => {
         props.getAuthLoginThunk(formData.email, formData.password, formData.rememberMe);
     }
     if (props.isAuth) {
-        return <Navigate to={'/profile'} />
+        return <Navigate to={'/profile'}/>
     }
     return (
         <>
-            <h1 style={{ color: 'indigo' }}>LOGIN</h1>
+            <h1 style={{color: 'indigo'}}>LOGIN</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </>
     )
@@ -59,4 +48,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect (mapStateToProps, {getAuthLoginThunk})(Login);
+export default connect(mapStateToProps, {getAuthLoginThunk})(Login);
