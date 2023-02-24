@@ -1,4 +1,4 @@
-import {usersAPI} from "../api/api";
+import { usersAPI } from "../api/api";
 
 // обернули в переменные action.type из actionCreator
 const FOLLOW = 'FOLLOW';
@@ -13,7 +13,6 @@ let initialState = {
     users: [],
     pageSize: 5,
     totalCount: 0,
-    // currentPage: 4120,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],
@@ -22,7 +21,6 @@ let initialState = {
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "FAKE": return {...state, fake: state.fake + 1}
         case FOLLOW:   // подписаться
             return {
                 ...state,   // поверхностное копирование
@@ -87,46 +85,40 @@ export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_FO
 
 // ThunkCreator
 export const getUsersThunk = (currentPage, pageSize) => {
-    return dispatch => {
+    return async dispatch => {
         dispatch(toggleIsFetching(true)); // spinner = true
         dispatch(setCurrentPage(currentPage)); // меняется активная кнопка при переключении пагинации
 
         // получаем юзеров с сервера
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            // debugger
-            dispatch(toggleIsFetching(false)); // spinner = false
-            dispatch(setUsers(data.items));
-            dispatch(setTotalCount(data.totalCount));
-        });
+        const data = await usersAPI.getUsers(currentPage, pageSize);
+        dispatch(toggleIsFetching(false)); // spinner = false
+        dispatch(setUsers(data.items));
+        dispatch(setTotalCount(data.totalCount));
     }
-}
+};
 
-// ThunkCreator
+// общий мето для подписки/отписки
+const followUnfollowFlow = async (userId, dispatch, apiMethod, actionCreator) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    const data = await apiMethod(userId);
+    if (data.resultCode === 0) {
+        dispatch(actionCreator(userId));
+    }
+    dispatch(toggleFollowingProgress(false, userId));
+};
+
+// ThunkCreator подписываемся на юзера
 export const followThunk = (userId) => {
-    return dispatch => {
-        dispatch(toggleFollowingProgress(true, userId));
-        // подписываемся на юзера
-        usersAPI.postUser(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(followSuccess(userId));
-            }
-            dispatch(toggleFollowingProgress(false, userId));
-        });
+    return async dispatch => {
+        await followUnfollowFlow(userId, dispatch, usersAPI.postUser.bind(usersAPI), followSuccess);
     }
-}
+};
 
-// ThunkCreator
+// ThunkCreator отписываемся от юзера
 export const unfollowThunk = (userId) => {
-    return dispatch => {
-        dispatch(toggleFollowingProgress(true, userId));
-        // отписываемся от юзера
-        usersAPI.deleteUser(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unfollowSuccess(userId));
-            }
-            dispatch(toggleFollowingProgress(false, userId));
-        });
+    return async dispatch => {
+        await followUnfollowFlow(userId, dispatch, usersAPI.deleteUser.bind(usersAPI), unfollowSuccess);
     }
-}
+};
 
 export default usersReducer;

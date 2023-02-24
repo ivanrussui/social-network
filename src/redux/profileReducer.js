@@ -1,4 +1,4 @@
-import {profileAPI} from "../api/api";
+import { profileAPI } from "../api/api";
 
 // обернули в переменные action.type из actionCreator
 const ADD_POST = 'ADD-POST';
@@ -79,26 +79,21 @@ export const deletePostActionCreator = (id) => ({type: DELETE_POST, id});
 
 
 // ThunkCreator
-export const getProfileThunk = (profileId) => dispatch => {
-    profileAPI.getProfile(profileId).then(data => {
-        dispatch(setUserProfile(data));
-    });
-}
+export const getProfileThunk = (profileId) => async dispatch => {
+    const data = await profileAPI.getProfile(profileId);
+    dispatch(setUserProfile(data));
+};
 
-export const getStatusThunk = (profileId) => dispatch => {
-    profileAPI.getStatus(profileId).then(data => {
-        // debugger
-        dispatch(setStatus(data));
-    });
-}
+export const getStatusThunk = (profileId) => async dispatch => {
+    const data = await profileAPI.getStatus(profileId);
+    dispatch(setStatus(data));
+};
 
-export const updateStatusThunk = (status) => dispatch => {
-    profileAPI.updateStatus(status).then(data => {
-        // debugger
-        if (data.resultCode === 0) {
-            dispatch(setStatus(status));
-        }
-    });
-}
+export const updateStatusThunk = (status) => async dispatch => {
+    const data = await profileAPI.updateStatus(status);
+    if (data.resultCode === 0) {
+        dispatch(setStatus(status));
+    }
+};
 
 export default profileReducer;
