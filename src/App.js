@@ -1,6 +1,6 @@
 import React from 'react';
-import { Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Routes, Route, useLocation, useNavigate, useParams, BrowserRouter } from 'react-router-dom';
+import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { initializedAppThunk } from './redux/appReducer';
 import Navbar from './components/Navbar/Navbar';
@@ -14,6 +14,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Spinner from './components/common/Spinner/Spinner';
 import './App.css';
+import store from './redux/reduxStore';
 
 class App extends React.Component {
     componentDidMount() {
@@ -71,7 +72,19 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-export default compose(
+const AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializedAppThunk})
 )(App);
+
+const SamuraiJSApp = (props) =>  {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    )
+};
+
+export default SamuraiJSApp;
