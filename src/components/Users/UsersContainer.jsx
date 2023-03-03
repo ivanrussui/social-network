@@ -35,8 +35,7 @@ class UsersContainer extends React.Component {
 
     render() {
         return <>
-            {this.props.isFetching ?
-                <Spinner/> :
+            {this.props.isFetching ? <Spinner/> : null}
                 <Users totalCount={this.props.totalCount}
                        pageSize={this.props.pageSize}
                        currentPage={this.props.currentPage}
@@ -45,7 +44,7 @@ class UsersContainer extends React.Component {
                        unfollow={this.props.unfollowThunk}
                        onPageChanged={this.onPageChanged}
                        followingInProgress={this.props.followingInProgress}
-                />}
+                />
         </>
     }
 }
