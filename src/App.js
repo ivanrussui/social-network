@@ -1,26 +1,25 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation, useNavigate, useParams, BrowserRouter } from 'react-router-dom';
 import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { initializedAppThunk } from './redux/appReducer';
-import Navbar from './components/Navbar/Navbar';
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
-import LoginPage from "./components/Login/Login";
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
 import Spinner from './components/common/Spinner/Spinner';
-import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import HeaderContainer from "./components/Header/HeaderContainer";
 import store from './redux/reduxStore';
+import './App.css';
+
+const ProfileContainer = lazy(() => import('./components/Profile/ProfileContainer'));
+const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
+const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
+const News = lazy(() => import('./components/News/News'));
+const Music = lazy(() => import('./components/Music/Music'));
+const Settings = lazy(() => import('./components/Settings/Settings'));
+const LoginPage = lazy(() => import('./components/Login/Login'));
 
 class App extends React.Component {
     componentDidMount() {
         this.props.initializedAppThunk();
-        // this.props.getAuthMeThunk(profileId);
-        // this.props.getProfileThunk(profileId);
     }
 
     render() {
@@ -31,21 +30,20 @@ class App extends React.Component {
         return (
             <div className="app-wrapper">
                 <HeaderContainer/>
-                {/*<Routes>*/}
-                {/*    <Route path='/*' element={<HeaderContainer/>}/>*/}
-                {/*</Routes>*/}
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Routes>
-                        <Route path='/profile/*' element={<ProfileContainer/>}/>
-                        <Route path='/profile/:userId' element={<ProfileContainer/>}/>
-                        <Route path="/dialogs/*" element={<DialogsContainer/>}/>
-                        <Route path="/users" element={<UsersContainer/>}/>
-                        <Route path="/news" element={<News/>}/>
-                        <Route path="/music" element={<Music/>}/>
-                        <Route path="/settings" element={<Settings/>}/>
-                        <Route path="/login" element={<LoginPage/>}/>
-                    </Routes>
+                    <Suspense fallback={<Spinner/>}>
+                        <Routes>
+                            <Route path='/profile/:userId' element={<ProfileContainer/>}/>
+                            <Route path='/profile' element={<ProfileContainer/>}/>
+                            <Route path="/dialogs" element={<DialogsContainer/>}/>
+                            <Route path="/users" element={<UsersContainer/>}/>
+                            <Route path="/news" element={<News/>}/>
+                            <Route path="/music" element={<Music/>}/>
+                            <Route path="/settings" element={<Settings/>}/>
+                            <Route path="/login" element={<LoginPage/>}/>
+                        </Routes>
+                    </Suspense>
                 </div>
             </div>
         );
@@ -77,7 +75,7 @@ const AppContainer = compose(
     connect(mapStateToProps, {initializedAppThunk})
 )(App);
 
-const SamuraiJSApp = (props) =>  {
+const SamuraiJSApp = () => {
     return (
         <BrowserRouter>
             <Provider store={store}>
