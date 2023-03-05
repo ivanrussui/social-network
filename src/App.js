@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Routes, Route, useLocation, useNavigate, useParams, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, useParams, BrowserRouter, HashRouter } from 'react-router-dom';
 import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { initializedAppThunk } from './redux/appReducer';
@@ -77,11 +77,11 @@ const AppContainer = compose(
 
 const SamuraiJSApp = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 };
 
