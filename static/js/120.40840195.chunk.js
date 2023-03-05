@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_1=self.webpackChunkreact_1||[]).push([[120],{1120:function(e,c,n){n.r(c);var r=n(7781),t=n(184);c.default=(0,r.qC)()((function(){return(0,t.jsx)("h1",{style:{color:"indigo"},children:"News"})}))}}]);
+//# sourceMappingURL=120.40840195.chunk.js.map
