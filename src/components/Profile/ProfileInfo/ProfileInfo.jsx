@@ -14,10 +14,13 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
     return (
         <div>
             <div className={s.descriptionBlock}>
-                {photos ?
-                    <img src={photos} alt="avatar"/> :
-                    <img src={plug} alt="Заглушка"/>
-                }
+                {/* мое решение */}
+                {/*{photos ?*/}
+                {/*    <img src={photos} alt="avatar"/> :*/}
+                {/*    <img src={plug} alt="Заглушка"/>*/}
+                {/*}*/}
+                {/* решение похожее на Димыча */}
+                <img src={photos || plug} alt={'avatar' || 'Заглушка'}/>
                 <div className={s.descriptionText}>
                     <div><b>О себе:</b> {profile.aboutMe}</div>
                     {contacts.facebook || contacts.vk || contacts.instagram || contacts.github ?

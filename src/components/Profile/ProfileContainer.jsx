@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component {
             isShowMyProfile: true
         }
     }
-
+    // по сути у тебя в 80 уроке реализация отличается, но ради практики напиши как у Димыча
     componentDidMount() {
         let profileId = this.props.router.params.userId;
         let authorisedProfileId = this.props.authorizedProfileId;
