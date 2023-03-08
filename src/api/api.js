@@ -7,7 +7,7 @@ const instance = axios.create({
     headers: {
         'API-KEY': 'fb5f73c1-add2-43ae-b773-e360c640feb1'
     }
-})
+});
 
 // делаем объект для users и в нем уже будут методы с запросами
 export const usersAPI = {
@@ -23,7 +23,7 @@ export const usersAPI = {
         return instance.post(`follow/${profileId}`)
             .then(response => response.data);
     }
-}
+};
 
 export const profileAPI = {
     getProfile(profileId) {
@@ -38,8 +38,18 @@ export const profileAPI = {
     updateStatus(status) {
         return instance.put(`profile/status`, { status: status })
             .then(response => response.data);
-    }
-}
+    },
+    savePhoto(file) {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+     }
+};
 
 export const authAPI = {
     getAuthMe() {

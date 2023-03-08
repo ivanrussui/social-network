@@ -4,20 +4,29 @@ import Spinner from "../../common/Spinner/Spinner";
 import plug from '../../../assets/img/plug.png';
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWihtHooks";
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
     if (!profile) { // если в props profile нет или null или undefined
         return <Spinner/> // отображаем спиннер
     }
     const photos = profile.photos.large;
     const contacts = profile.contacts;
 
+    const onMainPhotoSelected = (e) => {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
+    };
+
     return (
         <div>
             <div className={s.descriptionBlock}>
-                {photos ?
-                    <img src={photos} alt="avatar"/> :
-                    <img src={plug} alt="Заглушка"/>
-                }
+                {/* мое решение */}
+                {/*{photos ?*/}
+                {/*    <img src={photos} alt="avatar"/> :*/}
+                {/*    <img src={plug} alt="Заглушка"/>*/}
+                {/*}*/}
+                {/* решение похожее на Димыча */}
+                <img src={photos || plug} alt={'avatar' || 'Заглушка'} className={s.descriptionImg}/>
                 <div className={s.descriptionText}>
                     <div><b>О себе:</b> {profile.aboutMe}</div>
                     {contacts.facebook || contacts.vk || contacts.instagram || contacts.github ?
@@ -46,7 +55,7 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
                 </div>
 
             </div>
-
+            { isOwner && <input type={'file'} onChange={onMainPhotoSelected} /> }
             <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
         </div>

@@ -5,6 +5,7 @@ const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 const DELETE_POST = 'DELETE-POST';
+const SAVE_PHOTO_SUCCESS = 'SAVE-PHOTO-SUCCESS';
 
 // для моего изменения статуса
 // const CHANGE_STATUS = 'CHANGE-STATUS';
@@ -55,7 +56,15 @@ const profileReducer = (state = initialState, action) => {
                 posts: state.posts.filter(p => p.id !== action.id)
             };
         }
-
+        case SAVE_PHOTO_SUCCESS: {
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: action.photos
+                }
+            };
+        }
         // для моего изменения статуса
         // case CHANGE_STATUS: {  // изменение статуса
         //     return {
@@ -73,6 +82,7 @@ export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostTe
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 export const deletePostActionCreator = (id) => ({type: DELETE_POST, id});
+export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 
 // для моего изменения статуса
 // export const changeStatusText = (statusText) => ({type: CHANGE_STATUS, statusText});
@@ -93,6 +103,14 @@ export const updateStatusThunk = (status) => async dispatch => {
     const data = await profileAPI.updateStatus(status);
     if (data.resultCode === 0) {
         dispatch(setStatus(status));
+    }
+};
+
+export const savePhotoThunk = (file) => async dispatch => {
+    const response = await profileAPI.savePhoto(file);
+    // response нужен тк тут в api нет .then
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
     }
 };
 
