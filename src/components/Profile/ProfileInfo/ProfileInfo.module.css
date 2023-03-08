@@ -9,7 +9,8 @@
 .descriptionBlock {
     /*padding: 10px;*/
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
+    /*align-items: flex-end;*/
 }
 
 .descriptionImg {
@@ -23,6 +24,10 @@
 .status img {
     /*padding-left: 10px;*/
     max-width: 40px;
+}
+
+.Contacts {
+  padding-left: 10px;
 }
 
 /*.contactsSocial {*/

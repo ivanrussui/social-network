@@ -9,7 +9,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
         return <Spinner/> // отображаем спиннер
     }
     const photos = profile.photos.large;
-    const contacts = profile.contacts;
+    // const contacts = profile.contacts;
 
     const onMainPhotoSelected = (e) => {
         if (e.target.files.length) {
@@ -28,16 +28,22 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
                 {/* решение похожее на Димыча */}
                 <img src={photos || plug} alt={'avatar' || 'Заглушка'} className={s.descriptionImg}/>
                 <div className={s.descriptionText}>
-                    <div><b>О себе:</b> {profile.aboutMe}</div>
-                    {contacts.facebook || contacts.vk || contacts.instagram || contacts.github ?
-                        <div><b>Контакты:</b> <br/>
-                            <a href="facebook.com/">{profile.contacts.facebook}</a> <br/>
-                            <a href="vk.com/dimych">{profile.contacts.vk}</a> <br/>
-                            <a href="instagra.com/sds">{profile.contacts.instagram}</a> <br/>
-                            <a href="github.com/">{profile.contacts.github}</a> <br/>
-                        </div> :
-                        <p><b style={{color: 'red'}}>Контакты не указаны</b></p>
-                    }
+                    <div><b style={{color: 'indigo', textDecoration: 'underline', fontSize: '20px'}}>Обо мне</b> {profile.aboutMe}</div>
+                    {/*Это я делал на 60-м уроке*/}
+                    {/*{contacts.facebook || contacts.vk || contacts.instagram || contacts.github ?*/}
+                    {/*    <div><b>Контакты:</b> <br/>*/}
+                    {/*        <a href="facebook.com/">{profile.contacts.facebook}</a> <br/>*/}
+                    {/*        <a href="vk.com/dimych">{profile.contacts.vk}</a> <br/>*/}
+                    {/*        <a href="instagra.com/sds">{profile.contacts.instagram}</a> <br/>*/}
+                    {/*        <a href="github.com/">{profile.contacts.github}</a> <br/>*/}
+                    {/*    </div> :*/}
+                    {/*    <p><b style={{color: 'red'}}>Контакты не указаны</b></p>*/}
+                    {/*}*/}
+                    <div>
+                        <b>Контакты:</b> {Object.keys(profile.contacts).map(key => {
+                            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+                        })}
+                    </div>
 
                     <div className={s.status}><b>Статус работы: </b>
                         {profile.lookingForAJob ?
@@ -61,5 +67,9 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
         </div>
     );
 };
+
+const Contact = ({contactTitle, contactValue}) => {
+    return <div className={s.Contacts}> <b>{contactTitle}</b>: {contactValue}</div>
+}
 
 export default ProfileInfo;
