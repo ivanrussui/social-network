@@ -12,6 +12,10 @@
     align-items: flex-end;
 }
 
+.descriptionImg {
+  max-width: 225px;
+}
+
 .descriptionText {
     margin-left: 10px;
 }

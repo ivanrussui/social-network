@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import s from './Header.module.css';
 import logo from "../../logo.svg";
 // import plug from "../../assets/img/plug.png";
-// import spider from '../../assets/img/spider-man.webp'
 // import Spinner from "../common/Spinner/Spinner";
 
 const Header = (props) => {
@@ -33,10 +32,3 @@ const Header = (props) => {
 };
 
 export default Header;
-
-// <div className={s.loginBlock}>
-//   {/*<NavLink to={'/login'}>Login</NavLink>*/}
-//   {props.isAuth ? `login: ${props.login} - id: ${props.id} - avatar:` : <NavLink to={'/login'}>Login</NavLink>}
-//   {!props.avatar ? <img src={'https://avatars.mds.yandex.net/get-ott/1672343/2a00000169e7571b0993232db73c3cd072f8/678x380'} title={'Spider-Man'}/> : null}
-//   {/*{ props.isAuth ? props.dialog1.name : <NavLink to={'/login'}>Login</NavLink> }*/}
-// </div>
