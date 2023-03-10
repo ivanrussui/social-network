@@ -14,11 +14,16 @@
 }
 
 .descriptionImg {
-  max-width: 225px;
+  display: block;
+  max-width: 100%;
 }
 
 .descriptionText {
     margin-left: 10px;
+}
+
+.left {
+  max-width: 225px;
 }
 
 .status img {
