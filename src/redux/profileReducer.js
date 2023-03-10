@@ -108,18 +108,16 @@ export const updateStatusThunk = (status) => async dispatch => {
 
 export const savePhotoThunk = (file) => async dispatch => {
     const data = await profileAPI.savePhoto(file);
-    // response нужен тк тут в api нет .then
     if (data.resultCode === 0) {
         dispatch(savePhotoSuccess(data.data.photos));
     }
 };
 
-export const saveProfileThunk = (profile) => async dispatch => {
-    const response = await profileAPI.saveProfile(profile);
-    debugger
-    // response нужен тк тут в api нет .then
-    if (response.data.resultCode === 0) {
-        // dispatch(savePhotoSuccess(response.data.data.photos));
+export const saveProfileThunk = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.id;
+    const data = await profileAPI.saveProfile(profile);
+    if (data.resultCode === 0) {
+        dispatch(getProfileThunk(userId));
     }
 };
 
