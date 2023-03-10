@@ -114,4 +114,13 @@ export const savePhotoThunk = (file) => async dispatch => {
     }
 };
 
+export const saveProfileThunk = (profile) => async dispatch => {
+    const response = await profileAPI.saveProfile(profile);
+    debugger
+    // response нужен тк тут в api нет .then
+    if (response.data.resultCode === 0) {
+        // dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+};
+
 export default profileReducer;

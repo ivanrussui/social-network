@@ -1,7 +1,13 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import { getProfileThunk, getStatusThunk, savePhotoThunk, updateStatusThunk } from "../../redux/profileReducer";
+import {
+    getProfileThunk,
+    getStatusThunk,
+    savePhotoThunk,
+    saveProfileThunk,
+    updateStatusThunk
+} from "../../redux/profileReducer";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {compose} from "redux";
 import {Navigate} from "react-router-dom";
@@ -77,6 +83,7 @@ class ProfileContainer extends React.Component {
                      status={this.props.status}
                      isOwner={!this.props.router.params.userId}
                      savePhoto={this.props.savePhotoThunk}
+                     saveProfile={this.props.saveProfileThunk}
                      updateStatus={this.props.updateStatusThunk}/>
         )
     }
@@ -85,10 +92,10 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
     // console.log('mapStateToProps Profile');
     return ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    authorizedProfileId: state.auth.id,
-    isAuth: state.auth.isAuth
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
+        authorizedProfileId: state.auth.id,
+        isAuth: state.auth.isAuth
     })
 }
 
@@ -108,7 +115,7 @@ function withRouter(Component) {
 
 export default compose(
     connect(mapStateToProps, {
-        getProfileThunk, getStatusThunk, updateStatusThunk, savePhotoThunk
+        getProfileThunk, getStatusThunk, updateStatusThunk, savePhotoThunk, saveProfileThunk
     }),
     withRouter,
     // withNavigate

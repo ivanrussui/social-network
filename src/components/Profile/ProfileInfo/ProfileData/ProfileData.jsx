@@ -22,10 +22,11 @@ export const ProfileData = ({profile, isOwner, goToEditMode}) => {
             <div>
                 <b>Контакты:</b> {Object.keys(profile.contacts).map(key => {
                 return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-            })}
+                })}
             </div>
 
             <div className={s.status}><b>Статус работы: </b>
+                {/*{profile.lookingForAJob ? "yes" : "no"}*/}
                 {profile.lookingForAJob ?
                     <img src="https://avatanplus.com/files/resources/original/5693e5540266115231b7d02a.png"
                          alt="smile"/> :
@@ -36,7 +37,9 @@ export const ProfileData = ({profile, isOwner, goToEditMode}) => {
                         alt="smile sad"/>
                 }
             </div>
+            {/*{ profile.lookingForAJob &&*/}
             <div><b>Мои профессиональные навыки:</b> {profile.lookingForAJobDescription}</div>
+            {/*}*/}
             <div><b>Полное имя:</b> {profile.fullName}</div>
         </div>
     );
