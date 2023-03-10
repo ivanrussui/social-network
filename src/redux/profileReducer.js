@@ -107,10 +107,10 @@ export const updateStatusThunk = (status) => async dispatch => {
 };
 
 export const savePhotoThunk = (file) => async dispatch => {
-    const response = await profileAPI.savePhoto(file);
+    const data = await profileAPI.savePhoto(file);
     // response нужен тк тут в api нет .then
-    if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos));
+    if (data.resultCode === 0) {
+        dispatch(savePhotoSuccess(data.data.photos));
     }
 };
 

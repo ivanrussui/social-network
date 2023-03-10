@@ -47,9 +47,7 @@ export const profileAPI = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        })
-            // todo попробуй тут then
-            // .then(response => response.data);
+        }).then(response => response.data);
     },
     saveProfile(profile) {
         return instance.put(`profile`, profile)
