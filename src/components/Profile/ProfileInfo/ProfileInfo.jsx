@@ -3,15 +3,17 @@ import s from './ProfileInfo.module.css';
 import Spinner from "../../common/Spinner/Spinner";
 import plug from '../../../assets/img/plug.png';
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWihtHooks";
-import { ProfileDataForm } from './ProfileData/ProfileDataForm';
 import { ProfileData } from './ProfileData/ProfileData';
+import ProfileDataForm from './ProfileData/ProfileDataForm';
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+
     const [editMode, setEditMode] = useState(false);
 
     if (!profile) { // если в props profile нет или null или undefined
         return <Spinner/> // отображаем спиннер
     }
+
     const photos = profile.photos.large;
     // const contacts = profile.contacts;
 
@@ -20,6 +22,10 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
         if (e.target.files.length) {
             savePhoto(e.target.files[0]);
         }
+    };
+
+    const onSubmit = (formData) => {
+        console.log(formData);
     };
 
     return (
@@ -38,7 +44,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
             </div>
             <div>
                 {editMode
-                    ? <ProfileDataForm profile={profile}/>
+                    ? <ProfileDataForm profile={profile} onSubmit={onSubmit} />
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)} />
                 }
             </div>

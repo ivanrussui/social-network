@@ -36,7 +36,7 @@ export const ProfileData = ({profile, isOwner, goToEditMode}) => {
                         alt="smile sad"/>
                 }
             </div>
-            <div><b>Поиск работы:</b> {profile.lookingForAJobDescription}</div>
+            <div><b>Мои профессиональные навыки:</b> {profile.lookingForAJobDescription}</div>
             <div><b>Полное имя:</b> {profile.fullName}</div>
         </div>
     );
