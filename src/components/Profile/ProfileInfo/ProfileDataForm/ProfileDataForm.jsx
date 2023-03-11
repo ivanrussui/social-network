@@ -20,10 +20,13 @@ const ProfileDataForm = ({profile, handleSubmit, error}) => {
             </div>
             <div>
                 <b>Контакты:</b> {Object.keys(profile.contacts).map(key => {
-                return <ContactForm key={key} contactTitle={key} contactValue={`contacts.${key}`} />
-                //     <div>
-                //         <b>{key}:</b> {createField(key, `contacts.${key}`, FormControl, 'input')}
-                //     </div>
+                return(
+                <ContactForm key={key} contactTitle={key} contactValue={`contacts.${key}`.toLocaleLowerCase()} />
+                    // <div key={key}>
+                    //     <b>{key}:</b> {createField(key, 'contacts.' + key.toLocaleLowerCase(), FormControl, 'input')}
+                    //     {/*<b>{key}:</b> {createField(key, `contacts.${key}`, FormControl, 'input')}*/}
+                    // </div>
+                )
                 })}
             </div>
             <div className={s.status}><b>Статус работы: </b>

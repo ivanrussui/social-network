@@ -120,13 +120,10 @@ export const saveProfileThunk = (profile) => async (dispatch, getState) => {
     if (data.resultCode === 0) {
         dispatch(getProfileThunk(userId));
     } else {
-        dispatch(stopSubmit('profile', {_error: data.messages[0]}));
+        let wrongNetwork = data.messages[0]
+            .slice(data.messages[0].indexOf('>') + 1, data.messages[0].indexOf(')')).toLocaleLowerCase();
+        dispatch(stopSubmit('profile', {contacts: { [wrongNetwork]: data.messages[0] } }));
         return Promise.reject(data.messages[0]);
-
-        // ошибка именно под поле
-        // dispatch(stopSubmit('profile', {'contacts': {'facebook': data.messages[0]} }));
-        // надо попробовать распарсить
-        // dispatch(stopSubmit('profile', {'contacts': {'key': data.messages[0]} }));
     }
 };
 
