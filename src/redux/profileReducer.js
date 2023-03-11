@@ -121,6 +121,7 @@ export const saveProfileThunk = (profile) => async (dispatch, getState) => {
         dispatch(getProfileThunk(userId));
     } else {
         dispatch(stopSubmit('profile', {_error: data.messages[0]}));
+        return Promise.reject(data.messages[0]);
 
         // ошибка именно под поле
         // dispatch(stopSubmit('profile', {'contacts': {'facebook': data.messages[0]} }));
