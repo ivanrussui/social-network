@@ -4,7 +4,7 @@ import Spinner from "../../common/Spinner/Spinner";
 import plug from '../../../assets/img/plug.png';
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWihtHooks";
 import { ProfileData } from './ProfileData/ProfileData';
-import ProfileDataForm from './ProfileData/ProfileDataForm';
+import ProfileDataForm from './ProfileDataForm/ProfileDataForm';
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
 
