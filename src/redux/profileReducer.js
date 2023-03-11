@@ -1,4 +1,5 @@
 import { profileAPI } from "../api/api";
+import { stopSubmit } from 'redux-form';
 
 // обернули в переменные action.type из actionCreator
 const ADD_POST = 'ADD-POST';
@@ -118,6 +119,13 @@ export const saveProfileThunk = (profile) => async (dispatch, getState) => {
     const data = await profileAPI.saveProfile(profile);
     if (data.resultCode === 0) {
         dispatch(getProfileThunk(userId));
+    } else {
+        dispatch(stopSubmit('profile', {_error: data.messages[0]}));
+
+        // ошибка именно под поле
+        // dispatch(stopSubmit('profile', {'contacts': {'facebook': data.messages[0]} }));
+        // надо попробовать распарсить
+        // dispatch(stopSubmit('profile', {'contacts': {'key': data.messages[0]} }));
     }
 };
 

@@ -4,14 +4,16 @@ import { reduxForm } from 'redux-form';
 import { createField, FormControl } from '../../../common/FormsControls/FormsControls';
 import { minLengthCreator, required } from '../../../../utils/validators/validators';
 import { ContactForm } from './ContactForm/ContactForm';
+import styles from '../../../common/FormsControls/FormsControls.module.css';
 
 const minLength2 = minLengthCreator(2);
 const minLength5 = minLengthCreator(5);
 
-const ProfileDataForm = ({profile, handleSubmit}) => {
+const ProfileDataForm = ({profile, handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <button>Сохранить</button>
+            <div><button>Сохранить</button></div>
+            {error && <span className={styles.formSummaryError}>{error}</span>}
             <div>
                 <b style={{color: 'indigo', textDecoration: 'underline', fontSize: '20px'}}>Обо мне</b>
                 {createField('Обо мне', 'aboutMe', FormControl, 'textarea', [required, minLength5])}
@@ -19,13 +21,9 @@ const ProfileDataForm = ({profile, handleSubmit}) => {
             <div>
                 <b>Контакты:</b> {Object.keys(profile.contacts).map(key => {
                 return <ContactForm key={key} contactTitle={key} contactValue={`contacts.${key}`} />
-                // return <ContactForm key={key} contactTitle={key} contactValue={profile.contacts[key]} />
-                // (
                 //     <div>
                 //         <b>{key}:</b> {createField(key, `contacts.${key}`, FormControl, 'input')}
                 //     </div>
-                //     )
-                // <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
                 })}
             </div>
             <div className={s.status}><b>Статус работы: </b>
