@@ -58,5 +58,10 @@ export const getAuthLogoutThunk = () => async (dispatch) => {
     }
 };
 
+export const getCaptchaUrlThunk = () => async (dispatch) => {
+    const data = await authAPI.getCaptchaUrl();
+    const captchaUrl = data.url;
+};
+
 
 export default authReducer;
