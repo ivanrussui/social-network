@@ -1,3 +1,8 @@
 .ProfileStatus {
     margin-top: 10px;
+    display: flex;
+}
+
+.Status {
+  margin-right: 5px;
 }
