@@ -4,7 +4,7 @@ import { Contact } from './Contact/Contact';
 export const ProfileData = ({profile, isOwner, goToEditMode}) => {
     return (
         <div className={s.descriptionText}>
-            { isOwner && <button onClick={goToEditMode}>Edit</button>}
+            { isOwner && <button onClick={goToEditMode}>Change</button>}
             <div className={s.bold}><b>Looking For A Job: </b>
                 {/*{profile.lookingForAJob ? "yes" : "no"}*/}
                 {profile.lookingForAJob ?
@@ -30,7 +30,7 @@ export const ProfileData = ({profile, isOwner, goToEditMode}) => {
             {/*    </div> :*/}
             {/*    <p><b style={{color: 'red'}}>Контакты не указаны</b></p>*/}
             {/*}*/}
-            <div><b className={s.bold}>Контакты:</b> {Object.keys(profile.contacts).map(key => {
+            <div><b className={s.bold}>Contacts:</b> {Object.keys(profile.contacts).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
             })}
             </div>

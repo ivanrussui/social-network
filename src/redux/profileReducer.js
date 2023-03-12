@@ -101,9 +101,14 @@ export const getStatusThunk = (profileId) => async dispatch => {
 };
 
 export const updateStatusThunk = (status) => async dispatch => {
-    const data = await profileAPI.updateStatus(status);
-    if (data.resultCode === 0) {
-        dispatch(setStatus(status));
+    try {
+        const data = await profileAPI.updateStatus(status);
+        if (data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
+    } catch (e) {
+        alert('See error in console');
+        console.log(e);
     }
 };
 
@@ -122,7 +127,7 @@ export const saveProfileThunk = (profile) => async (dispatch, getState) => {
     } else {
         let wrongNetwork = data.messages[0]
             .slice(data.messages[0].indexOf('>') + 1, data.messages[0].indexOf(')')).toLocaleLowerCase();
-        dispatch(stopSubmit('profile', {contacts: { [wrongNetwork]: data.messages[0] } }));
+        dispatch(stopSubmit('profile', {contacts: {[wrongNetwork]: data.messages[0]}}));
         return Promise.reject(data.messages[0]);
     }
 };
