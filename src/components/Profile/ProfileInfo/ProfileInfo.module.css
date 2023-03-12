@@ -27,15 +27,21 @@
   max-width: 225px;
 }
 
-.status img {
-    /*padding-left: 10px;*/
-    max-width: 40px;
-}
-
 .Contacts {
   padding-left: 10px;
+
 }
 
 /*.contactsSocial {*/
 /*  padding-left: 20px;*/
 /*}*/
+
+.bold {
+  color: indigo;
+  font-size: 18px;
+}
+
+.bold img {
+  /*padding-left: 10px;*/
+  max-width: 40px;
+}
