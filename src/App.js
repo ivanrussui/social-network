@@ -1,5 +1,14 @@
 import React, { lazy, Suspense } from 'react';
-import { Routes, Route, useLocation, useNavigate, useParams, BrowserRouter, HashRouter } from 'react-router-dom';
+import {
+    Routes,
+    Route,
+    useLocation,
+    useNavigate,
+    Navigate,
+    useParams,
+    BrowserRouter,
+    HashRouter
+} from 'react-router-dom';
 import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { initializedAppThunk } from './redux/appReducer';
@@ -18,9 +27,18 @@ const Settings = lazy(() => import('./components/Settings/Settings'));
 const LoginPage = lazy(() => import('./components/Login/Login'));
 
 class App extends React.Component {
+    catchAllUnhandledErrors = (reason, promise) => {
+        alert('Some error occurred');
+    };
+
     componentDidMount() {
         this.props.initializedAppThunk();
-    }
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
+    };
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
+    };
 
     render() {
         if (!this.props.initialized) {
@@ -34,6 +52,7 @@ class App extends React.Component {
                 <div className="app-wrapper-content">
                     <Suspense fallback={<Spinner/>}>
                         <Routes>
+                            <Route path='/' element={<Navigate to={'/profile'} />} />
                             <Route path='/profile/:userId' element={<ProfileContainer/>}/>
                             <Route path='/profile' element={<ProfileContainer/>}/>
                             <Route path="/dialogs" element={<DialogsContainer/>}/>
@@ -42,6 +61,7 @@ class App extends React.Component {
                             <Route path="/music" element={<Music/>}/>
                             <Route path="/settings" element={<Settings/>}/>
                             <Route path="/login" element={<LoginPage/>}/>
+                            <Route path="*" element={<h1 style={{color: 'indigo'}}>404 NOT FOUND</h1>}/>
                         </Routes>
                     </Suspense>
                 </div>
