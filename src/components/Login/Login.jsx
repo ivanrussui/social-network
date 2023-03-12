@@ -11,13 +11,17 @@ const minLength2 = minLengthCreator(2);
 const minLength8 = minLengthCreator(8);
 
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}) => {
     return (
         <form onSubmit={handleSubmit}>
             {createField('Email', 'email', FormControl, 'input', [required, minLength2])}
             {createField('Password', 'password', FormControl, 'input', [required, minLength8], {type: 'password'})}
             {createField(null, 'rememberMe', FormControl, 'input', [], {type: 'checkbox'}, 'remember me')}
             {error && <span className={styles.formSummaryError}>{error}</span>}
+            {captchaUrl && <div>
+                <img src={captchaUrl} alt={'captchaUrl'}/>
+                {createField('Enter Captcha', 'captcha', FormControl, 'input', [required])}
+            </div>}
             <div>
                 <button>Login</button>
             </div>
@@ -31,7 +35,7 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        props.getAuthLoginThunk(formData.email, formData.password, formData.rememberMe);
+        props.getAuthLoginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha);
     }
     if (props.isAuth) {
         return <Navigate to={'/profile'}/>
@@ -39,12 +43,13 @@ const Login = (props) => {
     return (
         <>
             <h1 style={{color: 'indigo'}}>LOGIN</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </>
     )
 }
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 

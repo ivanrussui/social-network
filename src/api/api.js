@@ -60,8 +60,8 @@ export const authAPI = {
         return instance.get(`auth/me`)
             .then(response => response.data);
     },
-    postAuthLogin(email, password, rememberMe = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    postAuthLogin(email, password, rememberMe = false, captcha = null) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
             .then(response => response.data);
     },
     deleteAuthLogout() {
